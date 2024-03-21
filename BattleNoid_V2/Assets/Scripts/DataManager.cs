@@ -59,6 +59,10 @@ public class DataManager : MonoBehaviour
             }
             Debug.Log(enemyDictionary[1].name);
         }
+        else
+        {
+            Debug.LogError("무엇을 불러오고 싶은게냐!");
+        }
 
 
     }
