@@ -8,7 +8,7 @@ public class Exit : MonoBehaviour
     {
 
         // 에디터에서는 동작안함
-        Debug.Log("게임 종료 스크립트는 에디터에서 동작하지 않습니다.");
+        Debug.Log("Exit 스크립트는 에디터에서 작동안해요 아마도여");
 
         // 빌드된 게임에서는 동작함 봉붕어에서 가져옴
         Application.Quit();
