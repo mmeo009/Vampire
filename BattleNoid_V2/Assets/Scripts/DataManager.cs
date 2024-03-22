@@ -1,24 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
-using System;
-using System.Reflection;
+using System.Xml.Serialization;             // XML 사용하기 위한
+using System.IO;
 using UnityEngine;
 
 
 public class DataManager
 {
+    public enum DataType
+    {
+        name,
+        money,
+        character,
+        perk
+    }
+
+    public string saveFilePath;
+
     public Entity_Player entity_Player;         // file name = playerData
     public Entity_Enemy entity_Enemy;           // file name = enemyData
+
     public Dictionary<int, Entity_Player.Param> playerDictionary = new Dictionary<int, Entity_Player.Param>();
     public Dictionary<int, Entity_Enemy.Param> enemyDictionary = new Dictionary<int, Entity_Enemy.Param>();
-
+    public GameData gameData { get; private set; }
     public void Start()
     {
-        LoadGameData<Entity_Player>("playerData");
-        LoadGameData<Entity_Enemy>("enemyData");
+        LoadBaseData<Entity_Player>("playerData");
+        LoadBaseData<Entity_Enemy>("enemyData");
     }
-    public void LoadGameData<T>(string fileName) where T : UnityEngine.Object
+    public void LoadBaseData<T>(string fileName) where T : UnityEngine.Object
     {
+        saveFilePath = Application.persistentDataPath + "/GameData.Xml";
         // 파일 이름을 통해 파일의 경로를 저장함
         string filePath = $"Excel/{fileName}";
 
@@ -68,4 +80,147 @@ public class DataManager
 
 
     }
+
+    public void SaveGameData(GameData dataToBeStored)
+    {
+        XmlSerializer serializer = new XmlSerializer(typeof(GameData));
+        FileStream stream = new FileStream(saveFilePath, FileMode.Create);           // 파일 스트림 함수로 파일 생성
+        serializer.Serialize(stream, dataToBeStored);                                // 클래스 -> XML 변환 후 저장
+        stream.Close();
+    }
+
+    public GameData LoadGmaeData()
+    {
+        if (File.Exists(saveFilePath))
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(GameData));
+            FileStream stream = new FileStream(saveFilePath, FileMode.Open);        // 파일 읽기 모드로 파일 열기
+            GameData data = (GameData)serializer.Deserialize(stream);               // XML -> 클래스 읽어서 변환
+            stream.Close();                                                         // 다 불러온 후 닫기
+            return data;
+        }
+        else
+        {
+            return null;
+        }
+    }
+    public void ChangeGameData(DataType type, string _string = null, int _int = 0, bool _bool = false)
+    {
+        // type : 수행 방식
+        // _string : 이름, 돈(Plus,Minus,Set,Reset), 캐릭터 혹은 퍽의 코드
+        // _int : 돈의 추가량, 캐릭터 혹은 퍽의 레벨
+        // _bool : 캐릭터 혹은 퍽의 보유 여부
+        if(gameData == null)
+        {
+            gameData = new GameData();
+        }
+        if(type == DataType.name)
+        {
+            if (_string != null)
+            {
+                gameData.myName = _string;
+            }
+            else
+            {
+                Debug.LogWarning("이름이 기입되지 않았습니다.");
+                gameData.myName = "IDontHaveAnyName";
+            }
+        }
+        else if(type == DataType.money)
+        {
+            if(_string != null)
+            {
+                if(_string == "Plus"|| _string == "Minus")
+                {
+                    gameData.money += _int;
+                }
+                else if(_string == "Set")
+                {
+                    gameData.money = _int;
+                }
+                else if(_string == "Reset")
+                {
+                    gameData.money = 0;
+                }
+                if(gameData.money < 0)
+                {
+                    gameData.money = 0;
+                }
+            }
+            else
+            {
+                Debug.LogError("해당 작업을 수행할 수 없습니다. : 돈 데이터 변경");
+            }
+        }
+        else if(type == DataType.character)
+        {
+            if (_string != null)
+            {
+                if (gameData.characterData[_string] != null)
+                {
+                    gameData.characterData[_string].hasThisCharacter = _bool;
+                    gameData.characterData[_string].level = _int;
+                }
+                else
+                {
+                    CharacterData character = new CharacterData();
+                    character.code = _string;
+                    character.hasThisCharacter = _bool;
+                    character.level = _int;
+                    gameData.characterData.Add(_string, character);
+                }
+            }
+            else
+            {
+                Debug.LogError("해당 작업을 수행할 수 없습니다. : 캐릭터 데이터 추가");
+            }
+        }
+        else if(type == DataType.perk)
+        {
+            if (_string != null)
+            {
+                if (gameData.perkData[_string] != null)
+                {
+                    gameData.perkData[_string].hasThisPerk = _bool;
+                    gameData.perkData[_string].level = _int;
+                }
+                else
+                {
+                    PerkData perk = new PerkData();
+                    perk.code = _string;
+                    perk.hasThisPerk = _bool;
+                    perk.level = _int;
+                    gameData.perkData.Add(_string, perk);
+                }
+            }
+            else
+            {
+                Debug.LogError("해당 작업을 수행할 수 없습니다. : 퍽 데이터 추가");
+            }
+        }
+
+
+
+        
+    }
+}
+
+public class GameData
+{
+    public string myName;
+    public int money;
+    public Dictionary<string, CharacterData> characterData = new Dictionary<string, CharacterData>();
+    public Dictionary<string, PerkData> perkData = new Dictionary<string, PerkData>();
+}
+public class CharacterData
+{
+    public string code;
+    public bool hasThisCharacter;
+    public int level;
+}
+public class PerkData
+{
+    public string code;
+    public bool hasThisPerk;
+    public int level;
 }
