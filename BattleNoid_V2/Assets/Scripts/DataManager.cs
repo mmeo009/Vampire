@@ -5,7 +5,7 @@ using System.Reflection;
 using UnityEngine;
 
 
-public class DataManager : MonoBehaviour
+public class DataManager
 {
     public Entity_Player entity_Player;         // file name = playerData
     public Entity_Enemy entity_Enemy;           // file name = enemyData
@@ -19,12 +19,13 @@ public class DataManager : MonoBehaviour
     }
     public void LoadGameData<T>(string fileName) where T : UnityEngine.Object
     {
-        // typeof 연산자를 사용하여 T의 형식을 가져옴
+        // 파일 이름을 통해 파일의 경로를 저장함
         string filePath = $"Excel/{fileName}";
 
-        // 파일 로드
+        // 파일 경로에서 파일을 로드해 옴
         T loadedData = Resources.Load<T>(filePath);
 
+        // 만약 타입이 Entity_Player일 경우
         if (typeof(T) == typeof(Entity_Player))
         {
             entity_Player = loadedData as Entity_Player;
@@ -42,6 +43,7 @@ public class DataManager : MonoBehaviour
             }
             Debug.Log(playerDictionary[1].name);
         }
+        // 만약 타입이 Entity_Enemy일 경우
         else if (typeof(T) == typeof(Entity_Enemy))
         {
             entity_Enemy = loadedData as Entity_Enemy;
