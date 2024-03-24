@@ -9,10 +9,22 @@ public class DataManager
 {
     public enum DataType
     {
-        name,
-        money,
-        character,
-        perk
+        NAME,
+        MONEY,
+        CHARACTER,
+        PERK,
+        PLAYER,
+        MONSTER
+    }
+
+    public enum CharacterDataType
+    {
+        HP,
+        NAME,
+        DMG,
+        SPEED,
+        RANGE,
+        STAGE
     }
 
     public string saveFilePath;
@@ -77,8 +89,96 @@ public class DataManager
         {
             Debug.LogError("무엇을 불러오고 싶은게냐!");
         }
+    }
 
+    public string FindFromDictionary (DataType playerOrMonster, int indexNum, CharacterDataType dataType, bool isAdditional = false)
+    {
+            if(indexNum > 0)
+            {
+                if(playerOrMonster == DataType.PLAYER)
+                {
+                    if (isAdditional == false)
+                    {
+                        switch (dataType)
+                        {
+                            case CharacterDataType.NAME:
+                                return "플레이어는 이름이 없다!";
+                            case CharacterDataType.STAGE:
+                                return "0";
+                            case CharacterDataType.HP:
+                                return playerDictionary[indexNum].baseHp.ToString();
+                            case CharacterDataType.DMG:
+                                return playerDictionary[indexNum].baseDamage.ToString();
+                            case CharacterDataType.SPEED:
+                                return playerDictionary[indexNum].baseMoveSpeed.ToString();
+                            case CharacterDataType.RANGE:
+                                return playerDictionary[indexNum].baseRange.ToString();
+                        }
+                    }
+                    else
+                    {
+                        switch (dataType)
+                        {
+                            case CharacterDataType.NAME:
+                                return "플레이어는 이름이 없다!";
+                            case CharacterDataType.STAGE:
+                                return "0";
+                            case CharacterDataType.HP:
+                                return playerDictionary[indexNum].additionalHp.ToString();
+                            case CharacterDataType.DMG:
+                                return playerDictionary[indexNum].additionalDamage.ToString();
+                            case CharacterDataType.SPEED:
+                                return playerDictionary[indexNum].additionalMoveSpeed.ToString();
+                            case CharacterDataType.RANGE:
+                                return playerDictionary[indexNum].additionalRange.ToString();
+                        }
+                    }
+                }
+                else if(playerOrMonster == DataType.MONSTER)
+                {
+                    if (isAdditional == false)
+                    {
+                        switch (dataType)
+                        {
+                            case CharacterDataType.NAME:
+                                return enemyDictionary[indexNum].name;
+                            case CharacterDataType.STAGE:
+                                return enemyDictionary[indexNum].stage.ToString();
+                            case CharacterDataType.HP:
+                                return enemyDictionary[indexNum].baseHp.ToString();
+                            case CharacterDataType.DMG:
+                                return enemyDictionary[indexNum].baseDamage.ToString();
+                            case CharacterDataType.SPEED:
+                                return enemyDictionary[indexNum].baseMoveSpeed.ToString();
+                            case CharacterDataType.RANGE:
+                                return "이 친구는 몬스터야";
+                        }
+                    }
+                    else
+                    {
+                        switch (dataType)
+                        {
+                            case CharacterDataType.NAME:
+                                return enemyDictionary[indexNum].name;
+                            case CharacterDataType.STAGE:
+                                return enemyDictionary[indexNum].stage.ToString();
+                            case CharacterDataType.HP:
+                                return enemyDictionary[indexNum].additionalHp.ToString();
+                            case CharacterDataType.DMG:
+                                return enemyDictionary[indexNum].additionalDamage.ToString();
+                            case CharacterDataType.SPEED:
+                                return enemyDictionary[indexNum].additionalMoveSpeed.ToString();
+                            case CharacterDataType.RANGE:
+                                return enemyDictionary[indexNum].additionalRange.ToString();
+                        }
+                    }
+                }
+            }
+            else
+            {
 
+            }
+        return null;
     }
 
     public void SaveGameData(GameData dataToBeStored)
@@ -114,7 +214,7 @@ public class DataManager
         {
             gameData = new GameData();
         }
-        if(type == DataType.name)
+        if(type == DataType.NAME)
         {
             if (_string != null)
             {
@@ -126,7 +226,7 @@ public class DataManager
                 gameData.myName = "IDontHaveAnyName";
             }
         }
-        else if(type == DataType.money)
+        else if(type == DataType.MONEY)
         {
             if(_string != null)
             {
@@ -152,7 +252,7 @@ public class DataManager
                 Debug.LogError("해당 작업을 수행할 수 없습니다. : 돈 데이터 변경");
             }
         }
-        else if(type == DataType.character)
+        else if(type == DataType.CHARACTER)
         {
             if (_string != null)
             {
@@ -175,7 +275,7 @@ public class DataManager
                 Debug.LogError("해당 작업을 수행할 수 없습니다. : 캐릭터 데이터 추가");
             }
         }
-        else if(type == DataType.perk)
+        else if(type == DataType.PERK)
         {
             if (_string != null)
             {
@@ -198,10 +298,6 @@ public class DataManager
                 Debug.LogError("해당 작업을 수행할 수 없습니다. : 퍽 데이터 추가");
             }
         }
-
-
-
-        
     }
 }
 
