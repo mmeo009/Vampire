@@ -1,9 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Xml.Serialization;             // XML 사용하기 위한
 using System.IO;
+using System.Xml.Serialization;             // XML 사용하기 위한
 using UnityEngine;
-
 
 public class DataManager
 {
@@ -35,11 +33,7 @@ public class DataManager
     public Dictionary<int, Entity_Player.Param> playerDictionary = new Dictionary<int, Entity_Player.Param>();
     public Dictionary<int, Entity_Enemy.Param> enemyDictionary = new Dictionary<int, Entity_Enemy.Param>();
     public GameData gameData { get; private set; }
-    public void Start()
-    {
-        LoadBaseData<Entity_Player>("playerData");
-        LoadBaseData<Entity_Enemy>("enemyData");
-    }
+
     public void LoadBaseData<T>(string fileName) where T : UnityEngine.Object
     {
         saveFilePath = Application.persistentDataPath + "/GameData.Xml";
@@ -90,97 +84,69 @@ public class DataManager
             Debug.LogError("무엇을 불러오고 싶은게냐!");
         }
     }
-
-    public string FindFromDictionary (DataType playerOrMonster, int indexNum, CharacterDataType dataType, bool isAdditional = false)
+    public int FindKeyByCode<TKey, TValue>(Dictionary<TKey, TValue> dictionary, string code)
     {
-            if(indexNum > 0)
+        foreach (var pair in dictionary)
+        {
+            if (typeof(TKey) == typeof(int) && typeof(TValue) == typeof(Entity_Player.Param))
             {
-                if(playerOrMonster == DataType.PLAYER)
+                var param = (Entity_Player.Param)(object)pair.Value;
+                if (param.code == code)
                 {
-                    if (isAdditional == false)
+                    return (int)(object)pair.Key;
+                }
+            }
+            else if (typeof(TKey) == typeof(int) && typeof(TValue) == typeof(Entity_Enemy.Param))
+            {
+                var param = (Entity_Enemy.Param)(object)pair.Value;
+                if (param.code == code)
+                {
+                    return (int)(object)pair.Key;
+                }
+            }
+        }
+        return 0;
+    }
+    public TValue GetValueFromDictionary<TKey, TValue>(Dictionary<TKey, TValue> dictionary, int indexNum, string idCode = null)
+    {
+        if (indexNum > 0)
+        {
+            foreach (var pair in dictionary)
+            {
+                if (EqualityComparer<TKey>.Default.Equals(pair.Key, (TKey)(object)indexNum))
+                {
+                    return pair.Value;
+                }
+            }
+        }
+        else
+        {
+            if (idCode != null)
+            {
+                int key = FindKeyByCode(dictionary, idCode);
+                if(key > 0)
+                {
+                    foreach (var pair in dictionary)
                     {
-                        switch (dataType)
+                        if (EqualityComparer<TKey>.Default.Equals(pair.Key, (TKey)(object)indexNum))
                         {
-                            case CharacterDataType.NAME:
-                                return "플레이어는 이름이 없다!";
-                            case CharacterDataType.STAGE:
-                                return "0";
-                            case CharacterDataType.HP:
-                                return playerDictionary[indexNum].baseHp.ToString();
-                            case CharacterDataType.DMG:
-                                return playerDictionary[indexNum].baseDamage.ToString();
-                            case CharacterDataType.SPEED:
-                                return playerDictionary[indexNum].baseMoveSpeed.ToString();
-                            case CharacterDataType.RANGE:
-                                return playerDictionary[indexNum].baseRange.ToString();
-                        }
-                    }
-                    else
-                    {
-                        switch (dataType)
-                        {
-                            case CharacterDataType.NAME:
-                                return "플레이어는 이름이 없다!";
-                            case CharacterDataType.STAGE:
-                                return "0";
-                            case CharacterDataType.HP:
-                                return playerDictionary[indexNum].additionalHp.ToString();
-                            case CharacterDataType.DMG:
-                                return playerDictionary[indexNum].additionalDamage.ToString();
-                            case CharacterDataType.SPEED:
-                                return playerDictionary[indexNum].additionalMoveSpeed.ToString();
-                            case CharacterDataType.RANGE:
-                                return playerDictionary[indexNum].additionalRange.ToString();
+                            return pair.Value;
                         }
                     }
                 }
-                else if(playerOrMonster == DataType.MONSTER)
+                else
                 {
-                    if (isAdditional == false)
-                    {
-                        switch (dataType)
-                        {
-                            case CharacterDataType.NAME:
-                                return enemyDictionary[indexNum].name;
-                            case CharacterDataType.STAGE:
-                                return enemyDictionary[indexNum].stage.ToString();
-                            case CharacterDataType.HP:
-                                return enemyDictionary[indexNum].baseHp.ToString();
-                            case CharacterDataType.DMG:
-                                return enemyDictionary[indexNum].baseDamage.ToString();
-                            case CharacterDataType.SPEED:
-                                return enemyDictionary[indexNum].baseMoveSpeed.ToString();
-                            case CharacterDataType.RANGE:
-                                return "이 친구는 몬스터야";
-                        }
-                    }
-                    else
-                    {
-                        switch (dataType)
-                        {
-                            case CharacterDataType.NAME:
-                                return enemyDictionary[indexNum].name;
-                            case CharacterDataType.STAGE:
-                                return enemyDictionary[indexNum].stage.ToString();
-                            case CharacterDataType.HP:
-                                return enemyDictionary[indexNum].additionalHp.ToString();
-                            case CharacterDataType.DMG:
-                                return enemyDictionary[indexNum].additionalDamage.ToString();
-                            case CharacterDataType.SPEED:
-                                return enemyDictionary[indexNum].additionalMoveSpeed.ToString();
-                            case CharacterDataType.RANGE:
-                                return enemyDictionary[indexNum].additionalRange.ToString();
-                        }
-                    }
+                    Debug.LogError("해당 dataCode의 데이터가 존재하지 않아요");
+                    return default(TValue);
                 }
             }
             else
             {
-
+                Debug.LogError("indexNum도 dataCode도 없어요");
             }
-        return null;
+        }
+        return default(TValue);
     }
-
     public void SaveGameData(GameData dataToBeStored)
     {
         XmlSerializer serializer = new XmlSerializer(typeof(GameData));
@@ -210,11 +176,11 @@ public class DataManager
         // _string : 이름, 돈(Plus,Minus,Set,Reset), 캐릭터 혹은 퍽의 코드
         // _int : 돈의 추가량, 캐릭터 혹은 퍽의 레벨
         // _bool : 캐릭터 혹은 퍽의 보유 여부
-        if(gameData == null)
+        if (gameData == null)
         {
             gameData = new GameData();
         }
-        if(type == DataType.NAME)
+        if (type == DataType.NAME)
         {
             if (_string != null)
             {
@@ -226,23 +192,23 @@ public class DataManager
                 gameData.myName = "IDontHaveAnyName";
             }
         }
-        else if(type == DataType.MONEY)
+        else if (type == DataType.MONEY)
         {
-            if(_string != null)
+            if (_string != null)
             {
-                if(_string == "Plus"|| _string == "Minus")
+                if (_string == "Plus" || _string == "Minus")
                 {
                     gameData.money += _int;
                 }
-                else if(_string == "Set")
+                else if (_string == "Set")
                 {
                     gameData.money = _int;
                 }
-                else if(_string == "Reset")
+                else if (_string == "Reset")
                 {
                     gameData.money = 0;
                 }
-                if(gameData.money < 0)
+                if (gameData.money < 0)
                 {
                     gameData.money = 0;
                 }
@@ -252,7 +218,7 @@ public class DataManager
                 Debug.LogError("해당 작업을 수행할 수 없습니다. : 돈 데이터 변경");
             }
         }
-        else if(type == DataType.CHARACTER)
+        else if (type == DataType.CHARACTER)
         {
             if (_string != null)
             {
@@ -275,7 +241,7 @@ public class DataManager
                 Debug.LogError("해당 작업을 수행할 수 없습니다. : 캐릭터 데이터 추가");
             }
         }
-        else if(type == DataType.PERK)
+        else if (type == DataType.PERK)
         {
             if (_string != null)
             {
@@ -300,6 +266,7 @@ public class DataManager
         }
     }
 }
+
 
 public class GameData
 {

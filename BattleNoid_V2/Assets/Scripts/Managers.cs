@@ -24,7 +24,9 @@ public class Managers : MonoBehaviour
 
     DataManager _data = new DataManager();
     MonsterManager _monster = new MonsterManager();
+    ButtonManager _button = new ButtonManager();
     public static DataManager Data { get { return Instance?._data; } }
     public static MonsterManager Monster { get { return Instance?._monster; } }
+    public static ButtonManager Button { get {  return Instance?._button; } }
 
 }

@@ -2,13 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class CoolTime : MonoBehaviour
-
-    
 {
-
-
+    public TMP_Text text;
     public Text text_CoolTime;
     public Image image_fill;
     private float time_cooltime = 2;
