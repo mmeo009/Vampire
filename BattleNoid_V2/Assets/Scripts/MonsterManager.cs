@@ -7,7 +7,7 @@ public class MonsterManager
     public Dictionary<string, MonststerStats> monsters = new Dictionary<string, MonststerStats>();
     public void CreateMonster(string monsterCode)
     {
-        string monsterFilePath = $"Prefabs/";
+        string monsterFilePath = $"Prefabs/Monsters/{monsterCode}";
     }
 }
 
