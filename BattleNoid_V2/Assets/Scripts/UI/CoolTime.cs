@@ -6,22 +6,26 @@ using TMPro;
 
 public class CoolTime : MonoBehaviour
 {
-    public TMP_Text text;
     public Text text_CoolTime;
     public Image image_fill;
-    private float time_cooltime = 2;
+    public float time_cooltime = 10;        // 쿨타임 시간 설정
     private float time_current;
     private float time_start;
     private bool isEnded = true;
+    public KeyCode activationKey; // 사용자가 지정할 키
 
     void Start()
     {
         Init_UI();
-        Trigger_Skill();
     }
 
     void Update()
     {
+        if (Input.GetKeyDown(activationKey) && isEnded) // 사용자가 설정한 키를 눌렀고, 쿨타임이 끝났다면
+        {
+            Trigger_Skill(); // 스킬 발동
+        }
+
         if (isEnded)
             return;
         Check_CoolTime();
@@ -33,6 +37,7 @@ public class CoolTime : MonoBehaviour
         image_fill.fillMethod = Image.FillMethod.Radial360;
         image_fill.fillOrigin = (int)Image.Origin360.Top;
         image_fill.fillClockwise = false;
+        Debug.Log("발동됨");
     }
 
     private void Check_CoolTime()
@@ -65,7 +70,7 @@ public class CoolTime : MonoBehaviour
         }
 
         Reset_CoolTime();
-        Debug.LogError("뿅");
+        // Debug.LogError("뿅");
     }
 
     private void Reset_CoolTime()
@@ -76,12 +81,12 @@ public class CoolTime : MonoBehaviour
         Set_FillAmount(time_cooltime);
         isEnded = false;
     }
+
     private void Set_FillAmount(float _value)
     {
         image_fill.fillAmount = _value / time_cooltime;
         string txt = _value.ToString("0.0");
         text_CoolTime.text = txt;
-        Debug.Log(txt);
+        // Debug.Log(txt);
     }
-
 }

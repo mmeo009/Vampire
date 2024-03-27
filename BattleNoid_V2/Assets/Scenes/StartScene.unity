@@ -504,7 +504,6 @@ GameObject:
   - component: {fileID: 663549868}
   - component: {fileID: 663549871}
   - component: {fileID: 663549870}
-  - component: {fileID: 663549872}
   - component: {fileID: 663549869}
   m_Layer: 5
   m_Name: Quit
@@ -577,7 +576,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 663549872}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Exit, Assembly-CSharp
         m_MethodName: ExitGame
         m_Mode: 1
@@ -627,18 +626,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 663549867}
   m_CullTransparentMesh: 1
---- !u!114 &663549872
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 663549867}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae3fae4c294fa144eac15c4fcfbc3efa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &959008945
 GameObject:
   m_ObjectHideFlags: 0
@@ -717,7 +704,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1132625884}
   - component: {fileID: 1132625888}
-  - component: {fileID: 1132625887}
   - component: {fileID: 1132625886}
   - component: {fileID: 1132625885}
   m_Layer: 5
@@ -791,7 +777,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1132625887}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SceneMove, Assembly-CSharp
         m_MethodName: LoadGameScene
         m_Mode: 1
@@ -833,18 +819,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1132625887
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1132625883}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ab5d9e1c2de2a446aa6add0b24d3ffc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!222 &1132625888
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1278,7 +1252,6 @@ GameObject:
   - component: {fileID: 1500781008}
   - component: {fileID: 1500781011}
   - component: {fileID: 1500781010}
-  - component: {fileID: 1500781012}
   - component: {fileID: 1500781009}
   m_Layer: 5
   m_Name: Options
@@ -1351,7 +1324,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1500781012}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Options, Assembly-CSharp
         m_MethodName: OnClickstopbutton
         m_Mode: 1
@@ -1401,18 +1374,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1500781007}
   m_CullTransparentMesh: 1
---- !u!114 &1500781012
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1500781007}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2823f3253c565ea4294bcfda13dce52a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1584198441
 GameObject:
   m_ObjectHideFlags: 0
