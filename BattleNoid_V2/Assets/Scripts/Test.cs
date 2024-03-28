@@ -9,6 +9,6 @@ public class Test : MonoBehaviour
     {
         Managers.Data.LoadBaseData<Entity_Player>("playerData");
         Managers.Data.LoadBaseData<Entity_Enemy>("enemyData");
-        enemy = Managers.Data.GetValueFromDictionary(Managers.Data.enemyDictionary, 1);
+        enemy = Managers.Data.GetDataFromDictionary(Managers.Data.enemyDictionary, 1);
     }
 }
