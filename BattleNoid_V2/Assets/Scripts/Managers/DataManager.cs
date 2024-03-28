@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.Pool;
 using Newtonsoft.Json;
 using System;
 using System.Linq;
 using System.Security.Cryptography;
-using DataSupporter; // DataTypes 네임스페이스를 사용합니다.
+using Supporter; // Supporter 네임스페이스를 사용
 using System.Text;
 
 public class DataManager
@@ -28,6 +29,47 @@ public class DataManager
 
     // 게임 데이터
     public GameData gameData { get; private set; }
+
+    // 리소스 관련 데이터
+    //=========================================================================================================
+
+    Dictionary<string, UnityEngine.Object> resourcesDictionary = new Dictionary<string, UnityEngine.Object>();
+    public T Load<T>(string key) where T : UnityEngine.Object
+    {
+        if (resourcesDictionary.TryGetValue(key, out UnityEngine.Object resource))
+        {
+            return resource as T;
+        }
+
+        if (typeof(T) == typeof(Sprite))
+        {
+            key = key + ".sprite";
+            if (resourcesDictionary.TryGetValue(key, out UnityEngine.Object temp))
+            {
+                return temp as T;
+            }
+        }
+
+        return null;
+    }
+    public GameObject Instantiate(string key, Transform parent = null, bool pooling = false)
+    {
+        GameObject prefab = Load<GameObject>($"{key}");
+        if (prefab == null)
+        {
+            Debug.LogError($"Failed to load prefab : {key}");
+            return null;
+        }
+
+        if (pooling)
+            return Managers.Pool.Pop(prefab);
+
+        GameObject go = UnityEngine.Object.Instantiate(prefab, parent);
+
+        go.name = prefab.name;
+        return go;
+    }
+    //=========================================================================================================
 
     // 기본 데이터 로드 처음 한번만 실행
     public void LoadBaseData<T>(string fileName) where T : UnityEngine.Object
@@ -192,8 +234,6 @@ public class DataManager
     {
         if (File.Exists(saveFilePath))
         {
-            // 파일 안에 데이터 읽기
-
             // 파일에서 암호화된 데이터 읽기
             string encryptedData = File.ReadAllText(saveFilePath);
 

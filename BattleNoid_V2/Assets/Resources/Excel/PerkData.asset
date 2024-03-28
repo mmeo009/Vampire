@@ -18,7 +18,7 @@ MonoBehaviour:
     name: "\uC0DD\uCCB4 \uAC15\uD654"
     perkType: 1
     perkRarity: COMMON
-    isReplicatable: 0
+    isReplicatable: 1
     taskAmount: 2
     taskType: 1,1
     taskCondition: ASPD,ADMG
@@ -28,7 +28,7 @@ MonoBehaviour:
     name: "\uACF5\uACA9\uC131 \uAC15\uD654 \uD504\uB85C\uD1A0\uCF5C"
     perkType: 1
     perkRarity: COMMON
-    isReplicatable: 0
+    isReplicatable: 1
     taskAmount: 1
     taskType: 1,
     taskCondition: ADMG
