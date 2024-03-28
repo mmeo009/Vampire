@@ -63,7 +63,7 @@ public class PerkData_importer : AssetPostprocessor
 					cell = row.GetCell(2); p.name = (cell == null ? "" : cell.StringCellValue);
 					cell = row.GetCell(3); p.perkType = (int)(cell == null ? 0 : cell.NumericCellValue);
 					cell = row.GetCell(4); p.perkRarity = (cell == null ? "" : cell.StringCellValue);
-					cell = row.GetCell(5); p.isReplicable = (cell == null ? false : cell.BooleanCellValue);
+					cell = row.GetCell(5); p.isReplicatable = (cell == null ? false : cell.BooleanCellValue);
 					cell = row.GetCell(6); p.taskAmount = (int)(cell == null ? 0 : cell.NumericCellValue);
 					cell = row.GetCell(7); p.taskType = (cell == null ? "" : cell.StringCellValue);
 					cell = row.GetCell(8); p.taskCondition = (cell == null ? "" : cell.StringCellValue);

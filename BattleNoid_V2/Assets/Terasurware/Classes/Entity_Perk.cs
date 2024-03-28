@@ -15,7 +15,7 @@ public class Entity_Perk : ScriptableObject
 		public string name;
 		public int perkType;
 		public string perkRarity;
-		public bool isReplicable;
+		public bool isReplicatable;
 		public int taskAmount;
 		public string taskType;
 		public string taskCondition;
