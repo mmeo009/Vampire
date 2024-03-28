@@ -7,10 +7,10 @@ using NPOI.HSSF.UserModel;
 using NPOI.XSSF.UserModel;
 using NPOI.SS.UserModel;
 
-public class EnemyData_importer : AssetPostprocessor
+public class PerkData_importer : AssetPostprocessor
 {
-    private static readonly string filePath = "Assets/Resources/Excel/EnemyData.xlsx";
-    private static readonly string[] sheetNames = { "EnemyData", };
+    private static readonly string filePath = "Assets/Resources/Excel/PerkData.xlsx";
+    private static readonly string[] sheetNames = { "PerkData", };
     
     static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
     {
@@ -33,10 +33,10 @@ public class EnemyData_importer : AssetPostprocessor
                     var exportPath = "Assets/Resources/Excel/" + sheetName + ".asset";
                     
                     // check scriptable object
-                    var data = (Entity_Enemy)AssetDatabase.LoadAssetAtPath(exportPath, typeof(Entity_Enemy));
+                    var data = (Entity_Perk)AssetDatabase.LoadAssetAtPath(exportPath, typeof(Entity_Perk));
                     if (data == null)
                     {
-                        data = ScriptableObject.CreateInstance<Entity_Enemy>();
+                        data = ScriptableObject.CreateInstance<Entity_Perk>();
                         AssetDatabase.CreateAsset((ScriptableObject)data, exportPath);
                         data.hideFlags = HideFlags.NotEditable;
                     }
@@ -56,20 +56,18 @@ public class EnemyData_importer : AssetPostprocessor
                         IRow row = sheet.GetRow(i);
                         ICell cell = null;
                         
-                        var p = new Entity_Enemy.Param();
+                        var p = new Entity_Perk.Param();
 			
 					cell = row.GetCell(0); p.index = (int)(cell == null ? 0 : cell.NumericCellValue);
 					cell = row.GetCell(1); p.code = (cell == null ? "" : cell.StringCellValue);
 					cell = row.GetCell(2); p.name = (cell == null ? "" : cell.StringCellValue);
-					cell = row.GetCell(3); p.stage = (int)(cell == null ? 0 : cell.NumericCellValue);
-					cell = row.GetCell(4); p.baseHp = (cell == null ? 0.0 : cell.NumericCellValue);
-					cell = row.GetCell(5); p.baseDamage = (cell == null ? 0.0 : cell.NumericCellValue);
-					cell = row.GetCell(6); p.baseMoveSpeed = (cell == null ? 0.0 : cell.NumericCellValue);
-					cell = row.GetCell(7); p.additionalHp = (cell == null ? 0.0 : cell.NumericCellValue);
-					cell = row.GetCell(8); p.additionalDamage = (cell == null ? 0.0 : cell.NumericCellValue);
-					cell = row.GetCell(9); p.additionalMoveSpeed = (cell == null ? 0.0 : cell.NumericCellValue);
-					cell = row.GetCell(10); p.additionalRange = (cell == null ? 0.0 : cell.NumericCellValue);
-					cell = row.GetCell(11); p.attackType = (int)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(3); p.perkType = (int)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(4); p.perkRarity = (cell == null ? "" : cell.StringCellValue);
+					cell = row.GetCell(5); p.isReplicable = (cell == null ? false : cell.BooleanCellValue);
+					cell = row.GetCell(6); p.taskAmount = (int)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(7); p.taskType = (cell == null ? "" : cell.StringCellValue);
+					cell = row.GetCell(8); p.taskCondition = (cell == null ? "" : cell.StringCellValue);
+					cell = row.GetCell(9); p.taskReturnAmount = (cell == null ? "" : cell.StringCellValue);
 
                         data.param.Add(p);
                     }

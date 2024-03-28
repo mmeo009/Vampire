@@ -21,5 +21,6 @@ public class Entity_Enemy : ScriptableObject
 		public double additionalDamage;
 		public double additionalMoveSpeed;
 		public double additionalRange;
+		public int attackType;
 	}
 }

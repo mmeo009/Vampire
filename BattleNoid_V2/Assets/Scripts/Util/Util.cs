@@ -8,6 +8,11 @@ namespace DataSupporter
         // 코드를 나타내는 읽기 전용 속성
         string code { get; }
     }
+    public class Util
+    {
+
+    }
+    [System.Serializable]
     public class Enums
     {
         public enum PlayerType

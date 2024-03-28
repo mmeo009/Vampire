@@ -9,6 +9,7 @@ public class Test : MonoBehaviour
     {
         Managers.Data.LoadBaseData<Entity_Player>("playerData");
         Managers.Data.LoadBaseData<Entity_Enemy>("enemyData");
+        Managers.Data.LoadBaseData<Entity_Perk>("perkData");
         enemy = Managers.Data.GetDataFromDictionary(Managers.Data.enemyDictionary, 1);
     }
 }

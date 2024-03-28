@@ -19,10 +19,12 @@ public class DataManager
     // 플레이어 및 적 데이터
     public Entity_Player entity_Player;
     public Entity_Enemy entity_Enemy;
+    public Entity_Perk entity_Perk;
 
     // 플레이어 및 적 데이터를 담는 딕셔너리
     public Dictionary<int, Entity_Player.Param> playerDictionary = new Dictionary<int, Entity_Player.Param>();
     public Dictionary<int, Entity_Enemy.Param> enemyDictionary = new Dictionary<int, Entity_Enemy.Param>();
+    public Dictionary<int, Entity_Perk.Param> perkDictionary = new Dictionary<int, Entity_Perk.Param>();
 
     // 게임 데이터
     public GameData gameData { get; private set; }
@@ -57,6 +59,13 @@ public class DataManager
             AddEnemyDataToDictionary(entity_Enemy.param, enemyDictionary);
             Debug.Log(enemyDictionary[1].name);
         }
+        else if (typeof(T) == typeof(Entity_Perk))
+        {
+            entity_Perk = loadedData as Entity_Perk;
+            // 적 데이터 딕셔너리에 추가
+            AddPerkDataToDictionary(entity_Perk.param, perkDictionary);
+            Debug.Log(perkDictionary[1].name);
+        }
         else
         {
             Debug.LogError("불러올 데이터를 선택하세요!");
@@ -81,6 +90,22 @@ public class DataManager
 
     // 적 데이터를 딕셔너리에 추가
     private void AddEnemyDataToDictionary(List<Entity_Enemy.Param> data, Dictionary<int, Entity_Enemy.Param> dictionary)
+    {
+        foreach (var item in data)
+        {
+            if (!dictionary.ContainsKey(item.index))
+            {
+                dictionary.Add(item.index, item);
+            }
+            else
+            {
+                Debug.LogError($"이미 존재하는 인덱스: {item.index}");
+            }
+        }
+    }
+
+    // 플레이어 데이터를 딕셔너리에 추가
+    private void AddPerkDataToDictionary(List<Entity_Perk.Param> data, Dictionary<int, Entity_Perk.Param> dictionary)
     {
         foreach (var item in data)
         {

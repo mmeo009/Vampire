@@ -24,3 +24,4 @@ MonoBehaviour:
     additionalDamage: 5
     additionalMoveSpeed: 5
     additionalRange: 5
+    attackType: 1
