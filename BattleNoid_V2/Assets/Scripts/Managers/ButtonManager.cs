@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public class ButtonManager
+public class ButtonManager: MonoBehaviour
 {
     public enum ActonType
     {
