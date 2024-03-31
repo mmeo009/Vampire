@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using UnityEngine;
 
-namespace DataSupporter
+namespace Supporter
 {
     // IEntityWithCode는 코드(code) 속성을 가져야 하는 인터페이스. 다양한 클래스에서 공통적으로 가지고 있는 string 형식의 code를 사용하기 위해 사용
     public interface IEntityWithCode
@@ -10,7 +11,49 @@ namespace DataSupporter
     }
     public class Util
     {
+        public static T GetOrAddComponent<T>(GameObject go) where T : UnityEngine.Component
+        {
+            T component = go.GetComponent<T>();
+            if (component == null)
+                component = go.AddComponent<T>();
 
+            return component;
+        }
+        public static GameObject FindChild(GameObject go, string name = null, bool recursive = false)
+        {
+            Transform transform = FindChild<Transform>(go, name, recursive);
+            if (transform == null) return null;
+
+            return transform.gameObject;
+        }
+        public static T FindChild<T>(GameObject go, string name = null, bool recursive = false) where T : UnityEngine.Object
+        {
+            if (go == null)
+                return null;
+
+            if (recursive == false)
+            {
+                for (int i = 0; i < go.transform.childCount; i++)
+                {
+                    Transform transform = go.transform.GetChild(i);
+                    if (string.IsNullOrEmpty(name) || transform.name == name)
+                    {
+                        T component = transform.GetComponent<T>();
+                        if (component != null)
+                            return component;
+                    }
+                }
+            }
+            else
+            {
+                foreach (T component in go.GetComponentsInChildren<T>())
+                {
+                    if (string.IsNullOrEmpty(name) || component.name == name)
+                        return component;
+                }
+            }
+            return null;
+        }
     }
     [System.Serializable]
     public class Enums
@@ -18,29 +61,6 @@ namespace DataSupporter
         public enum PlayerType
         {
             TestPlayer
-        }
-
-        public enum EventType
-        {
-            NONE,
-            GoToBattle = 100,
-            CheckSTR = 1000,
-            CheckDEX,
-            CheckCON,
-            CheckINT,
-            CheckWIS,
-            CheckCHA
-        }
-
-        public enum ResultType
-        {
-            ChangeHp,
-            ChangeSp,
-            AddExperience = 100,
-            GoToShop = 1000,
-            GoToNextStory = 2000,
-            GoToRandomStory = 3000,
-            GoToEnding = 10000
         }
         public enum DataType
         {
@@ -57,6 +77,11 @@ namespace DataSupporter
             Minus,
             Set,
             Reset
+        }
+
+        public enum Skill
+        {
+            TestPlayer_Default,
         }
     }
 
@@ -100,5 +125,15 @@ namespace DataSupporter
         public string code;
         public bool hasThisPerk;
         public int level;
+    }
+    [System.Serializable]
+    public class MonststerStats
+    {
+        public Entity_Enemy entity_Enemy;
+        public string code;
+        public string name;
+        public double hp;
+        public double damage;
+        public double moveSpeed;
     }
 }

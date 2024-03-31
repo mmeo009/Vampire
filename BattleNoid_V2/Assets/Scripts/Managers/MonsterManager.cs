@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Supporter;
 
 public class MonsterManager
 {
@@ -12,11 +13,4 @@ public class MonsterManager
 }
 
 
-public class MonststerStats
-{
-    public string code;
-    public string name;
-    public double hp;
-    public double damage;
-    public double moveSpeed;
-}
+
