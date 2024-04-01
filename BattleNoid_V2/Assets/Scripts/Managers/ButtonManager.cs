@@ -1,31 +1,28 @@
-
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Supporter;
 
 
-public class ButtonManager: MonoBehaviour
+public class ButtonManager
 {
-    public enum ActonType
-    {
-        SceneMove,
-        ExitGame,
-        PauseGame,
-        SaveGame,
-        LoadGame,
-        DefaultAction
-    }
     // 옵션 윈도우를 가져올 친구
     public UnityEngine.GameObject OptionsWindow;
 
     public void Test()
     {
-        LoadGameScene(ActonType.ExitGame);
+        LoadGameScene(Enums.ActonType.ExitGame, null);
     }
 
-    //대체적으로 모든씬 이동 로직 및  여기다 적어놓을 예정임
-    public void LoadGameScene(ActonType type, string SceneName = null)
+    public void TestLoadEnum(Enums.DataType type)
     {
-        if(type == ActonType.SceneMove)
+        Debug.Log(type.ToString());
+    }
+    //대체적으로 모든씬 이동 로직 및  여기다 적어놓을 예정임
+    [SerializeField]
+    public void LoadGameScene(Enums.ActonType type, string SceneName = null)
+    {
+
+        if (type == Enums.ActonType.SceneMove)
         {
             if(SceneName != null)
             {
@@ -40,7 +37,7 @@ public class ButtonManager: MonoBehaviour
             }
 
         }
-        else if (type == ActonType.ExitGame)
+        else if (type == Enums.ActonType.ExitGame)
         {
             // 에디터에서는 동작안함
             Debug.Log("Exit 스크립트는 에디터에서 작동안해요 아마도여");
@@ -48,7 +45,7 @@ public class ButtonManager: MonoBehaviour
             // 빌드된 게임에서는 동작함 봉붕어에서 가져옴
             Application.Quit();
         }
-        else if (type == ActonType.PauseGame)
+        else if (type == Enums.ActonType.PauseGame)
         {
             // 시간이 정지하지 않았다면
             if (Time.timeScale == 1)
@@ -62,13 +59,13 @@ public class ButtonManager: MonoBehaviour
                 OptionsWindow.SetActive(false);
             }
         }
-        else if(type == ActonType.SaveGame)
+        else if(type == Enums.ActonType.SaveGame)
         {
-           // Managers.Data.SaveGameData();         //Todo : 저장 기능
+            Managers.Data.SaveGmaeData(Managers.Data.gameData);
         }
-        else if(type == ActonType.LoadGame) 
+        else if(type == Enums.ActonType.LoadGame) 
         {
-            // Managers.Data.LoadGameData();        //Todo : 저장한 데이터 불러오는 기능
+            Managers.Data.LoadGameData();
         }
     }
 }

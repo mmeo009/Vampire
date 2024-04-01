@@ -58,10 +58,22 @@ namespace Supporter
     [System.Serializable]
     public class Enums
     {
+        [SerializeField]
+        public enum ActonType
+        {
+            SceneMove,
+            ExitGame,
+            PauseGame,
+            SaveGame,
+            LoadGame,
+            DefaultAction
+        }
+        [SerializeField]
         public enum PlayerType
         {
             TestPlayer
         }
+        [SerializeField]
         public enum DataType
         {
             NAME,
@@ -71,6 +83,7 @@ namespace Supporter
             PLAYER,
             MONSTER
         }
+        [SerializeField]
         public enum Operation
         {
             Plus,
@@ -78,7 +91,7 @@ namespace Supporter
             Set,
             Reset
         }
-
+        [SerializeField]
         public enum Skill
         {
             TestPlayer_Default,

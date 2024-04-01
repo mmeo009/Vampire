@@ -15,7 +15,7 @@ public class DataManager
     public string saveFilePath;
 
     // 암호화 키
-    private string key = "ThisIsAWESOMEKey";
+    private string key = "ThisIsAAWESOMEKey";
 
     // 플레이어 및 적 데이터
     public Entity_Player entity_Player;
@@ -211,7 +211,7 @@ public class DataManager
     }
 
     // 게임 데이터 저장
-    void SaveData(GameData data)
+    public void SaveGmaeData(GameData data)
     {
         // JSON 직렬화
         string jsonData = JsonConvert.SerializeObject(data);
@@ -230,6 +230,13 @@ public class DataManager
     }
 
     // 게임 데이터 불러오기
+    public void LoadGameData()
+    {
+        GameData loadedData = new GameData();
+        loadedData = LoadData();
+
+        gameData = loadedData;
+    }
     GameData LoadData()
     {
         if (File.Exists(saveFilePath))

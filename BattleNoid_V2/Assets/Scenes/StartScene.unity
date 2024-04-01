@@ -505,6 +505,7 @@ GameObject:
   - component: {fileID: 663549871}
   - component: {fileID: 663549870}
   - component: {fileID: 663549869}
+  - component: {fileID: 663549872}
   m_Layer: 5
   m_Name: Quit
   m_TagString: Untagged
@@ -626,6 +627,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 663549867}
   m_CullTransparentMesh: 1
+--- !u!114 &663549872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 663549867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 889c8e23252a13140b573338945439ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actonType: 1
+  mythod: 
+  button: {fileID: 0}
 --- !u!1 &959008945
 GameObject:
   m_ObjectHideFlags: 0
@@ -704,9 +720,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1132625884}
   - component: {fileID: 1132625888}
-  - component: {fileID: 1132625889}
   - component: {fileID: 1132625886}
   - component: {fileID: 1132625885}
+  - component: {fileID: 1132625889}
   m_Layer: 5
   m_Name: Start
   m_TagString: Untagged
@@ -778,9 +794,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1132625889}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.MonoBehaviour, UnityEngine
-        m_MethodName: StopCoroutine
+        m_MethodName: 
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -837,10 +853,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1132625883}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ab5d9e1c2de2a446aa6add0b24d3ffc, type: 3}
+  m_Script: {fileID: 11500000, guid: 889c8e23252a13140b573338945439ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OptionsWindow: {fileID: 0}
+  actonType: 0
+  mythod: GameScene_001
+  button: {fileID: 0}
 --- !u!1 &1207240911
 GameObject:
   m_ObjectHideFlags: 0
@@ -1267,6 +1285,7 @@ GameObject:
   - component: {fileID: 1500781011}
   - component: {fileID: 1500781010}
   - component: {fileID: 1500781009}
+  - component: {fileID: 1500781012}
   m_Layer: 5
   m_Name: Options
   m_TagString: Untagged
@@ -1388,6 +1407,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1500781007}
   m_CullTransparentMesh: 1
+--- !u!114 &1500781012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1500781007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 889c8e23252a13140b573338945439ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actonType: 2
+  mythod: 
+  button: {fileID: 0}
 --- !u!1 &1584198441
 GameObject:
   m_ObjectHideFlags: 0
