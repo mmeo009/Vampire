@@ -17,10 +17,6 @@ public class Entity_Player : ScriptableObject
 		public double baseDamage;
 		public double baseMoveSpeed;
 		public double baseRange;
-		public double additionalHp;
-		public double additionalDamage;
-		public double additionalMoveSpeed;
-		public double additionalRange;
 		public int cost;
 	}
 }

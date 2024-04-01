@@ -8,7 +8,11 @@ public class MonsterManager
     public Dictionary<string, MonststerStats> monsters = new Dictionary<string, MonststerStats>();
     public void CreateMonster(string monsterCode)
     {
-        string monsterFilePath = $"Prefabs/Monsters/{monsterCode}";
+        Entity_Enemy.Param monster = Managers.Data.GetDataFromDictionary(Managers.Data.enemyDictionary,0, monsterCode);
+        if(monster != null)
+        {
+            string monsterFilePath = $"Prefabs/Monsters/{monsterCode}";
+        }
     }
 }
 

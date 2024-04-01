@@ -20,8 +20,4 @@ MonoBehaviour:
     baseDamage: 20
     baseMoveSpeed: 10
     baseRange: 10
-    additionalHp: 5
-    additionalDamage: 5
-    additionalMoveSpeed: 5
-    additionalRange: 5
-    cost: 300
+    cost: 0

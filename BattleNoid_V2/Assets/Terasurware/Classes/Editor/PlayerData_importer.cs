@@ -65,11 +65,7 @@ public class PlayerData_importer : AssetPostprocessor
 					cell = row.GetCell(4); p.baseDamage = (cell == null ? 0.0 : cell.NumericCellValue);
 					cell = row.GetCell(5); p.baseMoveSpeed = (cell == null ? 0.0 : cell.NumericCellValue);
 					cell = row.GetCell(6); p.baseRange = (cell == null ? 0.0 : cell.NumericCellValue);
-					cell = row.GetCell(7); p.additionalHp = (cell == null ? 0.0 : cell.NumericCellValue);
-					cell = row.GetCell(8); p.additionalDamage = (cell == null ? 0.0 : cell.NumericCellValue);
-					cell = row.GetCell(9); p.additionalMoveSpeed = (cell == null ? 0.0 : cell.NumericCellValue);
-					cell = row.GetCell(10); p.additionalRange = (cell == null ? 0.0 : cell.NumericCellValue);
-					cell = row.GetCell(11); p.cost = (int)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(7); p.cost = (int)(cell == null ? 0 : cell.NumericCellValue);
 
                         data.param.Add(p);
                     }
