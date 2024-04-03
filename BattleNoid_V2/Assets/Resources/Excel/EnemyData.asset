@@ -20,4 +20,4 @@ MonoBehaviour:
     baseHp: 10
     baseDamage: 20
     baseMoveSpeed: 10
-    attackType: 0
+    attackType: 1
