@@ -328,7 +328,7 @@ public class DataManager
     }
 
     // 게임 데이터 변경
-    public void ChangeGameData(Enums.DataType type, string dataKey = null, int intValue = 0, bool boolValue = false, Enums.Operation operation = Enums.Operation.Set)
+    public void ChangeGameData(DataType type, string dataKey = null, int intValue = 0, bool boolValue = false, Operation operation = Operation.Set)
     {
         if (gameData == null)
         {
@@ -337,17 +337,14 @@ public class DataManager
 
         switch (type)
         {
-            case Enums.DataType.NAME:
+            case DataType.NAME:
                 ChangeName(dataKey);
                 break;
-            case Enums.DataType.MONEY:
+            case DataType.MONEY:
                 ChangeMoney(operation, intValue);
                 break;
-            case Enums.DataType.CHARACTER:
+            case DataType.CHARACTER:
                 ChangeData(gameData.characterData, dataKey, boolValue, intValue);
-                break;
-            case Enums.DataType.PERK:
-                ChangeData(gameData.perkData, dataKey, boolValue, intValue);
                 break;
             default:
                 Debug.LogError("존재하지 않는 데이터 타입이야");
@@ -362,24 +359,24 @@ public class DataManager
     }
 
     // 돈 변경
-    private void ChangeMoney(Enums.Operation operation, int amount)
+    private void ChangeMoney(Operation operation, int amount)
     {
         switch (operation)
         {
-            case Enums.Operation.Plus:
+            case Operation.Plus:
                 gameData.money += amount;
                 break;
-            case Enums.Operation.Minus:
+            case Operation.Minus:
                 gameData.money -= amount;
                 if (gameData.money < 0)
                 {
                     gameData.money = 0;
                 }
                 break;
-            case Enums.Operation.Set:
+            case Operation.Set:
                 gameData.money = amount;
                 break;
-            case Enums.Operation.Reset:
+            case Operation.Reset:
                 gameData.money = 0;
                 break;
             default:
@@ -401,11 +398,6 @@ public class DataManager
                     characterData.hasThisCharacter = value;
                     characterData.level = level;
                 }
-                else if (data is PerkData perkData)
-                {
-                    perkData.hasThisPerk = value;
-                    perkData.level = level;
-                }
                 else
                 {
                     Debug.LogError("지원되지 않는 데이터 타입입니다.");
@@ -419,12 +411,6 @@ public class DataManager
                     characterData.code = key;
                     characterData.hasThisCharacter = value;
                     characterData.level = level;
-                }
-                else if (newData is PerkData perkData)
-                {
-                    perkData.code = key;
-                    perkData.hasThisPerk = value;
-                    perkData.level = level;
                 }
                 else
                 {

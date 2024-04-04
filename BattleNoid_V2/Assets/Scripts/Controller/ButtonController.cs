@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class ButtonController : MonoBehaviour
 {
-    public Enums.ActonType actonType;
+    public ActonType actonType;
     public string mythod;
     public Button button;
     void Start()
