@@ -30,7 +30,7 @@ public class EnemyData_importer : AssetPostprocessor
 
                 foreach (string sheetName in sheetNames)
                 {
-                    var exportPath = "Assets/Resources/Excel/" + sheetName + ".asset";
+                    var exportPath = "Assets/Resources_moved/Excel/" + sheetName + ".asset";
                     
                     // check scriptable object
                     var data = (Entity_Enemy)AssetDatabase.LoadAssetAtPath(exportPath, typeof(Entity_Enemy));

@@ -8,6 +8,9 @@ using System.Linq;
 using System.Security.Cryptography;
 using Supporter; // Supporter 네임스페이스를 사용
 using System.Text;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.ResourceLocations;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class DataManager
 {
@@ -72,16 +75,17 @@ public class DataManager
     //=========================================================================================================
 
     // 기본 데이터 로드 처음 한번만 실행
-    public void LoadBaseData<T>(string fileName) where T : UnityEngine.Object
+    public void LoadBaseData<T>(string key) where T : UnityEngine.Object
     {
         // 저장 파일 경로 설정
         saveFilePath = Application.persistentDataPath + "/BattleNoidData.json";
 
         // 리소스에서 파일 로드
-        T loadedData = Resources.Load<T>($"Excel/{fileName}");
+        var loadedData = Addressables.LoadAssetAsync<T>(key);
+        Debug.Log(loadedData.DebugName);
 
         // 로드한 데이터 처리
-        ProcessLoadedBaseData<T>(loadedData);
+        ProcessLoadedBaseData(loadedData.Result);
     }
 
     // 로드한 데이터 처리
