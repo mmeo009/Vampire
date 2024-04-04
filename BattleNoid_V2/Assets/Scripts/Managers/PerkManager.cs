@@ -32,7 +32,7 @@ public class PerkManager : MonoBehaviour
         }
         return null;
     }
-    public PerkTesk TeskNumToEnum(int num)
+    private PerkTesk TeskNumToEnum(int num)
     {
         if (num == 0) return PerkTesk.None;
         else if (num == 1) return PerkTesk.PlusPercent;
@@ -44,7 +44,7 @@ public class PerkManager : MonoBehaviour
         else if (num == 7) return PerkTesk.If;
         else return PerkTesk.None;
     }
-    public StatType TeskStatStringToEnum(string teskStat)
+    private StatType TeskStatStringToEnum(string teskStat)
     {
         if (teskStat == null) return StatType.None;
         else if (teskStat == "ASPD") return StatType.AttackSpeed;
@@ -52,15 +52,47 @@ public class PerkManager : MonoBehaviour
         else if (teskStat == "ARNG") return StatType.AttackRange;
         else return StatType.None;
     }
-    public void Task(PerkTesk tesk)
+    public void TeskActive(PerkData data)
     {
-        if(tesk == PerkTesk.PlusPercent)
+        for(int i = 0; i <data.perkTesks.Length; i++) 
         {
-
+            PerkTesk _tesk = data.perkTesks[i].tesk;
+            if (_tesk == PerkTesk.None) break;
+            else if (_tesk == PerkTesk.PlusPercent) PlusPercent();
+            else if (_tesk == PerkTesk.MinusPercent) MinusPercent();
+            else if (_tesk == PerkTesk.SatAsAmount) SatAsAmount();
+            else if (_tesk == PerkTesk.PlusAndMinus) PlusAndMinus();
+            else if (_tesk == PerkTesk.SetBool) SetBool();
+            else if (_tesk == PerkTesk.Timer) Timer();
+            else if (_tesk == PerkTesk.If) If();
         }
     }
 
     private void PlusPercent()
+    {
+
+    }
+    private void MinusPercent()
+    {
+
+    }
+    private void SatAsAmount()
+    {
+
+    }
+    private void PlusAndMinus()
+    {
+
+    }
+    private void SetBool()
+    {
+
+    }
+    private void Timer()
+    {
+
+    }
+    private void If()
     {
 
     }

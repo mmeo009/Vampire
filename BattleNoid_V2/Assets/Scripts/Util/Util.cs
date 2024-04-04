@@ -118,23 +118,22 @@ namespace Supporter
     }
 
     [System.Serializable]
-    public class Stats
+    public class PlayerStats
     {
-        // Ã¼·Â°ú Á¤½Å·Â
-        public int hpPoint;
-        public int spPoint;
+        public string code;
 
-        public int currentHpPoint;
-        public int currentSpPoint;
-        public int currentXpPoint;
+        public int hp;
+        public int sp;
+        public int xpLimit;
 
-        // ±âº» ½ºÅÝ ¼³Á¤(Ex D&D)
-        public int strength;        //STR Èû
-        public int dexterity;       //DEX ¹ÎÃ¸
-        public int consitiution;    //CON °Ç°­
-        public int Intelligence;    //INT Áö´É
-        public int wisdom;          //WIS ÁöÇý
-        public int charisma;        //CHA ¸Å·Â
+        public int currentHp;
+        public int currentSp;
+        public int currentXp;
+
+        public float attackDamage;
+        public float attackRange;
+        public float attackSpeed;
+        public float moveSpeed;
     }
     [System.Serializable]
     public class GameData

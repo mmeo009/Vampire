@@ -5,5 +5,11 @@ using Supporter;
 
 public class PlayerManager
 {
+    public PlayerStats player = new PlayerStats();
+
+    public void CreatePlayer()
+    {
+
+    }
 
 }
