@@ -21,3 +21,51 @@ MonoBehaviour:
     baseDamage: 20
     baseMoveSpeed: 10
     attackType: 1
+  - index: 2
+    code: 111112A
+    name: Enemy1
+    stage: 1
+    baseHp: 700
+    baseDamage: 200
+    baseMoveSpeed: 10
+    attackType: 1
+  - index: 3
+    code: 111113A
+    name: Enemy2
+    stage: 6
+    baseHp: 900
+    baseDamage: 100
+    baseMoveSpeed: 8
+    attackType: 1
+  - index: 4
+    code: 111114A
+    name: Enemy3
+    stage: 11
+    baseHp: 600
+    baseDamage: 250
+    baseMoveSpeed: 15
+    attackType: 1
+  - index: 5
+    code: 111115B
+    name: Boss1
+    stage: 5
+    baseHp: 4000
+    baseDamage: 300
+    baseMoveSpeed: 0
+    attackType: 2
+  - index: 6
+    code: 111116B
+    name: Boss2
+    stage: 10
+    baseHp: 6000
+    baseDamage: 400
+    baseMoveSpeed: 0
+    attackType: 2
+  - index: 7
+    code: 111117B
+    name: Boss3
+    stage: 15
+    baseHp: 8000
+    baseDamage: 500
+    baseMoveSpeed: 0
+    attackType: 2

@@ -9,7 +9,7 @@ using NPOI.SS.UserModel;
 
 public class PerkData_importer : AssetPostprocessor
 {
-    private static readonly string filePath = "Assets/Resources/Excel/PerkData.xlsx";
+    private static readonly string filePath = "Assets/@Resorces/Data/PerkData.xlsx";
     private static readonly string[] sheetNames = { "PerkData", };
     
     static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
@@ -30,7 +30,7 @@ public class PerkData_importer : AssetPostprocessor
 
                 foreach (string sheetName in sheetNames)
                 {
-                    var exportPath = "Assets/Resources_moved/Excel/" + sheetName + ".asset";
+                    var exportPath = "Assets/@Resorces/Data/" + sheetName + ".asset";
                     
                     // check scriptable object
                     var data = (Entity_Perk)AssetDatabase.LoadAssetAtPath(exportPath, typeof(Entity_Perk));

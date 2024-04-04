@@ -14,9 +14,9 @@ public class Entity_Enemy : ScriptableObject
 		public string code;
 		public string name;
 		public int stage;
-		public double baseHp;
-		public double baseDamage;
-		public double baseMoveSpeed;
-		public double attackType;
+		public float baseHp;
+		public float baseDamage;
+		public float baseMoveSpeed;
+		public int attackType;
 	}
 }

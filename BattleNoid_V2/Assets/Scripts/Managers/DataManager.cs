@@ -9,7 +9,7 @@ using System.Security.Cryptography;
 using Supporter; // Supporter 네임스페이스를 사용
 using System.Text;
 using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.ResourceLocations;
+using System.Threading.Tasks;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class DataManager
@@ -75,17 +75,28 @@ public class DataManager
     //=========================================================================================================
 
     // 기본 데이터 로드 처음 한번만 실행
-    public void LoadBaseData<T>(string key) where T : UnityEngine.Object
+    public async Task LoadBaseData<T>(string key) where T : UnityEngine.Object
     {
         // 저장 파일 경로 설정
         saveFilePath = Application.persistentDataPath + "/BattleNoidData.json";
 
         // 리소스에서 파일 로드
-        var loadedData = Addressables.LoadAssetAsync<T>(key);
-        Debug.Log(loadedData.DebugName);
+        var operation = Addressables.LoadAssetAsync<T>(key);
+        // 대기해서 로드 기다리기
+        await operation.Task;
 
-        // 로드한 데이터 처리
-        ProcessLoadedBaseData(loadedData.Result);
+        if (operation.Status == AsyncOperationStatus.Succeeded)
+        {
+            var loadedData = operation.Result;
+            Debug.Log(loadedData.name);
+
+            // 로드한 데이터 처리
+            ProcessLoadedBaseData(loadedData);
+        }
+        else
+        {
+            Debug.LogError($"{key}를 가진 데이터가 존재하지 않습니다.");
+        }
     }
 
     // 로드한 데이터 처리

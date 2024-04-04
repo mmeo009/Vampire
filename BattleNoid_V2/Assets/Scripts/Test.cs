@@ -5,11 +5,11 @@ using UnityEngine;
 public class Test : MonoBehaviour
 {
     public Entity_Enemy.Param enemy;
-    public void Start()
+    public async void Start()
     {
-        Managers.Data.LoadBaseData<Entity_Player>("PlayerData");
-        Managers.Data.LoadBaseData<Entity_Enemy>("EnemyData");
-        Managers.Data.LoadBaseData<Entity_Perk>("PerkData");
+        await Managers.Data.LoadBaseData<Entity_Player>("PlayerData");
+        await Managers.Data.LoadBaseData<Entity_Enemy>("EnemyData");
+        await Managers.Data.LoadBaseData<Entity_Perk>("PerkData");
         enemy = Managers.Data.GetDataFromDictionary(Managers.Data.enemyDictionary, 1);
     }
 }
