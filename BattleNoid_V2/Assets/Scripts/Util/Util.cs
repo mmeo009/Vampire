@@ -126,9 +126,13 @@ namespace Supporter
         public int sp;
         public int xpLimit;
 
-        public int currentHp;
-        public int currentSp;
-        public int currentXp;
+        public float currentHp;
+        public float currentSp;
+        public float currentXp;
+
+        public int hpPerSec;
+        public int spPerSec;
+        public int xpPerSec;
 
         public float attackDamage;
         public float attackRange;

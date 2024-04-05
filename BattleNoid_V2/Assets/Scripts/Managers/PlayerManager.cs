@@ -12,4 +12,8 @@ public class PlayerManager
 
     }
 
+    public void Attack()
+    {
+
+    }
 }
