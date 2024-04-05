@@ -114,7 +114,23 @@ namespace Supporter
         AttackSpeed,
         AttackDamage,
         AttackRange,
+        MoveSpeed,
+        CurrentHP,
+        MAXHP,
+        CurrentSP,
+        MAXSP,
+        CurrentXP,
+        MAXXP
 
+    }
+
+    public enum BulletType
+    {
+        forward,
+        left,
+        right,
+        back,
+        target,
     }
 
     [System.Serializable]
@@ -122,9 +138,9 @@ namespace Supporter
     {
         public string code;
 
-        public int hp;
-        public int sp;
-        public int xpLimit;
+        public float hp;
+        public float sp;
+        public float xpLimit;
 
         public float currentHp;
         public float currentSp;
