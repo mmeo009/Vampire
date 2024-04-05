@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 8
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8efd65ecf9e16b46a4de687fc9aaaf2, type: 3}
+  m_Name: PerkData
+  m_EditorClassIdentifier: 
+  param:
+  - index: 1
+    code: 1111111P
+    name: "\uC0DD\uCCB4 \uAC15\uD654"
+    perkType: 1
+    perkRarity: COMMON
+    isReplicatable: 1
+    taskAmount: 2
+    taskType: 1,1
+    taskCondition: ASPD,ADMG
+    taskReturnAmount: 1.2*,0.8*
+  - index: 2
+    code: 1111112P
+    name: "\uACF5\uACA9\uC131 \uAC15\uD654 \uD504\uB85C\uD1A0\uCF5C"
+    perkType: 1
+    perkRarity: COMMON
+    isReplicatable: 1
+    taskAmount: 1
+    taskType: 1,
+    taskCondition: ADMG
+    taskReturnAmount: 1.2*,

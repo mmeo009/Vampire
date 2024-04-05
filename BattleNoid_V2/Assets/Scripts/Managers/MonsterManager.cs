@@ -5,10 +5,14 @@ using Supporter;
 
 public class MonsterManager
 {
-    public Dictionary<string, MonststerStats> monsters = new Dictionary<string, MonststerStats>();
+    public HashSet<MonsterController> monsters = new HashSet<MonsterController>();
     public void CreateMonster(string monsterCode)
     {
-        string monsterFilePath = $"Prefabs/Monsters/{monsterCode}";
+        Entity_Enemy.Param monster = Managers.Data.GetDataFromDictionary(Managers.Data.enemyDictionary,0, monsterCode);
+        if(monster != null)
+        {
+            
+        }
     }
 }
 

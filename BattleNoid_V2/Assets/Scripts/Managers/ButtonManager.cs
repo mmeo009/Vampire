@@ -1,31 +1,28 @@
-
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Supporter;
 
 
 public class ButtonManager
 {
-    public enum ActonType
-    {
-        SceneMove,
-        ExitGame,
-        PauseGame,
-        SaveGame,
-        LoadGame,
-        DefaultAction
-    }
     // 옵션 윈도우를 가져올 친구
     public UnityEngine.GameObject OptionsWindow;
 
     public void Test()
     {
-        LoadGameScene(ActonType.ExitGame);
+        LoadGameScene(ActonType.ExitGame, null);
     }
 
+    public void TestLoadEnum(DataType type)
+    {
+        Debug.Log(type.ToString());
+    }
     //대체적으로 모든씬 이동 로직 및  여기다 적어놓을 예정임
+    [SerializeField]
     public void LoadGameScene(ActonType type, string SceneName = null)
     {
-        if(type == ActonType.SceneMove)
+
+        if (type == ActonType.SceneMove)
         {
             if(SceneName != null)
             {
@@ -64,11 +61,11 @@ public class ButtonManager
         }
         else if(type == ActonType.SaveGame)
         {
-           // Managers.Data.SaveGameData();         //Todo : 저장 기능
+            Managers.Data.SaveGmaeData(Managers.Data.gameData);
         }
         else if(type == ActonType.LoadGame) 
         {
-            // Managers.Data.LoadGameData();        //Todo : 저장한 데이터 불러오는 기능
+            Managers.Data.LoadGameData();
         }
     }
 }

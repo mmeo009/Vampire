@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 8
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5c34af0d34d1994b94230d53f8ab2c0, type: 3}
+  m_Name: PlayerData
+  m_EditorClassIdentifier: 
+  param:
+  - index: 1
+    code: 111111A
+    name: Serena
+    baseHp: 1500
+    baseDamage: 100
+    baseMoveSpeed: 10
+    baseRange: 10
+    cost: 0
+  - index: 2
+    code: 111112A
+    name: Ember
+    baseHp: 2000
+    baseDamage: 130
+    baseMoveSpeed: 10
+    baseRange: 10
+    cost: 0

@@ -13,14 +13,10 @@ public class Entity_Player : ScriptableObject
 		public int index;
 		public string code;
 		public string name;
-		public double baseHp;
-		public double baseDamage;
-		public double baseMoveSpeed;
-		public double baseRange;
-		public double additionalHp;
-		public double additionalDamage;
-		public double additionalMoveSpeed;
-		public double additionalRange;
+		public float baseHp;
+		public float baseDamage;
+		public float baseMoveSpeed;
+		public float baseRange;
 		public int cost;
 	}
 }

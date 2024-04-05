@@ -9,7 +9,7 @@ using NPOI.SS.UserModel;
 
 public class EnemyData_importer : AssetPostprocessor
 {
-    private static readonly string filePath = "Assets/Resources/Excel/EnemyData.xlsx";
+    private static readonly string filePath = "Assets/@Resorces/Data/EnemyData.xlsx";
     private static readonly string[] sheetNames = { "EnemyData", };
     
     static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
@@ -30,7 +30,7 @@ public class EnemyData_importer : AssetPostprocessor
 
                 foreach (string sheetName in sheetNames)
                 {
-                    var exportPath = "Assets/Resources/Excel/" + sheetName + ".asset";
+                    var exportPath = "Assets/@Resorces/Data/" + sheetName + ".asset";
                     
                     // check scriptable object
                     var data = (Entity_Enemy)AssetDatabase.LoadAssetAtPath(exportPath, typeof(Entity_Enemy));
@@ -62,14 +62,10 @@ public class EnemyData_importer : AssetPostprocessor
 					cell = row.GetCell(1); p.code = (cell == null ? "" : cell.StringCellValue);
 					cell = row.GetCell(2); p.name = (cell == null ? "" : cell.StringCellValue);
 					cell = row.GetCell(3); p.stage = (int)(cell == null ? 0 : cell.NumericCellValue);
-					cell = row.GetCell(4); p.baseHp = (cell == null ? 0.0 : cell.NumericCellValue);
-					cell = row.GetCell(5); p.baseDamage = (cell == null ? 0.0 : cell.NumericCellValue);
-					cell = row.GetCell(6); p.baseMoveSpeed = (cell == null ? 0.0 : cell.NumericCellValue);
-					cell = row.GetCell(7); p.additionalHp = (cell == null ? 0.0 : cell.NumericCellValue);
-					cell = row.GetCell(8); p.additionalDamage = (cell == null ? 0.0 : cell.NumericCellValue);
-					cell = row.GetCell(9); p.additionalMoveSpeed = (cell == null ? 0.0 : cell.NumericCellValue);
-					cell = row.GetCell(10); p.additionalRange = (cell == null ? 0.0 : cell.NumericCellValue);
-					cell = row.GetCell(11); p.attackType = (int)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(4); p.baseHp = (float)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(5); p.baseDamage = (float)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(6); p.baseMoveSpeed = (float)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(7); p.attackType = (int)(cell == null ? 0 : cell.NumericCellValue);
 
                         data.param.Add(p);
                     }

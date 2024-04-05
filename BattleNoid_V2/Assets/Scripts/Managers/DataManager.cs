@@ -8,6 +8,9 @@ using System.Linq;
 using System.Security.Cryptography;
 using Supporter; // Supporter 네임스페이스를 사용
 using System.Text;
+using UnityEngine.AddressableAssets;
+using System.Threading.Tasks;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class DataManager
 {
@@ -15,7 +18,7 @@ public class DataManager
     public string saveFilePath;
 
     // 암호화 키
-    private string key = "ThisIsAWESOMEKey";
+    private string key = "ThisIsAAWESOMEKey";
 
     // 플레이어 및 적 데이터
     public Entity_Player entity_Player;
@@ -72,16 +75,28 @@ public class DataManager
     //=========================================================================================================
 
     // 기본 데이터 로드 처음 한번만 실행
-    public void LoadBaseData<T>(string fileName) where T : UnityEngine.Object
+    public async Task LoadBaseData<T>(string key) where T : UnityEngine.Object
     {
         // 저장 파일 경로 설정
         saveFilePath = Application.persistentDataPath + "/BattleNoidData.json";
 
         // 리소스에서 파일 로드
-        T loadedData = Resources.Load<T>($"Excel/{fileName}");
+        var operation = Addressables.LoadAssetAsync<T>(key);
+        // 대기해서 로드 기다리기
+        await operation.Task;
 
-        // 로드한 데이터 처리
-        ProcessLoadedBaseData<T>(loadedData);
+        if (operation.Status == AsyncOperationStatus.Succeeded)
+        {
+            var loadedData = operation.Result;
+            Debug.Log(loadedData.name);
+
+            // 로드한 데이터 처리
+            ProcessLoadedBaseData(loadedData);
+        }
+        else
+        {
+            Debug.LogError($"{key}를 가진 데이터가 존재하지 않습니다.");
+        }
     }
 
     // 로드한 데이터 처리
@@ -211,7 +226,7 @@ public class DataManager
     }
 
     // 게임 데이터 저장
-    void SaveData(GameData data)
+    public void SaveGmaeData(GameData data)
     {
         // JSON 직렬화
         string jsonData = JsonConvert.SerializeObject(data);
@@ -230,6 +245,13 @@ public class DataManager
     }
 
     // 게임 데이터 불러오기
+    public void LoadGameData()
+    {
+        GameData loadedData = new GameData();
+        loadedData = LoadData();
+
+        gameData = loadedData;
+    }
     GameData LoadData()
     {
         if (File.Exists(saveFilePath))
@@ -317,7 +339,7 @@ public class DataManager
     }
 
     // 게임 데이터 변경
-    public void ChangeGameData(Enums.DataType type, string dataKey = null, int intValue = 0, bool boolValue = false, Enums.Operation operation = Enums.Operation.Set)
+    public void ChangeGameData(DataType type, string dataKey = null, int intValue = 0, bool boolValue = false, Operation operation = Operation.Set)
     {
         if (gameData == null)
         {
@@ -326,17 +348,14 @@ public class DataManager
 
         switch (type)
         {
-            case Enums.DataType.NAME:
+            case DataType.NAME:
                 ChangeName(dataKey);
                 break;
-            case Enums.DataType.MONEY:
+            case DataType.MONEY:
                 ChangeMoney(operation, intValue);
                 break;
-            case Enums.DataType.CHARACTER:
+            case DataType.CHARACTER:
                 ChangeData(gameData.characterData, dataKey, boolValue, intValue);
-                break;
-            case Enums.DataType.PERK:
-                ChangeData(gameData.perkData, dataKey, boolValue, intValue);
                 break;
             default:
                 Debug.LogError("존재하지 않는 데이터 타입이야");
@@ -351,24 +370,24 @@ public class DataManager
     }
 
     // 돈 변경
-    private void ChangeMoney(Enums.Operation operation, int amount)
+    private void ChangeMoney(Operation operation, int amount)
     {
         switch (operation)
         {
-            case Enums.Operation.Plus:
+            case Operation.Plus:
                 gameData.money += amount;
                 break;
-            case Enums.Operation.Minus:
+            case Operation.Minus:
                 gameData.money -= amount;
                 if (gameData.money < 0)
                 {
                     gameData.money = 0;
                 }
                 break;
-            case Enums.Operation.Set:
+            case Operation.Set:
                 gameData.money = amount;
                 break;
-            case Enums.Operation.Reset:
+            case Operation.Reset:
                 gameData.money = 0;
                 break;
             default:
@@ -390,11 +409,6 @@ public class DataManager
                     characterData.hasThisCharacter = value;
                     characterData.level = level;
                 }
-                else if (data is PerkData perkData)
-                {
-                    perkData.hasThisPerk = value;
-                    perkData.level = level;
-                }
                 else
                 {
                     Debug.LogError("지원되지 않는 데이터 타입입니다.");
@@ -408,12 +422,6 @@ public class DataManager
                     characterData.code = key;
                     characterData.hasThisCharacter = value;
                     characterData.level = level;
-                }
-                else if (newData is PerkData perkData)
-                {
-                    perkData.code = key;
-                    perkData.hasThisPerk = value;
-                    perkData.level = level;
                 }
                 else
                 {

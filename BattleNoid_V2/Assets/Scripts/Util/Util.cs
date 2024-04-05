@@ -55,54 +55,89 @@ namespace Supporter
             return null;
         }
     }
-    [System.Serializable]
-    public class Enums
+    [SerializeField]
+    public enum ActonType
     {
-        public enum PlayerType
-        {
-            TestPlayer
-        }
-        public enum DataType
-        {
-            NAME,
-            MONEY,
-            CHARACTER,
-            PERK,
-            PLAYER,
-            MONSTER
-        }
-        public enum Operation
-        {
-            Plus,
-            Minus,
-            Set,
-            Reset
-        }
+        SceneMove,
+        ExitGame,
+        PauseGame,
+        SaveGame,
+        LoadGame,
+        DefaultAction
+    }
+    [SerializeField]
+    public enum PlayerType
+    {
+        TestPlayer,
+        Serena,
+        Ember
+    }
+    [SerializeField]
+    public enum DataType
+    {
+        NAME,
+        MONEY,
+        CHARACTER,
+        PERK,
+        PLAYER,
+        MONSTER
+    }
+    [SerializeField]
+    public enum Operation
+    {
+        Plus,
+        Minus,
+        Set,
+        Reset
+    }
+    [SerializeField]
+    public enum Skill
+    {
+        TestPlayer_Default,
+    }
 
-        public enum Skill
-        {
-            TestPlayer_Default,
-        }
+    public enum PerkTesk
+    {
+        None = 0,
+        PlusPercent,
+        MinusPercent,
+        SatAsAmount,
+        PlusAndMinus,
+        SetBool,
+        Timer,
+        If,
+    }
+
+    public enum StatType
+    {
+        None = 0,
+        AttackSpeed,
+        AttackDamage,
+        AttackRange,
+
     }
 
     [System.Serializable]
-    public class Stats
+    public class PlayerStats
     {
-        // Ã¼·Â°ú Á¤½Å·Â
-        public int hpPoint;
-        public int spPoint;
+        public string code;
 
-        public int currentHpPoint;
-        public int currentSpPoint;
-        public int currentXpPoint;
+        public int hp;
+        public int sp;
+        public int xpLimit;
 
-        // ±âº» ½ºÅÝ ¼³Á¤(Ex D&D)
-        public int strength;        //STR Èû
-        public int dexterity;       //DEX ¹ÎÃ¸
-        public int consitiution;    //CON °Ç°­
-        public int Intelligence;    //INT Áö´É
-        public int wisdom;          //WIS ÁöÇý
-        public int charisma;        //CHA ¸Å·Â
+        public float currentHp;
+        public float currentSp;
+        public float currentXp;
+
+        public int hpPerSec;
+        public int spPerSec;
+        public int xpPerSec;
+
+        public float attackDamage;
+        public float attackRange;
+        public float attackSpeed;
+        public float moveSpeed;
     }
     [System.Serializable]
     public class GameData
@@ -110,7 +145,6 @@ namespace Supporter
         public string myName;
         public int money;
         public Dictionary<string, CharacterData> characterData = new Dictionary<string, CharacterData>();
-        public Dictionary<string, PerkData> perkData = new Dictionary<string, PerkData>();
     }
     [System.Serializable]
     public class CharacterData
@@ -122,9 +156,16 @@ namespace Supporter
     [System.Serializable]
     public class PerkData
     {
+        public string name;
         public string code;
-        public bool hasThisPerk;
-        public int level;
+        public bool replicatable = false;
+        public PerkTeskData[] perkTesks;
+    }
+    public class PerkTeskData
+    {
+        public int teskNum;
+        public PerkTesk tesk;
+        public StatType targetData;
     }
     [System.Serializable]
     public class MonststerStats

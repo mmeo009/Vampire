@@ -9,7 +9,7 @@ using NPOI.SS.UserModel;
 
 public class PlayerData_importer : AssetPostprocessor
 {
-    private static readonly string filePath = "Assets/Resources/Excel/PlayerData.xlsx";
+    private static readonly string filePath = "Assets/@Resorces/Data/PlayerData.xlsx";
     private static readonly string[] sheetNames = { "PlayerData", };
     
     static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
@@ -30,7 +30,7 @@ public class PlayerData_importer : AssetPostprocessor
 
                 foreach (string sheetName in sheetNames)
                 {
-                    var exportPath = "Assets/Resources/Excel/" + sheetName + ".asset";
+                    var exportPath = "Assets/@Resorces/Data/" + sheetName + ".asset";
                     
                     // check scriptable object
                     var data = (Entity_Player)AssetDatabase.LoadAssetAtPath(exportPath, typeof(Entity_Player));
@@ -61,15 +61,11 @@ public class PlayerData_importer : AssetPostprocessor
 					cell = row.GetCell(0); p.index = (int)(cell == null ? 0 : cell.NumericCellValue);
 					cell = row.GetCell(1); p.code = (cell == null ? "" : cell.StringCellValue);
 					cell = row.GetCell(2); p.name = (cell == null ? "" : cell.StringCellValue);
-					cell = row.GetCell(3); p.baseHp = (cell == null ? 0.0 : cell.NumericCellValue);
-					cell = row.GetCell(4); p.baseDamage = (cell == null ? 0.0 : cell.NumericCellValue);
-					cell = row.GetCell(5); p.baseMoveSpeed = (cell == null ? 0.0 : cell.NumericCellValue);
-					cell = row.GetCell(6); p.baseRange = (cell == null ? 0.0 : cell.NumericCellValue);
-					cell = row.GetCell(7); p.additionalHp = (cell == null ? 0.0 : cell.NumericCellValue);
-					cell = row.GetCell(8); p.additionalDamage = (cell == null ? 0.0 : cell.NumericCellValue);
-					cell = row.GetCell(9); p.additionalMoveSpeed = (cell == null ? 0.0 : cell.NumericCellValue);
-					cell = row.GetCell(10); p.additionalRange = (cell == null ? 0.0 : cell.NumericCellValue);
-					cell = row.GetCell(11); p.cost = (int)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(3); p.baseHp = (float)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(4); p.baseDamage = (float)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(5); p.baseMoveSpeed = (float)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(6); p.baseRange = (float)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(7); p.cost = (int)(cell == null ? 0 : cell.NumericCellValue);
 
                         data.param.Add(p);
                     }
