@@ -1,24 +1,18 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using Supporter;
-
 
 public class ButtonManager
 {
     // 옵션 윈도우를 가져올 친구
     public UnityEngine.GameObject OptionsWindow;
 
-    public void Test()
-    {
-        LoadGameScene(ActonType.ExitGame, null);
-    }
-
     public void TestLoadEnum(DataType type)
     {
         Debug.Log(type.ToString());
     }
     //대체적으로 모든씬 이동 로직 및  여기다 적어놓을 예정임
-    [SerializeField]
     public void LoadGameScene(ActonType type, string SceneName = null)
     {
 
@@ -27,7 +21,8 @@ public class ButtonManager
             if(SceneName != null)
             {
                 // 씬 로딩 로직은 여기에 추가
-                SceneManager.LoadScene(SceneName);
+                SceneManager.LoadScene("LoadingScene");
+                CoroutineManager.LoadSceneWithLoadingBar(SceneName);
             }
             else
             {
