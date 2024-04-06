@@ -34,16 +34,22 @@ public class CoroutineManager : MonoBehaviour
     private static IEnumerator LoadingSceneAndFillLoadingBarCoroutine(string sceneName)
     {
         Image loadingBar;
-        if (SceneManager.GetActiveScene().name == "LoadingScene")
+        if (SceneManager.GetActiveScene().name != "LoadingScene")
         {
-            loadingBar = GameObject.Find("loadingBar").GetComponent<Image>();
+            AsyncOperation loadLoadingScene = SceneManager.LoadSceneAsync("LoadingScene");
+            while (!loadLoadingScene.isDone)
+            {
+                yield return null;
+            }
         }
-        else
+
+        loadingBar = GameObject.Find("LoadingBar").GetComponent<Image>();
+        if (loadingBar == null)
         {
-            loadingBar = null;
-            Debug.LogError("로딩바가 없거나 로딩씬이 아닙니다.");
+            Debug.LogError("로딩바를 찾을 수 없습니다.");
             yield break;
         }
+
         AsyncOperation op = SceneManager.LoadSceneAsync(sceneName);
         op.allowSceneActivation = false;
         float timer = 0f;

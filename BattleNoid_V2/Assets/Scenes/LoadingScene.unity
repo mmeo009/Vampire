@@ -321,7 +321,7 @@ GameObject:
   - component: {fileID: 963208688}
   - component: {fileID: 963208687}
   m_Layer: 5
-  m_Name: LodingBar
+  m_Name: LoadingBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
