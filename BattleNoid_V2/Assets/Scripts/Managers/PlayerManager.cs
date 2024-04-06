@@ -6,6 +6,7 @@ using Supporter;
 public class PlayerManager
 {
     public PlayerStats player;
+    public HashSet<BulletController> bullets = new HashSet<BulletController>();
     public void CreatePlayer(int index, string code)
     {
         PlayerStats _player = new PlayerStats();
@@ -62,8 +63,23 @@ public class PlayerManager
         }
     }
 
-    public void Attack()
+    protected virtual void Attack()
     {
 
+    }
+    private void ShotAsDirection(BulletDirection direction)
+    {
+        GameObject temp = Managers.Pool.Pop(Managers.Data.Instantiate("Bullet"));
+        BulletController bc = temp.GetComponent<BulletController>();
+        bc.bulletType = direction;
+        bc.moveSpeed = player.bulletSpeed;
+
+        if (direction == BulletDirection.forward) bc.direction = Vector3.forward;
+        else if (direction == BulletDirection.left) bc.direction = Vector3.left;
+        else if (direction == BulletDirection.right) bc.direction = Vector3.right;
+        else if (direction == BulletDirection.back) bc.direction = Vector3.back;
+        else Debug.LogWarning("방향오류");
+
+        bullets.Add(bc);
     }
 }

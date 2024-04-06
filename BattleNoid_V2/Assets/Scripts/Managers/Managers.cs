@@ -26,9 +26,10 @@ public class Managers : MonoBehaviour
     MonsterManager _monster = new MonsterManager();
     PoolManager _pool = new PoolManager();
     ButtonManager _button = new ButtonManager();
+    PlayerManager _player = new PlayerManager();
     public static DataManager Data { get { return Instance?._data; } }
     public static MonsterManager Monster { get { return Instance?._monster; } }
     public static PoolManager Pool { get {  return Instance?._pool; } }
-
     public static ButtonManager Button { get {  return Instance?._button; } }
+    public static PlayerManager Player { get { return Instance?._player; } }
 }

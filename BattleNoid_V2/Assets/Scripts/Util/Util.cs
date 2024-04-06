@@ -123,8 +123,7 @@ namespace Supporter
         MAXXP
 
     }
-
-    public enum BulletType
+    public enum BulletDirection
     {
         forward,
         left,
@@ -154,6 +153,7 @@ namespace Supporter
         public float attackRange;
         public float attackSpeed;
         public float moveSpeed;
+        public float bulletSpeed;
     }
     [System.Serializable]
     public class GameData
