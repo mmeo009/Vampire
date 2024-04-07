@@ -624,7 +624,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 24.63562, y: 0}
+  m_AnchoredPosition: {x: 8, y: 0}
   m_SizeDelta: {x: 2000, y: 1100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1207240913
@@ -881,7 +881,6 @@ GameObject:
   - component: {fileID: 1500781011}
   - component: {fileID: 1500781010}
   - component: {fileID: 1500781009}
-  - component: {fileID: 1500781012}
   m_Layer: 5
   m_Name: Options
   m_TagString: Untagged
@@ -952,9 +951,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1500781007}
         m_TargetAssemblyTypeName: Options, Assembly-CSharp
-        m_MethodName: OnClickstopbutton
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1002,21 +1001,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1500781007}
   m_CullTransparentMesh: 1
---- !u!114 &1500781012
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1500781007}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 889c8e23252a13140b573338945439ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actonType: 2
-  mythod: 
-  button: {fileID: 0}
 --- !u!1 &1584198441
 GameObject:
   m_ObjectHideFlags: 0
