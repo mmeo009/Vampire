@@ -880,6 +880,7 @@ GameObject:
   - component: {fileID: 1500781008}
   - component: {fileID: 1500781011}
   - component: {fileID: 1500781010}
+  - component: {fileID: 1500781012}
   - component: {fileID: 1500781009}
   m_Layer: 5
   m_Name: Options
@@ -951,9 +952,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1500781007}
-        m_TargetAssemblyTypeName: Options, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 1500781012}
+        m_TargetAssemblyTypeName: PauseGame, Assembly-CSharp
+        m_MethodName: OnClickstopbutton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1001,6 +1002,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1500781007}
   m_CullTransparentMesh: 1
+--- !u!114 &1500781012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1500781007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e58c0da25713e847b02b5b618bfec65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VolumeWindow: {fileID: 1207240911}
 --- !u!1 &1584198441
 GameObject:
   m_ObjectHideFlags: 0
@@ -1222,6 +1236,7 @@ GameObject:
   - component: {fileID: 1698357935}
   - component: {fileID: 1698357939}
   - component: {fileID: 1698357938}
+  - component: {fileID: 1698357940}
   - component: {fileID: 1698357936}
   m_Layer: 5
   m_Name: Stop
@@ -1294,8 +1309,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Options, Assembly-CSharp
+      - m_Target: {fileID: 1698357940}
+        m_TargetAssemblyTypeName: PauseGame, Assembly-CSharp
         m_MethodName: OnClickContiButtom
         m_Mode: 1
         m_Arguments:
@@ -1344,6 +1359,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1698357934}
   m_CullTransparentMesh: 1
+--- !u!114 &1698357940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1698357934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e58c0da25713e847b02b5b618bfec65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VolumeWindow: {fileID: 0}
 --- !u!1 &1725210174
 GameObject:
   m_ObjectHideFlags: 0
