@@ -8,21 +8,30 @@ public class PlayerManager
 {
     public PlayerStats player;
     public HashSet<BulletController> bullets = new HashSet<BulletController>();
-    public async void CreatePlayer(int index, string code)
+    public void CreatePlayer(int index, string code)
     {
         PlayerStats _player = new PlayerStats();
 
         Entity_Player.Param _playerData = Managers.Data.GetDataFromDictionary(Managers.Data.playerDictionary, index, code);
         if(string.IsNullOrEmpty(code))
         {
-            _playerData.code = code;
+             code = _playerData.code;
         }
-        GameObject playerObject = Managers.Pool.Pop(Managers.Data.Instantiate(code));
+         GameObject playerObject = Managers.Data.Instantiate(code,null,true);
 
         _player.playerController = playerObject.GetComponent<PlayerController>();
         _player.hp = _playerData.baseHp;
+        _player.attackSpeed = 5;
+        _player.moveSpeed = _playerData.baseMoveSpeed;
+        _player.rotationSpeed = 10;
+        _player.bulletSpeed = 1;
+        _player.attackRange = _playerData.baseRange;
 
         player = _player;
+        player.playerController.LoadData();
+        CameraController cc = Util.GetOrAddComponent<CameraController>(_player.playerController.gameObject);
+        cc.player = _player.playerController;
+        cc.FindCamera();
     }
     public void SetStats(Operation operation ,StatType statType, float amount)
     {
@@ -68,21 +77,23 @@ public class PlayerManager
         }
     }
 
-    protected virtual void Attack()
+    public virtual void Attack()
     {
-
+        ShotAsDirection(BulletDirection.forward);
+        Debug.Log("빵야");
     }
     private void ShotAsDirection(BulletDirection direction)
     {
-        GameObject temp = Managers.Pool.Pop(Managers.Data.Instantiate("Bullet"));
+        GameObject temp = Managers.Data.Instantiate("Bullet",null,true);
         BulletController bc = Util.GetOrAddComponent<BulletController>(temp);
+        temp.transform.position = player.playerController.transform.position + new Vector3(0,1.3f,0);
         bc.bulletType = direction;
         bc.moveSpeed = player.bulletSpeed;
 
-        if (direction == BulletDirection.forward) bc.direction = Vector3.forward;
-        else if (direction == BulletDirection.left) bc.direction = Vector3.left;
-        else if (direction == BulletDirection.right) bc.direction = Vector3.right;
-        else if (direction == BulletDirection.back) bc.direction = Vector3.back;
+        if (direction == BulletDirection.forward) bc.direction = player.playerController.transform.forward;
+        else if (direction == BulletDirection.left) bc.direction = -player.playerController.transform.right;
+        else if (direction == BulletDirection.right) bc.direction = player.playerController.transform.right;
+        else if (direction == BulletDirection.back) bc.direction = -player.playerController.transform.forward;
         else Debug.LogWarning("방향오류");
 
         bullets.Add(bc);

@@ -6,8 +6,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
-    public float moveSpeed;             //이동 속도
-    public float rotationSpeed;         //회전 속도
+    private float moveSpeed;             //이동 속도
+    private float rotationSpeed;         //회전 속도
+    private float attackCooldown;
+    [SerializeField]
+    private float attackTimer;
     public Vector3 moveInput = Vector3.zero;
     public Rigidbody playerRigidbody;
 
@@ -20,8 +23,14 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         PlayerMove();
+        CoolDown();
     }
-
+    public void LoadData()
+    {
+        moveSpeed = Managers.Player.player.moveSpeed;
+        rotationSpeed = Managers.Player.player.rotationSpeed;
+        attackCooldown = Managers.Player.player.attackSpeed;
+    }
     public void PlayerMove()
     {
         // 축을 가져옴
@@ -41,5 +50,18 @@ public class PlayerController : MonoBehaviour
         }
 
         playerRigidbody.velocity = moveInput * moveSpeed;
+    }
+    private void CoolDown()
+    {
+        attackTimer -= Time.deltaTime;
+        if(attackTimer <= 0)
+        {
+            Attack();
+            attackTimer = attackCooldown;
+        }
+    }
+    private void Attack()
+    {
+        Managers.Player.Attack();
     }
 }

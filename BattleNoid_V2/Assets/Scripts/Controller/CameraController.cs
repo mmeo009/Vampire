@@ -5,40 +5,46 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public Camera camera;
+    private Camera mainCamera; // 변수명 변경
     public PlayerController player;
 
-    public void Update()
+    private void Update()
     {
-        FallowPlayer();
+        FollowPlayer();
     }
+
     public void FindCamera()
     {
-        player = Managers.Player.player.playerController;
-        if(camera == null)
+        if (player == null)
         {
-            camera = Camera.main;
-            if(camera == null )
+            player = Managers.Player.player.playerController;
+            if(player == null)
             {
-                camera = GameObject.Find("Main Camera").GetComponent<Camera>();
-                if(camera == null )
+                Debug.LogError("플레이어 컨트롤러가 없소!");
+                return;
+            }
+        }
+
+        if (mainCamera == null)
+        {
+            mainCamera = Camera.main;
+            if (mainCamera == null)
+            {
+                mainCamera = GameObject.FindWithTag("MainCamera")?.GetComponent<Camera>(); // 태그로 카메라 찾음
+                if (mainCamera == null)
                 {
-                    camera = new Camera();
+                    Debug.LogError("Main camera not found in the scene!");
                 }
             }
         }
     }
-    private void FallowPlayer()
+
+    private void FollowPlayer()
     {
-        if (player != null && camera != null)
+        if (player != null && mainCamera != null)
         {
             Vector3 playerPos = player.transform.position;
-            camera.transform.position = new Vector3(playerPos.x, playerPos.y + 6, playerPos.z - 10);
-        }
-        else
-        {
-            FindCamera();
+            mainCamera.transform.position = new Vector3(playerPos.x, playerPos.y + 6, playerPos.z - 10);
         }
     }
-   
 }

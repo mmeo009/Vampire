@@ -17,6 +17,7 @@ public class Entity_Player : ScriptableObject
 		public float baseDamage;
 		public float baseMoveSpeed;
 		public float baseRange;
+		public float baseAttackSpeed;
 		public int cost;
 	}
 }

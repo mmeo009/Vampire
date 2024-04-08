@@ -152,6 +152,7 @@ namespace Supporter
         public float attackSpeed;
         public float moveSpeed;
         public float bulletSpeed;
+        public float rotationSpeed;
 
         public PlayerController playerController;
     }

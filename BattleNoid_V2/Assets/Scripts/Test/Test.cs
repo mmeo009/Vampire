@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class Test : MonoBehaviour
 {
-    public Entity_Enemy.Param enemy;
-    public CameraController controller;
     public async void Start()
     {
         await Managers.Data.LoadBaseData<Entity_Player>("PlayerData");
         await Managers.Data.LoadBaseData<Entity_Enemy>("EnemyData");
         await Managers.Data.LoadBaseData<Entity_Perk>("PerkData");
-        enemy = Managers.Data.GetDataFromDictionary(Managers.Data.enemyDictionary, 1);
-
-        Managers.Player.CreatePlayer(1, null);
+        Managers.Data.GetDataFromDictionary(Managers.Data.playerDictionary, 1);
+        Managers.Data.LoadAllAsync<Object>("Prefabs", (key, count, totalCount) =>
+        {
+            Debug.Log("key : " + key + " Count : " + count + " totalCount : " + totalCount);
+        });
     }
 }
