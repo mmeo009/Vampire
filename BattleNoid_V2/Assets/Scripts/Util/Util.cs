@@ -139,11 +139,9 @@ namespace Supporter
 
         public float hp;
         public float sp;
-        public float xpLimit;
 
         public float currentHp;
         public float currentSp;
-        public float currentXp;
 
         public int hpPerSec;
         public int spPerSec;
@@ -154,6 +152,8 @@ namespace Supporter
         public float attackSpeed;
         public float moveSpeed;
         public float bulletSpeed;
+
+        public PlayerController playerController;
     }
     [System.Serializable]
     public class GameData

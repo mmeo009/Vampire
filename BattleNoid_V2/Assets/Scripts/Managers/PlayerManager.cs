@@ -2,19 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Supporter;
+using Unity.VisualScripting;
 
 public class PlayerManager
 {
     public PlayerStats player;
     public HashSet<BulletController> bullets = new HashSet<BulletController>();
-    public void CreatePlayer(int index, string code)
+    public async void CreatePlayer(int index, string code)
     {
         PlayerStats _player = new PlayerStats();
 
         Entity_Player.Param _playerData = Managers.Data.GetDataFromDictionary(Managers.Data.playerDictionary, index, code);
+        if(string.IsNullOrEmpty(code))
+        {
+            _playerData.code = code;
+        }
+        GameObject playerObject = Managers.Pool.Pop(Managers.Data.Instantiate(code));
 
+        _player.playerController = playerObject.GetComponent<PlayerController>();
         _player.hp = _playerData.baseHp;
 
+        player = _player;
     }
     public void SetStats(Operation operation ,StatType statType, float amount)
     {
@@ -24,7 +32,6 @@ public class PlayerManager
             else if (statType == StatType.MAXHP) player.hp += amount;
             else if (statType == StatType.CurrentSP) player.currentSp += amount;
             else if (statType == StatType.MAXSP) player.sp += amount;
-            else if (statType == StatType.CurrentXP) player.currentXp += amount;
             else if (statType == StatType.MoveSpeed) player.moveSpeed += amount;
             else if (statType == StatType.AttackSpeed) player.attackSpeed += amount;
             else if (statType == StatType.AttackDamage) player.attackDamage += amount;
@@ -37,7 +44,6 @@ public class PlayerManager
             else if (statType == StatType.MAXHP) { player.hp -= amount; if (player.hp <= 0) player.hp = 0; }
             else if (statType == StatType.CurrentSP) { player.currentSp -= amount; if (player.currentSp <= 0) player.currentSp = 0; }
             else if (statType == StatType.MAXSP) { player.sp -= amount; if (player.sp <= 0) player.sp = 0; }
-            else if (statType == StatType.CurrentXP) { player.currentXp -= amount; if (player.currentXp <= 0) player.currentXp = 0; }
             else if (statType == StatType.MoveSpeed) { player.moveSpeed -= amount; if (player.moveSpeed <= 0) player.moveSpeed = 0; }
             else if (statType == StatType.AttackSpeed) { player.attackSpeed -= amount; if (player.attackSpeed <= 0) player.attackSpeed = 0; }
             else if (statType == StatType.AttackDamage) { player.attackDamage -= amount; if (player.attackDamage <= 0) player.attackDamage = 0; }
@@ -50,7 +56,6 @@ public class PlayerManager
             else if (statType == StatType.MAXHP) player.hp = amount;
             else if (statType == StatType.CurrentSP) player.currentSp = amount;
             else if (statType == StatType.MAXSP) player.sp = amount;
-            else if (statType == StatType.CurrentXP) player.currentXp = amount;
             else if (statType == StatType.MoveSpeed) player.moveSpeed = amount;
             else if (statType == StatType.AttackSpeed) player.attackSpeed = amount;
             else if (statType == StatType.AttackDamage) player.attackDamage = amount;
@@ -70,7 +75,7 @@ public class PlayerManager
     private void ShotAsDirection(BulletDirection direction)
     {
         GameObject temp = Managers.Pool.Pop(Managers.Data.Instantiate("Bullet"));
-        BulletController bc = temp.GetComponent<BulletController>();
+        BulletController bc = Util.GetOrAddComponent<BulletController>(temp);
         bc.bulletType = direction;
         bc.moveSpeed = player.bulletSpeed;
 
