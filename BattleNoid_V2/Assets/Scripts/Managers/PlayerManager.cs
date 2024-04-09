@@ -21,10 +21,10 @@ public class PlayerManager
 
         _player.playerController = playerObject.GetComponent<PlayerController>();
         _player.hp = _playerData.baseHp;
-        _player.attackSpeed = 5;
+        _player.attackSpeed = _playerData.baseAttackSpeed;
         _player.moveSpeed = _playerData.baseMoveSpeed;
         _player.rotationSpeed = 10;
-        _player.bulletSpeed = 1;
+        _player.bulletSpeed = 3;
         _player.attackRange = _playerData.baseRange;
 
         player = _player;
