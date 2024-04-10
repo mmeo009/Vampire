@@ -23,8 +23,8 @@ public class PlayerManager
         _player.hp = _playerData.baseHp;
         _player.attackSpeed = _playerData.baseAttackSpeed;
         _player.moveSpeed = _playerData.baseMoveSpeed;
-        _player.rotationSpeed = 10;
-        _player.bulletSpeed = 3;
+        _player.rotationSpeed = _playerData.baseRotSpeed;
+        _player.bulletSpeed = _playerData.bulletSpeed;
         _player.attackRange = _playerData.baseRange;
 
         player = _player;
