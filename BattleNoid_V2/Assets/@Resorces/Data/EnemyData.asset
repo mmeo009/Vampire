@@ -17,9 +17,9 @@ MonoBehaviour:
     code: 111111A
     name: TestEnemy
     stage: 1
-    baseHp: 10
+    baseHp: 5
     baseDamage: 20
-    baseMoveSpeed: 10
+    baseMoveSpeed: 1
     attackType: 1
   - index: 2
     code: 111112A
@@ -27,7 +27,7 @@ MonoBehaviour:
     stage: 1
     baseHp: 700
     baseDamage: 200
-    baseMoveSpeed: 10
+    baseMoveSpeed: 1
     attackType: 1
   - index: 3
     code: 111113A
@@ -35,7 +35,7 @@ MonoBehaviour:
     stage: 6
     baseHp: 900
     baseDamage: 100
-    baseMoveSpeed: 8
+    baseMoveSpeed: 2
     attackType: 1
   - index: 4
     code: 111114A
@@ -43,7 +43,7 @@ MonoBehaviour:
     stage: 11
     baseHp: 600
     baseDamage: 250
-    baseMoveSpeed: 15
+    baseMoveSpeed: 4
     attackType: 1
   - index: 5
     code: 111115B

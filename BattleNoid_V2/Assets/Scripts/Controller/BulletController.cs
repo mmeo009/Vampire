@@ -9,6 +9,7 @@ public class BulletController : MonoBehaviour
     public Vector3 direction;
     public float moveSpeed;
     public float timer;
+    public float damage;
     private void OnEnable()
     {
         timer = Managers.Player.player.attackRange;
@@ -16,18 +17,22 @@ public class BulletController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        Attack();
+        Move();
         timer -= Time.fixedDeltaTime;
         if(timer <= 0)
         {
-            Debug.Log("»ç¸Á!");
-            Managers.Player.bullets.Remove(this as BulletController);
-            Managers.Pool.Destroy(this.gameObject);
+            DestroyBullet();
         }
     }
-    private void Attack()
+    private void Move()
     {
         float _moveSpeed = (moveSpeed) * Time.fixedDeltaTime;
         transform.Translate(direction * _moveSpeed);
+    }
+    public void DestroyBullet()
+    {
+        Debug.Log("»ç¸Á!");
+        Managers.Player.bullets.Remove(this as BulletController);
+        Managers.Pool.Destroy(this.gameObject);
     }
 }

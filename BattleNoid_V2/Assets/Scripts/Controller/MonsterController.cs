@@ -8,7 +8,7 @@ public class MonsterController : MonoBehaviour
 {
     Entity_Enemy.Param myData;
 
-    public int hp;
+    public float hp;
     public float moveSpeed;
     public float rotationSpeed = 10;
     public PlayerController player;
@@ -37,5 +37,25 @@ public class MonsterController : MonoBehaviour
 
         Quaternion targetRotation = Quaternion.LookRotation(targetDiraction);
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+    }
+
+    private void GetDmg(float amount)
+    {
+        hp -= amount;
+        if(hp <= 0)
+        {
+            Managers.Monster.monsters.Remove(this as MonsterController);
+            Managers.Pool.Destroy(this.gameObject);
+        }
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Bullet"))
+        {
+            BulletController bullet = other.GetComponent<BulletController>();
+            GetDmg(bullet.damage);
+            bullet.DestroyBullet();
+        }
     }
 }

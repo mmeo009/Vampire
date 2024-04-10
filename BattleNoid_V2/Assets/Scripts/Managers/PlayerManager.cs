@@ -21,6 +21,7 @@ public class PlayerManager
 
         _player.playerController = playerObject.GetComponent<PlayerController>();
         _player.hp = _playerData.baseHp;
+        _player.attackDamage = _playerData.baseDamage;
         _player.attackSpeed = _playerData.baseAttackSpeed;
         _player.moveSpeed = _playerData.baseMoveSpeed;
         _player.rotationSpeed = _playerData.baseRotSpeed;
@@ -89,6 +90,7 @@ public class PlayerManager
         temp.transform.position = player.playerController.transform.position + new Vector3(0,1.3f,0);
         bc.bulletType = direction;
         bc.moveSpeed = player.bulletSpeed;
+        bc.damage = player.attackDamage;
 
         if (direction == BulletDirection.forward) bc.direction = player.playerController.transform.forward;
         else if (direction == BulletDirection.left) bc.direction = -player.playerController.transform.right;
