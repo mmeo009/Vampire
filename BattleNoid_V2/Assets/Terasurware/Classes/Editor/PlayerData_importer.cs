@@ -33,10 +33,10 @@ public class PlayerData_importer : AssetPostprocessor
                     var exportPath = "Assets/@Resorces/Data/" + sheetName + ".asset";
                     
                     // check scriptable object
-                    var data = (Entity_Player)AssetDatabase.LoadAssetAtPath(exportPath, typeof(Entity_Player));
+                    var data = (Entity_PlayerData)AssetDatabase.LoadAssetAtPath(exportPath, typeof(Entity_PlayerData));
                     if (data == null)
                     {
-                        data = ScriptableObject.CreateInstance<Entity_Player>();
+                        data = ScriptableObject.CreateInstance<Entity_PlayerData>();
                         AssetDatabase.CreateAsset((ScriptableObject)data, exportPath);
                         data.hideFlags = HideFlags.NotEditable;
                     }
@@ -56,7 +56,7 @@ public class PlayerData_importer : AssetPostprocessor
                         IRow row = sheet.GetRow(i);
                         ICell cell = null;
                         
-                        var p = new Entity_Player.Param();
+                        var p = new Entity_PlayerData.Param();
 			
 					cell = row.GetCell(0); p.index = (int)(cell == null ? 0 : cell.NumericCellValue);
 					cell = row.GetCell(1); p.code = (cell == null ? "" : cell.StringCellValue);
@@ -64,8 +64,11 @@ public class PlayerData_importer : AssetPostprocessor
 					cell = row.GetCell(3); p.baseHp = (float)(cell == null ? 0 : cell.NumericCellValue);
 					cell = row.GetCell(4); p.baseDamage = (float)(cell == null ? 0 : cell.NumericCellValue);
 					cell = row.GetCell(5); p.baseMoveSpeed = (float)(cell == null ? 0 : cell.NumericCellValue);
-					cell = row.GetCell(6); p.baseRange = (float)(cell == null ? 0 : cell.NumericCellValue);
-					cell = row.GetCell(7); p.cost = (int)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(6); p.baseRotSpeed = (float)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(7); p.baseRange = (float)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(8); p.baseAttackSpeed = (float)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(9); p.bulletSpeed = (float)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(10); p.cost = (int)(cell == null ? 0 : cell.NumericCellValue);
 
                         data.param.Add(p);
                     }

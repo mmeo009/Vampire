@@ -72,6 +72,60 @@ public class DataManager
         go.name = prefab.name;
         return go;
     }
+    public void LoadAsync<T>(string Key, Action<T> callback = null) where T : UnityEngine.Object
+    {
+        //스프라이트인 경우 하위객체의 이름으로 로드하면 스프라이트로 로딩이 됨 
+        string loadKey = Key;
+        if (Key.Contains(".sprite"))
+            loadKey = $"{Key}[{Key.Replace(".sprite", "")}]";
+
+        var asyncOperation = Addressables.LoadAssetAsync<T>(loadKey);
+
+        asyncOperation.Completed += (op) =>
+        {
+            //캐시확인 
+            if (resourcesDictionary.TryGetValue(Key, out UnityEngine.Object resource))
+            {
+                callback?.Invoke(op.Result);
+                return;
+            }
+
+            resourcesDictionary.Add(Key, op.Result);
+            callback?.Invoke(op.Result);
+        };
+    }
+
+    public void LoadAllAsync<T>(string label, Action<string, int, int> callback) where T : UnityEngine.Object
+    {
+        var OpHandle = Addressables.LoadResourceLocationsAsync(label, typeof(T));
+
+        OpHandle.Completed += (op) =>
+        {
+            int loadCount = 0;
+
+            int totalCount = op.Result.Count;
+
+            foreach (var result in op.Result)
+            {
+                if (result.PrimaryKey.Contains(".sprite"))
+                {
+                    LoadAsync<Sprite>(result.PrimaryKey, (obj) =>
+                    {
+                        loadCount++;
+                        callback?.Invoke(result.PrimaryKey, loadCount, totalCount);
+                    });
+                }
+                else
+                {
+                    LoadAsync<T>(result.PrimaryKey, (obj) =>
+                    {
+                        loadCount++;
+                        callback?.Invoke(result.PrimaryKey, loadCount, totalCount);
+                    });
+                }
+            }
+        };
+    }
     //=========================================================================================================
 
     // 기본 데이터 로드 처음 한번만 실행

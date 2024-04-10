@@ -9,23 +9,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5c34af0d34d1994b94230d53f8ab2c0, type: 3}
+  m_Script: {fileID: 11500000, guid: 385c7dfb6e2775548ba05e08a0bfcbc2, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   param:
   - index: 1
-    code: 111111A
+    code: 111111P
     name: Serena
     baseHp: 1500
     baseDamage: 100
-    baseMoveSpeed: 10
+    baseMoveSpeed: 2
+    baseRotSpeed: 10
     baseRange: 10
+    baseAttackSpeed: 5
+    bulletSpeed: 3
     cost: 0
   - index: 2
-    code: 111112A
+    code: 111112P
     name: Ember
     baseHp: 2000
     baseDamage: 130
-    baseMoveSpeed: 10
+    baseMoveSpeed: 2
+    baseRotSpeed: 10
     baseRange: 10
+    baseAttackSpeed: 5
+    bulletSpeed: 3
     cost: 0
