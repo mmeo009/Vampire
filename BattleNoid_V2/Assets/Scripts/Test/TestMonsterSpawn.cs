@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TestMonsterSpawn : MonoBehaviour
 {
-    public float time = 10;
+    public float time = 30;
     public float timer;
     void Update()
     {
