@@ -16,8 +16,10 @@ public class Entity_Player : ScriptableObject
 		public float baseHp;
 		public float baseDamage;
 		public float baseMoveSpeed;
+		public float baseRotSpeed;
 		public float baseRange;
 		public float baseAttackSpeed;
+		public float bulletSpeed;
 		public int cost;
 	}
 }

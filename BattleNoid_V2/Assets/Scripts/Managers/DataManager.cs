@@ -161,7 +161,6 @@ public class DataManager
             entity_Player = loadedData as Entity_Player;
             // 플레이어 데이터 딕셔너리에 추가
             AddPlayerDataToDictionary(entity_Player.param, playerDictionary);
-            Debug.Log(playerDictionary[1].name);
         }
         else if (typeof(T) == typeof(Entity_Enemy))
         {
@@ -191,6 +190,7 @@ public class DataManager
             if (!dictionary.ContainsKey(item.index))
             {
                 dictionary.Add(item.index, item);
+                Debug.Log(item.index + item.name);
             }
             else
             {
@@ -207,6 +207,7 @@ public class DataManager
             if (!dictionary.ContainsKey(item.index))
             {
                 dictionary.Add(item.index, item);
+                Debug.Log(item.index + item.name);
             }
             else
             {
@@ -223,6 +224,7 @@ public class DataManager
             if (!dictionary.ContainsKey(item.index))
             {
                 dictionary.Add(item.index, item);
+                Debug.Log(item.index + item.name);
             }
             else
             {
