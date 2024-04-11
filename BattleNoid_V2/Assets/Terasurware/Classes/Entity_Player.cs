@@ -20,6 +20,8 @@ public class Entity_Player : ScriptableObject
 		public float baseRange;
 		public float baseAttackSpeed;
 		public float bulletSpeed;
+		public string skill1;
+		public string skill2;
 		public int cost;
 	}
 }

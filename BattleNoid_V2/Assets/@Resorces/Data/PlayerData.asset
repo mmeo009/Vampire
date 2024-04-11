@@ -23,6 +23,8 @@ MonoBehaviour:
     baseRange: 10
     baseAttackSpeed: 5
     bulletSpeed: 3
+    skill1: null
+    skill2: null
     cost: 0
   - index: 2
     code: 111112P
@@ -34,4 +36,6 @@ MonoBehaviour:
     baseRange: 10
     baseAttackSpeed: 5
     bulletSpeed: 3
+    skill1: null
+    skill2: null
     cost: 0
