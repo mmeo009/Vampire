@@ -340,7 +340,7 @@ public class DataManager
         // AES 암호화 알고리즘 생성
         using (Aes aesAlg = Aes.Create())
         {
-            aesAlg.Key = Encoding.UTF8.GetBytes(key);
+            aesAlg.Key = AdjustKeySize(key, 256); // 256 비트 (32 바이트)로 키 크기 조정
             aesAlg.IV = new byte[16];   // 초기화 벡터
 
             // 암호화 변환기 생성
@@ -369,7 +369,7 @@ public class DataManager
         // AES 복호화 알고리즘 생성
         using (Aes aesAlg = Aes.Create())
         {
-            aesAlg.Key = Encoding.UTF8.GetBytes(key);
+            aesAlg.Key = AdjustKeySize(key, 256); // 256 비트 (32 바이트)로 키 크기 조정
             aesAlg.IV = new byte[16];   // 초기화 벡터
 
             // 복호화 변환기 생성
@@ -392,6 +392,14 @@ public class DataManager
                 }
             }
         }
+    }
+
+    // 데이터 사이즈 조절
+    private byte[] AdjustKeySize(string key, int keySize)
+    {
+        byte[] keyBytes = Encoding.UTF8.GetBytes(key);
+        Array.Resize(ref keyBytes, keySize / 8); // 원하는 키 크기에 맞게 배열 크기 조정
+        return keyBytes;
     }
 
     // 게임 데이터 변경

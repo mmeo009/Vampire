@@ -20,3 +20,6 @@ MonoBehaviour:
   monsters:
   - monsterIndex: 1
     monsterAmount: 5
+    additionalHp: 1
+    additionalDamage: 1
+    additionalMoveSpeed: 1
