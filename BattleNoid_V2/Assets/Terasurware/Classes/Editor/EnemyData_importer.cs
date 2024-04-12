@@ -65,7 +65,11 @@ public class EnemyData_importer : AssetPostprocessor
 					cell = row.GetCell(4); p.baseHp = (float)(cell == null ? 0 : cell.NumericCellValue);
 					cell = row.GetCell(5); p.baseDamage = (float)(cell == null ? 0 : cell.NumericCellValue);
 					cell = row.GetCell(6); p.baseMoveSpeed = (float)(cell == null ? 0 : cell.NumericCellValue);
-					cell = row.GetCell(7); p.attackType = (int)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(7); p.baserotationSpeed = (float)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(8); p.baseRange = (float)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(9); p.knockBackAmount = (float)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(10); p.knockBackTime = (float)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(11); p.attackType = (int)(cell == null ? 0 : cell.NumericCellValue);
 
                         data.param.Add(p);
                     }

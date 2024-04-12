@@ -18,15 +18,27 @@ public class MonsterManager
             GameObject monsterObject = Managers.Data.Instantiate(monsterCode, null, true);
             monsterObject.transform.position = pos.position;
             MonsterController mc = monsterObject.GetComponent<MonsterController>();
-            mc.LoadMyData(monster.index, monsterCode);
-            
+            LoadData(monster, mc);
+            mc.AddStats(StatType.None);
+            mc.AddStats(StatType.MAXHP, hp);
+            mc.AddStats(StatType.AttackDamage, damage);
+            mc.AddStats(StatType.MoveSpeed, speed);
             monsters.Add(mc);
         }
     }
 
-    private void LoadData()
+    private void LoadData(Entity_Enemy.Param monsterData, MonsterController monsterController)
     {
         MonsterStats monster = new MonsterStats();
+        monster.code = monsterData.code;
+        monster.hp = monsterData.baseHp;
+        monster.knockBackAmount = monsterData.knockBackAmount;
+        monster.knockBackTime = monsterData.knockBackTime;
+        monster.attackDamage = monsterData.baseDamage;
+        monster.attackRange = monsterData.baseRange;
+        monster.moveSpeed = monsterData.baseMoveSpeed;
+        monster.rotationSpeed = monsterData.baserotationSpeed;
+        monster.monsterController = monsterController;
     }
     public void WavePlus(int amount)
     {

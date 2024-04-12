@@ -20,7 +20,11 @@ MonoBehaviour:
     baseHp: 5
     baseDamage: 20
     baseMoveSpeed: 1
-    attackType: 1
+    baserotationSpeed: 0
+    baseRange: 0
+    knockBackAmount: 0
+    knockBackTime: 0
+    attackType: 10
   - index: 2
     code: 111112A
     name: Enemy1
@@ -28,7 +32,11 @@ MonoBehaviour:
     baseHp: 700
     baseDamage: 200
     baseMoveSpeed: 1
-    attackType: 1
+    baserotationSpeed: 0
+    baseRange: 0
+    knockBackAmount: 0
+    knockBackTime: 0
+    attackType: 10
   - index: 3
     code: 111113A
     name: Enemy2
@@ -36,7 +44,11 @@ MonoBehaviour:
     baseHp: 900
     baseDamage: 100
     baseMoveSpeed: 2
-    attackType: 1
+    baserotationSpeed: 0
+    baseRange: 0
+    knockBackAmount: 0
+    knockBackTime: 0
+    attackType: 10
   - index: 4
     code: 111114A
     name: Enemy3
@@ -44,7 +56,11 @@ MonoBehaviour:
     baseHp: 600
     baseDamage: 250
     baseMoveSpeed: 4
-    attackType: 1
+    baserotationSpeed: 0
+    baseRange: 0
+    knockBackAmount: 0
+    knockBackTime: 0
+    attackType: 10
   - index: 5
     code: 111115B
     name: Boss1
@@ -52,7 +68,11 @@ MonoBehaviour:
     baseHp: 4000
     baseDamage: 300
     baseMoveSpeed: 0
-    attackType: 2
+    baserotationSpeed: 0
+    baseRange: 0
+    knockBackAmount: 0
+    knockBackTime: 0
+    attackType: 5
   - index: 6
     code: 111116B
     name: Boss2
@@ -60,7 +80,11 @@ MonoBehaviour:
     baseHp: 6000
     baseDamage: 400
     baseMoveSpeed: 0
-    attackType: 2
+    baserotationSpeed: 0
+    baseRange: 0
+    knockBackAmount: 0
+    knockBackTime: 0
+    attackType: 5
   - index: 7
     code: 111117B
     name: Boss3
@@ -68,4 +92,8 @@ MonoBehaviour:
     baseHp: 8000
     baseDamage: 500
     baseMoveSpeed: 0
-    attackType: 2
+    baserotationSpeed: 0
+    baseRange: 0
+    knockBackAmount: 0
+    knockBackTime: 0
+    attackType: 5

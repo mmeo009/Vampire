@@ -8,10 +8,6 @@ public class MonsterController : MonoBehaviour
     Entity_Enemy.Param myData;
 
     [SerializeField] private MonsterStats monster;
-    [SerializeField] private float hp;
-    [SerializeField] private float moveSpeed;
-    [SerializeField] private float attackDamage;
-    [SerializeField] private float rotationSpeed = 10;
     public PlayerController player;
     public Rigidbody rb;
 
@@ -19,37 +15,43 @@ public class MonsterController : MonoBehaviour
     {
         Move();
     }
-    public void LoadMyData(int id, string code)
+    public void AddStats(StatType stat, float amount = 0, MonsterStats ms = null)
     {
-        myData = Managers.Data.GetDataFromDictionary(Managers.Data.enemyDictionary, id, code);
-        hp = ((int)myData.baseHp);
-        moveSpeed = myData.baseMoveSpeed;
-        player = Managers.Player.player.playerController;
-        rb = Util.GetOrAddComponent<Rigidbody>(this.gameObject);
-    }
-    public void AddStats(float _hp = 0, float damage = 0, float speed = 0)
-    {
-        hp += _hp;
-        attackDamage += damage;
-        moveSpeed += speed;
+        if(stat == StatType.None)
+        {
+            player = Managers.Player.player.playerController;
+            rb = GetComponent<Rigidbody>();
+            return;
+        }
+        if (amount > 0)
+        {
+            if (stat == StatType.MoveSpeed) monster.hp += amount;
+            else if (stat == StatType.AttackDamage) monster.attackDamage += amount;
+            else if (stat == StatType.MAXHP) monster.hp += amount;
+            else return;
+        }
+        else
+        {
+            return;
+        }
     }
 
     public void Move()
     {
-        Vector3 direction = (player.transform.position - transform.position).normalized;
+        Vector3 direction = (player.transform.position - this.transform.position).normalized;
 
-        rb.MovePosition(transform.position + direction * moveSpeed * Time.deltaTime);
+        rb.MovePosition(this.transform.position + direction * monster.moveSpeed * Time.deltaTime);
 
         Vector3 targetDiraction = (player.transform.position - this.transform.position).normalized;
 
         Quaternion targetRotation = Quaternion.LookRotation(targetDiraction);
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, monster.rotationSpeed * Time.deltaTime);
     }
 
     private void GetDmg(float amount)
     {
-        hp -= amount;
-        if(hp <= 0)
+        monster.hp -= amount;
+        if(monster.hp <= 0)
         {
             Managers.Monster.monsters.Remove(this as MonsterController);
             Managers.Pool.Destroy(this.gameObject);
