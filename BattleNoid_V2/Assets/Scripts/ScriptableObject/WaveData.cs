@@ -14,6 +14,9 @@ public class WaveData : ScriptableObject
     {
         public int monsterIndex;                            // 몬스터 인덱스 번호
         public int monsterAmount;                           // 몬스터 생성 수
+        public float additionalHp;                          // 추가 체력
+        public float additionalDamage;                      // 추가 데미지
+        public float additionalMoveSpeed;                   // 추가 이동 속도
     }
     [System.Serializable]
     public class StageData

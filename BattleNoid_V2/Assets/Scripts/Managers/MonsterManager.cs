@@ -10,7 +10,7 @@ public class MonsterManager
     [SerializeField] private int additionalHp;
     [SerializeField] private int additionalSpeed;
 
-    public void CreateMonster(Transform pos, int monsterIndex ,string monsterCode = null)
+    public void CreateMonster(Transform pos, int monsterIndex, string monsterCode = null, float hp = 0, float damage = 0, float speed = 0)
     {
         Entity_Enemy.Param monster = Managers.Data.GetDataFromDictionary(Managers.Data.enemyDictionary, monsterIndex, monsterCode);
         if(monster != null)
@@ -19,14 +19,20 @@ public class MonsterManager
             monsterObject.transform.position = pos.position;
             MonsterController mc = monsterObject.GetComponent<MonsterController>();
             mc.LoadMyData(monster.index, monsterCode);
+            
             monsters.Add(mc);
         }
     }
 
+    private void LoadData()
+    {
+        MonsterStats monster = new MonsterStats();
+    }
     public void WavePlus(int amount)
     {
 
     }
+
 }
 
 

@@ -156,6 +156,26 @@ namespace Supporter
 
         public PlayerController playerController;
     }
+
+    [System.Serializable]
+    public class MonsterStats
+    {
+        public string code;
+
+        public float hp;
+
+        public float knockBackAmount;
+        public float knockBackTime;
+
+        public float damagedInfi;
+
+        public float attackDamage;
+        public float attackRange;
+        public float moveSpeed;
+        public float rotationSpeed;
+
+        public MonsterController monsterController;
+    }
     [System.Serializable]
     public class GameData
     {

@@ -7,9 +7,11 @@ public class MonsterController : MonoBehaviour
 {
     Entity_Enemy.Param myData;
 
-    public float hp;
-    public float moveSpeed;
-    public float rotationSpeed = 10;
+    [SerializeField] private MonsterStats monster;
+    [SerializeField] private float hp;
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float attackDamage;
+    [SerializeField] private float rotationSpeed = 10;
     public PlayerController player;
     public Rigidbody rb;
 
@@ -24,6 +26,12 @@ public class MonsterController : MonoBehaviour
         moveSpeed = myData.baseMoveSpeed;
         player = Managers.Player.player.playerController;
         rb = Util.GetOrAddComponent<Rigidbody>(this.gameObject);
+    }
+    public void AddStats(float _hp = 0, float damage = 0, float speed = 0)
+    {
+        hp += _hp;
+        attackDamage += damage;
+        moveSpeed += speed;
     }
 
     public void Move()
