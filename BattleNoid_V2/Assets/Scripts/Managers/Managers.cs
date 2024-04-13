@@ -22,11 +22,11 @@ public class Managers : MonoBehaviour
         }
     }
 
-    DataManager _data = new DataManager();
-    MonsterManager _monster = new MonsterManager();
-    PoolManager _pool = new PoolManager();
-    ButtonManager _button = new ButtonManager();
-    PlayerManager _player = new PlayerManager();
+    [SerializeField] DataManager _data = new DataManager();
+    [SerializeField] MonsterManager _monster = new MonsterManager();
+    [SerializeField] PoolManager _pool = new PoolManager();
+    [SerializeField] ButtonManager _button = new ButtonManager();
+    [SerializeField] PlayerManager _player = new PlayerManager();
     public static DataManager Data { get { return Instance?._data; } }
     public static MonsterManager Monster { get { return Instance?._monster; } }
     public static PoolManager Pool { get {  return Instance?._pool; } }

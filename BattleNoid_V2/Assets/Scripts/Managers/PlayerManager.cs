@@ -4,6 +4,7 @@ using UnityEngine;
 using Supporter;
 using Unity.VisualScripting;
 
+[System.Serializable]
 public class PlayerManager
 {
     public PlayerStats player;

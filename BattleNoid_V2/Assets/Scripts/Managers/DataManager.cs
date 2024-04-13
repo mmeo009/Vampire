@@ -12,6 +12,7 @@ using UnityEngine.AddressableAssets;
 using System.Threading.Tasks;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
+[System.Serializable]
 public class DataManager
 {
     // 저장 파일 경로
@@ -31,7 +32,7 @@ public class DataManager
     public Dictionary<int, Entity_Perk.Param> perkDictionary = new Dictionary<int, Entity_Perk.Param>();
 
     // 게임 데이터
-    public GameData gameData { get; private set; }
+    [SerializeField] public GameData gameData { get; private set; }
 
     // 리소스 관련 데이터
     //=========================================================================================================
