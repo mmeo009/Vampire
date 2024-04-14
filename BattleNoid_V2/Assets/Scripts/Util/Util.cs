@@ -138,14 +138,13 @@ namespace Supporter
         public string code;
 
         public float hp;
-        public float sp;
+        public float xp;
 
         public float currentHp;
-        public float currentSp;
+        public float currentXp;
 
         public int hpPerSec;
         public int spPerSec;
-        public int xpPerSec;
 
         public float attackDamage;
         public float attackRange;
@@ -153,6 +152,11 @@ namespace Supporter
         public float moveSpeed;
         public float bulletSpeed;
         public float rotationSpeed;
+
+        public int leftAttackAmount;
+        public int rightAttackAmount;
+        public int forwardAttackAmount;
+        public int backwardAttackAmount;
 
         public PlayerController playerController;
     }
