@@ -11,59 +11,145 @@ public class PlayerManager
     public HashSet<BulletController> bullets = new HashSet<BulletController>();
     public void CreatePlayer(int index, string code)
     {
-
         Entity_Player.Param _playerData = Managers.Data.GetDataFromDictionary(Managers.Data.playerDictionary, index, code);
+
         if(string.IsNullOrEmpty(code))
         {
              code = _playerData.code;
         }
-         GameObject playerObject = Managers.Data.Instantiate(code,null,true);
+
+        GameObject playerObject = Managers.Data.Instantiate(code,null,true);
         player.playerController = playerObject.GetComponent<PlayerController>();
-        SetStats(Operation.Reset, StatType.None, 0, _playerData);
+        SetStats(OperationType.Reset, StatType.None, 0, _playerData);
         player.playerController.LoadData();
         CameraController cc = Util.GetOrAddComponent<CameraController>(player.playerController.gameObject);
-        cc.player = player.playerController;
         cc.FindCamera();
     }
-    public void SetStats(Operation operation, StatType statType, float amount, Entity_Player.Param resetData = null)
+    public void SetStats(OperationType operation, StatType statType, float amount, Entity_Player.Param resetData = null)
     {
-        if(operation == Operation.Plus)
+        if(operation == OperationType.Plus)
         {
-            if (statType == StatType.CurrentHP) player.currentHp += amount;
-            else if (statType == StatType.MAXHP) player.hp += amount;
-            else if (statType == StatType.CurrentSP) player.currentXp += amount;
-            else if (statType == StatType.MAXSP) player.xp += amount;
-            else if (statType == StatType.MoveSpeed) player.moveSpeed += amount;
-            else if (statType == StatType.AttackSpeed) player.attackSpeed += amount;
-            else if (statType == StatType.AttackDamage) player.attackDamage += amount;
-            else if (statType == StatType.AttackRange) player.attackRange += amount;
-            else Debug.LogWarning("플레이어의 무엇을 더하고 싶으시나");
+            switch (statType)
+            {
+                case StatType.CurrentHP:
+                    player.currentHp += amount;
+                    break;
+                case StatType.MAXHP:
+                    player.hp += amount;
+                    break;
+                case StatType.CurrentXP:
+                    player.currentXp += amount;
+                    break;
+                case StatType.MAXXP:
+                    player.xp += amount;
+                    break;
+                case StatType.MoveSpeed:
+                    player.moveSpeed += amount;
+                    break;
+                case StatType.AttackSpeed:
+                    player.attackSpeed += amount;
+                    break;
+                case StatType.AttackDamage:
+                    player.attackDamage += amount;
+                    break;
+                case StatType.AttackRange:
+                    player.attackRange += amount;
+                    break;
+            }
         }
-        else if(operation == Operation.Minus)
+        else if(operation == OperationType.Minus)
         {
-            if (statType == StatType.CurrentHP) { player.currentHp -= amount; if (player.currentHp <= 0) player.currentHp = 0; }
-            else if (statType == StatType.MAXHP) { player.hp -= amount; if (player.hp <= 0) player.hp = 0; }
-            else if (statType == StatType.CurrentSP) { player.currentXp -= amount; if (player.currentXp <= 0) player.currentXp = 0; }
-            else if (statType == StatType.MAXSP) { player.xp -= amount; if (player.xp <= 0) player.xp = 0; }
-            else if (statType == StatType.MoveSpeed) { player.moveSpeed -= amount; if (player.moveSpeed <= 0) player.moveSpeed = 0; }
-            else if (statType == StatType.AttackSpeed) { player.attackSpeed -= amount; if (player.attackSpeed <= 0) player.attackSpeed = 0; }
-            else if (statType == StatType.AttackDamage) { player.attackDamage -= amount; if (player.attackDamage <= 0) player.attackDamage = 0; }
-            else if (statType == StatType.AttackRange) { player.attackRange -= amount; if (player.attackRange <= 0) player.attackRange = 0; }
-            else Debug.LogWarning("플레이어의 무엇을 빼고 싶으시나");
+            switch (statType)
+            {
+                case StatType.CurrentHP:
+                    player.currentHp -= amount;
+                    if (player.currentHp <= 0)
+                    {
+                        player.currentHp = 0;
+                    }
+                    break;
+                case StatType.MAXHP:
+                    player.hp -= amount;
+                    if (player.hp <= 0)
+                    {
+                        player.hp = 0;
+                    }
+                    break;
+                case StatType.CurrentXP:
+                    player.currentXp -= amount;
+                    if(player.currentXp <= 0)
+                    {
+                        player.currentXp = 0;
+                    }
+                    break;
+                case StatType.MAXXP:
+                    player.xp -= amount;
+                    if (player.xp <= 0)
+                    {
+                        player.xp = 0;
+                    }
+                    break;
+                case StatType.MoveSpeed:
+                    player.moveSpeed -= amount;
+                    if(player.moveSpeed <= 0)
+                    {
+                        player.moveSpeed = 0;
+                    }
+                    break;
+                case StatType.AttackSpeed:
+                    player.attackSpeed -= amount;
+                    if (player.attackSpeed <= 0)
+                    {
+                        player.attackSpeed = 0;
+                    }
+                    break;
+                case StatType.AttackDamage:
+                    player.attackDamage -= amount;
+                    if(player.attackDamage <= 0)
+                    {
+                        player.attackDamage = 0;
+                    }
+                    break;
+                case StatType.AttackRange:
+                    player.attackRange -= amount;
+                    if( player.attackRange <= 0)
+                    {
+                        player.attackRange = 0;
+                    }
+                    break;
+            }
         }
-        else if(operation == Operation.Set)
+        else if(operation == OperationType.Set)
         {
-            if (statType == StatType.CurrentHP) player.currentHp = amount;
-            else if (statType == StatType.MAXHP) player.hp = amount;
-            else if (statType == StatType.CurrentSP) player.currentXp = amount;
-            else if (statType == StatType.MAXSP) player.xp = amount;
-            else if (statType == StatType.MoveSpeed) player.moveSpeed = amount;
-            else if (statType == StatType.AttackSpeed) player.attackSpeed = amount;
-            else if (statType == StatType.AttackDamage) player.attackDamage = amount;
-            else if (statType == StatType.AttackRange) player.attackRange = amount;
-            else Debug.LogWarning("플레이어의 무엇을 바꾸고 싶으시나");
+            switch(statType)
+            {
+                case StatType.CurrentHP:
+                    player.currentHp = amount;
+                    break;
+                case StatType.MAXHP:
+                    player.hp = amount; 
+                    break;
+                case StatType.CurrentXP: 
+                    player.currentXp = amount; 
+                    break;
+                case StatType.MAXXP:
+                    player.xp = amount;
+                    break;
+                case StatType.MoveSpeed:
+                    player.moveSpeed = amount;
+                    break;
+                case StatType.AttackSpeed:
+                    player.attackSpeed = amount;
+                    break;
+                case StatType.AttackDamage:
+                    player.attackDamage = amount;
+                    break;
+                case StatType.AttackRange:
+                    player.attackRange = amount;
+                    break;
+            }
         }
-        else if(operation == Operation.Reset && resetData != null)
+        else if(operation == OperationType.Reset && resetData != null)
         {
             player.hp = resetData.baseHp;
             player.attackDamage = resetData.baseDamage;

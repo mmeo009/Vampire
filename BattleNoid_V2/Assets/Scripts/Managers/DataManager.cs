@@ -404,7 +404,7 @@ public class DataManager
     }
 
     // 게임 데이터 변경
-    public void ChangeGameData(DataType type, string dataKey = null, int intValue = 0, bool boolValue = false, Operation operation = Operation.Set)
+    public void ChangeGameData(DataType type, string dataKey = null, int intValue = 0, bool boolValue = false, OperationType operation = OperationType.Set)
     {
         if (gameData == null)
         {
@@ -435,24 +435,24 @@ public class DataManager
     }
 
     // 돈 변경
-    private void ChangeMoney(Operation operation, int amount)
+    private void ChangeMoney(OperationType operation, int amount)
     {
         switch (operation)
         {
-            case Operation.Plus:
+            case OperationType.Plus:
                 gameData.money += amount;
                 break;
-            case Operation.Minus:
+            case OperationType.Minus:
                 gameData.money -= amount;
                 if (gameData.money < 0)
                 {
                     gameData.money = 0;
                 }
                 break;
-            case Operation.Set:
+            case OperationType.Set:
                 gameData.money = amount;
                 break;
-            case Operation.Reset:
+            case OperationType.Reset:
                 gameData.money = 0;
                 break;
             default:

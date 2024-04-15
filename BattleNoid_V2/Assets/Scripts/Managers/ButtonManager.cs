@@ -69,7 +69,7 @@ public class ButtonManager
                 if (taskString == "OptionsWindow")
                 {
                     OptionsWindow.SetActive(false);
-                    if (CardWindow.active == false)
+                    if (CardWindow.activeInHierarchy == false)
                     {
                         Time.timeScale = 1;
                     }
@@ -77,7 +77,7 @@ public class ButtonManager
                 else if( taskString == "CardWindow")
                 {
                     CardWindow.SetActive(false);
-                    if(OptionsWindow.active == false)
+                    if(OptionsWindow.activeInHierarchy == false)
                     {
                         Time.timeScale = 1;
                     }

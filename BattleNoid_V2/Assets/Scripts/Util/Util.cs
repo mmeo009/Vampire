@@ -83,12 +83,13 @@ namespace Supporter
         MONSTER
     }
     [SerializeField]
-    public enum Operation
+    public enum OperationType
     {
         Plus,
         Minus,
         Set,
-        Reset
+        Reset,
+        None
     }
     [SerializeField]
     public enum Skill
@@ -117,8 +118,6 @@ namespace Supporter
         MoveSpeed,
         CurrentHP,
         MAXHP,
-        CurrentSP,
-        MAXSP,
         CurrentXP,
         MAXXP
 

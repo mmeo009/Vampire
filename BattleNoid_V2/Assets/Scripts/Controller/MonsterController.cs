@@ -15,25 +15,35 @@ public class MonsterController : MonoBehaviour
     {
         Move();
     }
-    public void AddStats(StatType stat, float amount = 0, MonsterStats ms = null)
+    public void ChangeMonsterStats(OperationType operation, StatType stat, float amount = 0, MonsterStats ms = null)
     {
-        if(stat == StatType.None)
+        if(operation == OperationType.None)
         {
             player = Managers.Player.player.playerController;
             rb = GetComponent<Rigidbody>();
             return;
         }
-        if (amount > 0)
+        else if(operation == OperationType.Plus)
         {
-            if (stat == StatType.MoveSpeed) monster.hp += amount;
-            else if (stat == StatType.AttackDamage) monster.attackDamage += amount;
-            else if (stat == StatType.MAXHP) monster.hp += amount;
-            else return;
+            switch(stat)
+            {
+                case StatType.CurrentHP:
+                case StatType.MAXHP:
+                    monster.hp += amount;
+                    break;
+                case StatType.AttackDamage:
+                    monster.attackDamage += amount;
+                    break;
+                case StatType.MoveSpeed:
+                    monster.moveSpeed += amount;
+                    break;
+            }
         }
-        else
+        else if(operation == OperationType.Minus) 
         {
-            return;
+
         }
+
     }
 
     public void Move()

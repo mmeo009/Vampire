@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Supporter;
+using static UnityEngine.Rendering.HDROutputUtils;
 
 public class MonsterManager
 {
@@ -13,21 +14,22 @@ public class MonsterManager
     public void CreateMonster(Transform pos, int monsterIndex, string monsterCode = null, float hp = 0, float damage = 0, float speed = 0)
     {
         Entity_Enemy.Param monster = Managers.Data.GetDataFromDictionary(Managers.Data.enemyDictionary, monsterIndex, monsterCode);
+
         if(monster != null)
         {
             GameObject monsterObject = Managers.Data.Instantiate(monsterCode, null, true);
             monsterObject.transform.position = pos.position;
             MonsterController mc = monsterObject.GetComponent<MonsterController>();
-            LoadData(monster, mc);
-            mc.AddStats(StatType.None);
-            mc.AddStats(StatType.MAXHP, hp);
-            mc.AddStats(StatType.AttackDamage, damage);
-            mc.AddStats(StatType.MoveSpeed, speed);
+            LoadMonsterData(monster, mc);
+            mc.ChangeMonsterStats(OperationType.None,StatType.None);
+            mc.ChangeMonsterStats(OperationType.Plus,StatType.MAXHP, hp);
+            mc.ChangeMonsterStats(OperationType.Plus, StatType.AttackDamage, damage);
+            mc.ChangeMonsterStats(OperationType.Plus, StatType.MoveSpeed, speed);
             monsters.Add(mc);
         }
     }
 
-    private void LoadData(Entity_Enemy.Param monsterData, MonsterController monsterController)
+    private void LoadMonsterData(Entity_Enemy.Param monsterData, MonsterController monsterController)
     {
         MonsterStats monster = new MonsterStats();
         monster.code = monsterData.code;
@@ -39,10 +41,6 @@ public class MonsterManager
         monster.moveSpeed = monsterData.baseMoveSpeed;
         monster.rotationSpeed = monsterData.baserotationSpeed;
         monster.monsterController = monsterController;
-    }
-    public void WavePlus(int amount)
-    {
-
     }
 
 }

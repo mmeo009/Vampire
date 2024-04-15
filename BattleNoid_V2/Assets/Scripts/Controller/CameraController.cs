@@ -15,16 +15,7 @@ public class CameraController : MonoBehaviour
 
     public void FindCamera()
     {
-        if (player == null)
-        {
-            player = Managers.Player.player.playerController;
-            if(player == null)
-            {
-                Debug.LogError("플레이어 컨트롤러가 없소!");
-                return;
-            }
-        }
-
+        player = Managers.Player.player.playerController;
         if (mainCamera == null)
         {
             mainCamera = Camera.main;
