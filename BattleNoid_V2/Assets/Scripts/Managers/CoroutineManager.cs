@@ -68,13 +68,15 @@ public class CoroutineManager : MonoBehaviour
                 if (loadingBar.fillAmount >= 1f || op.isDone)
                 {
                     op.allowSceneActivation = true;
-                    yield return StartCoroutine(IE_SetWaveData());
+
+                    yield return new WaitUntil(() => op.isDone);
+                    yield return StartCoroutine(IE_SetWaveData(sceneName));
                 }
             }
         }
     }
 
-    private static IEnumerator IE_SetWaveData()
+    private static IEnumerator IE_SetWaveData(string sceneName)
     {
         if(Managers.Monster.waveDatas == null)
         {
@@ -82,9 +84,19 @@ public class CoroutineManager : MonoBehaviour
             yield return null;
         }
 
-        if (SceneManager.GetActiveScene().name == "GameScene_001")
+        if (SceneManager.GetActiveScene().name != sceneName)
+        {
+            AsyncOperation loadLoadingScene = SceneManager.LoadSceneAsync(sceneName);
+            while (!loadLoadingScene.isDone)
+            {
+                yield return null;
+            }
+        }
+
+        if (sceneName == "GameScene_001")
         {
             var temp = new GameObject();
+            temp.name = "@WaveController";
             var waveController = temp.AddComponent<WaveController>();
             waveController.LoadWaveData(1);
         }
