@@ -11,7 +11,6 @@ public class PlayerManager
     public HashSet<BulletController> bullets = new HashSet<BulletController>();
     public void CreatePlayer(int index, string code)
     {
-        PlayerStats _player = new PlayerStats();
 
         Entity_Player.Param _playerData = Managers.Data.GetDataFromDictionary(Managers.Data.playerDictionary, index, code);
         if(string.IsNullOrEmpty(code))
@@ -19,11 +18,11 @@ public class PlayerManager
              code = _playerData.code;
         }
          GameObject playerObject = Managers.Data.Instantiate(code,null,true);
-        _player.playerController = playerObject.GetComponent<PlayerController>();
+        player.playerController = playerObject.GetComponent<PlayerController>();
         SetStats(Operation.Reset, StatType.None, 0, _playerData);
         player.playerController.LoadData();
-        CameraController cc = Util.GetOrAddComponent<CameraController>(_player.playerController.gameObject);
-        cc.player = _player.playerController;
+        CameraController cc = Util.GetOrAddComponent<CameraController>(player.playerController.gameObject);
+        cc.player = player.playerController;
         cc.FindCamera();
     }
     public void SetStats(Operation operation, StatType statType, float amount, Entity_Player.Param resetData = null)
