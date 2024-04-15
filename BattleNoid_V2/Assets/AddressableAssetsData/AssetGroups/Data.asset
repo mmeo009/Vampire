@@ -17,14 +17,20 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: afc7e3dccb0441344b61621602633658
   m_SerializeEntries:
-  - m_GUID: 69f814c73fd93f14ea81e7ca5675e018
-    m_Address: PlayerData
+  - m_GUID: c68d512c94719d249b5c7e615b86a55c
+    m_Address: EnemyData
     m_ReadOnly: 0
     m_SerializedLabels:
     - Data
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 3b0ec216dd22ae14f8347b807a348863
     m_Address: PerkData
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Data
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 69f814c73fd93f14ea81e7ca5675e018
+    m_Address: PlayerData
     m_ReadOnly: 0
     m_SerializedLabels:
     - Data

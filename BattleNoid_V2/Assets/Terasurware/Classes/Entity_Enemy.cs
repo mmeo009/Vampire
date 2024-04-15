@@ -18,6 +18,7 @@ public class Entity_Enemy : ScriptableObject
 		public float baseDamage;
 		public float baseMoveSpeed;
 		public float baserotationSpeed;
+		public float attackSpeed;
 		public float baseRange;
 		public float knockBackAmount;
 		public float knockBackTime;

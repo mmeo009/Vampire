@@ -30,7 +30,7 @@ public class EnemyData_importer : AssetPostprocessor
 
                 foreach (string sheetName in sheetNames)
                 {
-                    var exportPath = "Assets/@Resorces/Data/" + sheetName + ".asset";
+                    var exportPath = "Assets\@Resorces\Data/" + sheetName + ".asset";
                     
                     // check scriptable object
                     var data = (Entity_Enemy)AssetDatabase.LoadAssetAtPath(exportPath, typeof(Entity_Enemy));
@@ -66,10 +66,11 @@ public class EnemyData_importer : AssetPostprocessor
 					cell = row.GetCell(5); p.baseDamage = (float)(cell == null ? 0 : cell.NumericCellValue);
 					cell = row.GetCell(6); p.baseMoveSpeed = (float)(cell == null ? 0 : cell.NumericCellValue);
 					cell = row.GetCell(7); p.baserotationSpeed = (float)(cell == null ? 0 : cell.NumericCellValue);
-					cell = row.GetCell(8); p.baseRange = (float)(cell == null ? 0 : cell.NumericCellValue);
-					cell = row.GetCell(9); p.knockBackAmount = (float)(cell == null ? 0 : cell.NumericCellValue);
-					cell = row.GetCell(10); p.knockBackTime = (float)(cell == null ? 0 : cell.NumericCellValue);
-					cell = row.GetCell(11); p.attackType = (int)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(8); p.attackSpeed = (float)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(9); p.baseRange = (float)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(10); p.knockBackAmount = (float)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(11); p.knockBackTime = (float)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(12); p.attackType = (int)(cell == null ? 0 : cell.NumericCellValue);
 
                         data.param.Add(p);
                     }

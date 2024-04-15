@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 8
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0a1957e1b9638e459ab4b0aa0018698, type: 3}
+  m_Name: EnemyData
+  m_EditorClassIdentifier: 
+  param:
+  - index: 1
+    code: 111111A
+    name: TestEnemy
+    stage: 1
+    baseHp: 5
+    baseDamage: 20
+    baseMoveSpeed: 1
+    baserotationSpeed: 10
+    baseRange: 1
+    knockBackAmount: 3
+    knockBackTime: 1
+    attackType: 1
+  - index: 2
+    code: 111112A
+    name: "\uB4DC\uB860"
+    stage: 1
+    baseHp: 40
+    baseDamage: 10
+    baseMoveSpeed: 3
+    baserotationSpeed: 10
+    baseRange: 1
+    knockBackAmount: 2
+    knockBackTime: 1
+    attackType: 1
+  - index: 3
+    code: 111113A
+    name: "\uC6D0\uAC70\uB9AC \uB85C\uBD07"
+    stage: 6
+    baseHp: 30
+    baseDamage: 20
+    baseMoveSpeed: 2
+    baserotationSpeed: 10
+    baseRange: 3
+    knockBackAmount: 15
+    knockBackTime: 0
+    attackType: 0
+  - index: 4
+    code: 111114A
+    name: "\uC790\uD3ED\uD615 \uB4DC\uB860"
+    stage: 11
+    baseHp: 25
+    baseDamage: 15
+    baseMoveSpeed: 5
+    baserotationSpeed: 10
+    baseRange: 0
+    knockBackAmount: 1
+    knockBackTime: 1.2
+    attackType: 0
+  - index: 5
+    code: 111115B
+    name: Boss1
+    stage: 5
+    baseHp: 400
+    baseDamage: 300
+    baseMoveSpeed: 0
+    baserotationSpeed: 0
+    baseRange: 15
+    knockBackAmount: 0
+    knockBackTime: 1
+    attackType: 1
+  - index: 6
+    code: 111116B
+    name: Boss2
+    stage: 10
+    baseHp: 600
+    baseDamage: 400
+    baseMoveSpeed: 0
+    baserotationSpeed: 0
+    baseRange: 15
+    knockBackAmount: 0
+    knockBackTime: 1
+    attackType: 1
+  - index: 7
+    code: 111117B
+    name: Boss3
+    stage: 15
+    baseHp: 800
+    baseDamage: 500
+    baseMoveSpeed: 0
+    baserotationSpeed: 0
+    baseRange: 15
+    knockBackAmount: 0
+    knockBackTime: 1
+    attackType: 1
