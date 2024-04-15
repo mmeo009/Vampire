@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using Supporter;
 
+[RequireComponent(typeof(Rigidbody))]
 public class MonsterController : MonoBehaviour
 {
-    Entity_Enemy.Param myData;
+    private Entity_Enemy.Param myData;
 
     [SerializeField] private MonsterStats monster;
-    public PlayerController player;
-    public Rigidbody rb;
+    public PlayerController Player;
+    private Rigidbody rb;
 
     public void Update()
     {
@@ -19,7 +20,7 @@ public class MonsterController : MonoBehaviour
     {
         if(operation == OperationType.None)
         {
-            player = Managers.Player.player.playerController;
+            Player = Managers.Player.player.playerController;
             rb = GetComponent<Rigidbody>();
             return;
         }
@@ -48,11 +49,11 @@ public class MonsterController : MonoBehaviour
 
     public void Move()
     {
-        Vector3 direction = (player.transform.position - this.transform.position).normalized;
+        Vector3 direction = (Player.transform.position - this.transform.position).normalized;
 
         rb.MovePosition(this.transform.position + direction * monster.moveSpeed * Time.deltaTime);
 
-        Vector3 targetDiraction = (player.transform.position - this.transform.position).normalized;
+        Vector3 targetDiraction = (Player.transform.position - this.transform.position).normalized;
 
         Quaternion targetRotation = Quaternion.LookRotation(targetDiraction);
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, monster.rotationSpeed * Time.deltaTime);

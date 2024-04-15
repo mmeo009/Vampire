@@ -24,16 +24,14 @@ public class CoroutineManager : MonoBehaviour
     {
         monoInstance.StopCoroutine(coroutine);
     }
-    // 버튼 매니저에서 호출할 로딩 코루틴
     public static void LoadSceneWithLoadingBar(string sceneName)
     {
-        StartCoroutine(LoadingSceneAndFillLoadingBarCoroutine(sceneName));
+        StartCoroutine(IE_LoadingScene(sceneName));
     }
-
-    // 씬을 로드하고 로딩 바를 채우는 Coroutine
-    private static IEnumerator LoadingSceneAndFillLoadingBarCoroutine(string sceneName)
+    private static IEnumerator IE_LoadingScene(string sceneName)
     {
         Image loadingBar;
+
         if (SceneManager.GetActiveScene().name != "LoadingScene")
         {
             AsyncOperation loadLoadingScene = SceneManager.LoadSceneAsync("LoadingScene");
@@ -44,15 +42,16 @@ public class CoroutineManager : MonoBehaviour
         }
 
         loadingBar = GameObject.Find("LoadingBar").GetComponent<Image>();
+
         if (loadingBar == null)
         {
             Debug.LogError("로딩바를 찾을 수 없습니다.");
             yield break;
         }
-
         AsyncOperation op = SceneManager.LoadSceneAsync(sceneName);
         op.allowSceneActivation = false;
         float timer = 0f;
+
         while (!op.isDone)
         {
             yield return null;
@@ -65,12 +64,33 @@ public class CoroutineManager : MonoBehaviour
             {
                 timer += Time.unscaledDeltaTime;
                 loadingBar.fillAmount = Mathf.Lerp(0.0f, 1f, timer);
+
                 if (loadingBar.fillAmount >= 1f || op.isDone)
                 {
                     op.allowSceneActivation = true;
-                    yield break;
+                    yield return StartCoroutine(IE_SetWaveData());
                 }
             }
+        }
+    }
+
+    private static IEnumerator IE_SetWaveData()
+    {
+        if(Managers.Monster.waveDatas == null)
+        {
+            Managers.Monster.GetWaveDatas();
+            yield return null;
+        }
+
+        if (SceneManager.GetActiveScene().name == "GameScene_001")
+        {
+            var temp = new GameObject();
+            var waveController = temp.AddComponent<WaveController>();
+            waveController.LoadWaveData(1);
+        }
+        else
+        {
+            yield break;
         }
     }
 }

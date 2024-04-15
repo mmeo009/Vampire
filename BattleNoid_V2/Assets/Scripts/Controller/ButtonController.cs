@@ -4,15 +4,20 @@ using UnityEngine;
 using Supporter;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Button))]
 public class ButtonController : MonoBehaviour
 {
-    public ActonType actonType;
+    #region PublicVariables
+    public ActionType actonType;
     public string mythod;
     public Button button;
-    void Start()
+    #endregion
+    private void Start()
     {
+        if(button == null)
         button = Util.GetOrAddComponent<Button>(this.gameObject);
-        button.onClick.AddListener(() => Managers.Button.LoadGameScene(actonType, mythod));
+
+        button.onClick.AddListener(() => Managers.Button.ButtonAction(actonType, mythod));
     }
 
 }

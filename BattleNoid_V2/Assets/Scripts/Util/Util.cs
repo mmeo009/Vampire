@@ -11,9 +11,11 @@ namespace Supporter
     }
     public class Util
     {
+        #region PublicMethod
         public static T GetOrAddComponent<T>(GameObject go) where T : UnityEngine.Component
         {
             T component = go.GetComponent<T>();
+
             if (component == null)
                 component = go.AddComponent<T>();
 
@@ -22,7 +24,9 @@ namespace Supporter
         public static GameObject FindChild(GameObject go, string name = null, bool recursive = false)
         {
             Transform transform = FindChild<Transform>(go, name, recursive);
-            if (transform == null) return null;
+
+            if (transform == null) 
+                return null;
 
             return transform.gameObject;
         }
@@ -54,15 +58,17 @@ namespace Supporter
             }
             return null;
         }
+        #endregion
     }
     [SerializeField]
-    public enum ActonType
+    public enum ActionType
     {
         SceneMove,
         ExitGame,
         PauseGame,
         SaveGame,
         LoadGame,
+        LoadWaveData,
         DefaultAction
     }
     [SerializeField]

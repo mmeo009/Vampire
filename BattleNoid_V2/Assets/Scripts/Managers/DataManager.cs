@@ -16,15 +16,15 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 public class DataManager
 {
     // 저장 파일 경로
-    public string saveFilePath;
+    [SerializeField] private string saveFilePath;
 
     // 암호화 키
     private string key = "ThisIsAAWESOMEKey";
 
     // 플레이어 및 적 데이터
-    public Entity_Player entity_Player;
-    public Entity_Enemy entity_Enemy;
-    public Entity_Perk entity_Perk;
+    [SerializeField] private Entity_Player entity_Player;
+    [SerializeField] private Entity_Enemy entity_Enemy;
+    [SerializeField] private Entity_Perk entity_Perk;
 
     // 플레이어 및 적 데이터를 담는 딕셔너리
     public Dictionary<int, Entity_Player.Param> playerDictionary = new Dictionary<int, Entity_Player.Param>();
@@ -283,7 +283,7 @@ public class DataManager
     }
 
     // 게임 데이터 저장
-    public void SaveGmaeData(GameData data)
+    public void SaveGameData(GameData data)
     {
         // JSON 직렬화
         string jsonData = JsonConvert.SerializeObject(data);

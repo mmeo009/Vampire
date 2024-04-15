@@ -7,9 +7,18 @@ using static UnityEngine.Rendering.HDROutputUtils;
 public class MonsterManager
 {
     public HashSet<MonsterController> monsters = new HashSet<MonsterController>();
-    public int waveNum = 0;
-    [SerializeField] private int additionalHp;
-    [SerializeField] private int additionalSpeed;
+
+    public Dictionary<string, WaveData> waveDatas = new Dictionary<string, WaveData>();
+
+    public void GetWaveDatas()
+    {
+        Managers.Data.LoadAllAsync<WaveData>("Wave", (key, count, totalCount) =>
+        {
+            Debug.Log("key : " + key + " Count : " + count + " totalCount : " + totalCount);
+            var data = Managers.Data.Load<WaveData>(key);
+            waveDatas.Add($"S{data.stageData.stageNumber}N{data.stageData.waveNumber}", data);
+        });
+    }
 
     public void CreateMonster(Transform pos, int monsterIndex, string monsterCode = null, float hp = 0, float damage = 0, float speed = 0)
     {
@@ -17,9 +26,9 @@ public class MonsterManager
 
         if(monster != null)
         {
-            GameObject monsterObject = Managers.Data.Instantiate(monsterCode, null, true);
+            var monsterObject = Managers.Data.Instantiate(monsterCode, null, true);
             monsterObject.transform.position = pos.position;
-            MonsterController mc = monsterObject.GetComponent<MonsterController>();
+            var mc = monsterObject.GetComponent<MonsterController>();
             LoadMonsterData(monster, mc);
             mc.ChangeMonsterStats(OperationType.None,StatType.None);
             mc.ChangeMonsterStats(OperationType.Plus,StatType.MAXHP, hp);

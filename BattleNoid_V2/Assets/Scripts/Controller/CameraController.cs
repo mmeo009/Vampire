@@ -6,7 +6,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     private Camera mainCamera; // 변수명 변경
-    public PlayerController player;
+    public PlayerController Player;
 
     private void Update()
     {
@@ -15,7 +15,7 @@ public class CameraController : MonoBehaviour
 
     public void FindCamera()
     {
-        player = Managers.Player.player.playerController;
+        Player = Managers.Player.player.playerController;
         if (mainCamera == null)
         {
             mainCamera = Camera.main;
@@ -32,9 +32,9 @@ public class CameraController : MonoBehaviour
 
     private void FollowPlayer()
     {
-        if (player != null && mainCamera != null)
+        if (Player != null && mainCamera != null)
         {
-            Vector3 playerPos = player.transform.position;
+            Vector3 playerPos = Player.transform.position;
             mainCamera.transform.position = new Vector3(playerPos.x, playerPos.y + 6, playerPos.z - 10);
         }
     }
