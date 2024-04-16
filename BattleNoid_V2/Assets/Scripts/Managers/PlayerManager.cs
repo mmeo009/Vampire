@@ -225,27 +225,34 @@ public class PlayerManager
         GameObject temp = Managers.Data.Instantiate("Bullet", null, true);
         BulletController bc = Util.GetOrAddComponent<BulletController>(temp);
         bullets.Add(bc);
-        float startingAngle = 0f;
-        float angleIncrement = (amount == 1) ? 0f : 45f / (amount - 1);
+        Vector3 addVector = new Vector3(0, 1.3f, 0);
         if (direction == BulletDirection.forward)
         {
+            if(amount % 2 == 0)
+            {
+                addVector += new Vector3(0, 0, (amount+1));
+            }
+            else
+            {
+                addVector += new Vector3(0, 0, -amount);
+            }
             bc.direction = player.playerController.transform.forward;
-            temp.transform.position = player.playerController.transform.position + new Vector3(0, 1.3f, 0);
+            temp.transform.position = player.playerController.transform.position + addVector;
         }
         else if (direction == BulletDirection.left)
         {
             bc.direction = -player.playerController.transform.right;
-            temp.transform.position = player.playerController.transform.position + new Vector3(0, 1.3f, 0);
+            temp.transform.position = player.playerController.transform.position + addVector;
         }
         else if (direction == BulletDirection.right)
         {
             bc.direction = player.playerController.transform.right;
-            temp.transform.position = player.playerController.transform.position + new Vector3(0, 1.3f, 0);
+            temp.transform.position = player.playerController.transform.position + addVector;
         }
         else if (direction == BulletDirection.back)
         {
             bc.direction = -player.playerController.transform.forward;
-            temp.transform.position = player.playerController.transform.position + new Vector3(0, 1.3f, 0);
+            temp.transform.position = player.playerController.transform.position + addVector;
         }
         else
         {
