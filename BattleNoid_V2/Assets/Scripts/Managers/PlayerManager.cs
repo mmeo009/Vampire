@@ -1,8 +1,9 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Supporter;
 using Unity.VisualScripting;
+using System.Diagnostics.Tracing;
 
 [System.Serializable]
 public class PlayerManager
@@ -77,34 +78,183 @@ public class PlayerManager
                         player.hp = 0;
                     }
                     break;
-                    // Other cases omitted for brevity
+                case StatType.CurrentXP:
+                    player.currentXp -= amount;
+                    if (player.currentXp <= 0)
+                    {
+                        player.currentXp = 0;
+                    }
+                    break;
+                case StatType.MAXXP:
+                    player.xp -= amount;
+                    if (player.xp <= 0)
+                    {
+                        player.xp = 0;
+                    }
+                    break;
+                case StatType.MoveSpeed:
+                    player.moveSpeed -= amount;
+                    if (player.moveSpeed <= 0)
+                    {
+                        player.moveSpeed = 0;
+                    }
+                    break;
+                case StatType.AttackSpeed:
+                    player.attackSpeed -= amount;
+                    if (player.attackSpeed <= 0)
+                    {
+                        player.attackSpeed = 0;
+                    }
+                    break;
+                case StatType.AttackDamage:
+                    player.attackDamage -= amount;
+                    if (player.attackDamage <= 0)
+                    {
+                        player.attackDamage = 0;
+                    }
+                    break;
+                case StatType.AttackRange:
+                    player.attackRange -= amount;
+                    if (player.attackRange <= 0)
+                    {
+                        player.attackRange = 0;
+                    }
+                    break;
             }
         }
-        // Other cases omitted for brevity
+        else if (operation == OperationType.Set)
+        {
+            switch (statType)
+            {
+                case StatType.CurrentHP:
+                    player.currentHp = amount;
+                    break;
+                case StatType.MAXHP:
+                    player.hp = amount;
+                    break;
+                case StatType.CurrentXP:
+                    player.currentXp = amount;
+                    break;
+                case StatType.MAXXP:
+                    player.xp = amount;
+                    break;
+                case StatType.MoveSpeed:
+                    player.moveSpeed = amount;
+                    break;
+                case StatType.AttackSpeed:
+                    player.attackSpeed = amount;
+                    break;
+                case StatType.AttackDamage:
+                    player.attackDamage = amount;
+                    break;
+                case StatType.AttackRange:
+                    player.attackRange = amount;
+                    break;
+            }
+        }
+        else if (operation == OperationType.Reset && resetData != null)
+        {
+            player.code = resetData.code;
+            player.hp = resetData.baseHp;
+            player.attackDamage = resetData.baseDamage;
+            player.attackSpeed = resetData.baseAttackSpeed;
+            player.attackRange = resetData.baseRange;
+            player.moveSpeed = resetData.baseMoveSpeed;
+            player.rotationSpeed = resetData.baseRotSpeed;
+            player.bulletSpeed = resetData.bulletSpeed;
+            player.leftAttackAmount = 0;
+            player.rightAttackAmount = 0;
+            player.forwardAttackAmount = 1;
+            player.backwardAttackAmount = 0;
+            player.xp = 5;
+            player.currentXp = 0;
+            player.currentHp = player.hp;
+        }
+        else
+        {
+            Debug.LogWarning("¹Ì¾ÈÇØ");
+        }
+
     }
 
     public void Attack()
     {
         if (player.code == "111111P")
         {
-            ShotAsDirection(BulletDirection.forward);
+            for(int i  = 0; i < player.forwardAttackAmount; i++)
+            {
+                ShotBulletAsDirection(BulletDirection.forward, i);
+            }
+
+            for(int i = 0; i< player.leftAttackAmount; i++)
+            {
+                ShotBulletAsDirection(BulletDirection.left, i);
+            }
+
+            for(int i = 0;i< player.rightAttackAmount; i++)
+            {
+                ShotBulletAsDirection(BulletDirection.right, i);
+            }
+
+            for (int i = 0; i < player.backwardAttackAmount; i++)
+            {
+                ShotBulletAsDirection(BulletDirection.back, i);
+            }
         }
-        Debug.Log("����");
+        Debug.Log("빵야");
     }
 
-    private void ShotAsDirection(BulletDirection direction)
+    public void UseFirstSkill()
+    {
+        if (player.code == "111111P")
+        {
+
+        }
+    }
+    public void UseSecondSkill()
+    {
+        if (player.code == "111111P")
+        {
+
+        }
+    }
+
+
+    private void ShotBulletAsDirection(BulletDirection direction, int amount)
     {
         GameObject temp = Managers.Data.Instantiate("Bullet", null, true);
         BulletController bc = Util.GetOrAddComponent<BulletController>(temp);
-        temp.transform.position = player.playerController.transform.position + new Vector3(0, 1.3f, 0);
+        bullets.Add(bc);
+        float startingAngle = 0f;
+        float angleIncrement = (amount == 1) ? 0f : 45f / (amount - 1);
+        if (direction == BulletDirection.forward)
+        {
+            bc.direction = player.playerController.transform.forward;
+            temp.transform.position = player.playerController.transform.position + new Vector3(0, 1.3f, 0);
+        }
+        else if (direction == BulletDirection.left)
+        {
+            bc.direction = -player.playerController.transform.right;
+            temp.transform.position = player.playerController.transform.position + new Vector3(0, 1.3f, 0);
+        }
+        else if (direction == BulletDirection.right)
+        {
+            bc.direction = player.playerController.transform.right;
+            temp.transform.position = player.playerController.transform.position + new Vector3(0, 1.3f, 0);
+        }
+        else if (direction == BulletDirection.back)
+        {
+            bc.direction = -player.playerController.transform.forward;
+            temp.transform.position = player.playerController.transform.position + new Vector3(0, 1.3f, 0);
+        }
+        else
+        {
+            Debug.LogError("Wrong Direction");
+            bc.DestroyBullet();
+        }
+
         bc.bulletType = direction;
         bc.moveSpeed = player.bulletSpeed;
         bc.damage = player.attackDamage;
-
-        if (direction == BulletDirection.forward) bc.direction = player.playerController.transform.forward;
-        else if (direction == BulletDirection.left) bc.direction = -player.playerController.transform.right;
-        // Other conditions omitted for brevity
-
-        bullets.Add(bc);
     }
 }

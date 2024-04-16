@@ -158,10 +158,21 @@ namespace Supporter
         public float bulletSpeed;
         public float rotationSpeed;
 
+        public string firstSkill;
+        public string secondSkill;
+
+        public float firstCoolDown;
+        public float secondCoolDown;
+
+        public float currentFirstCoolDown;
+        public float currentSecondCoolDown;
+
         public int leftAttackAmount;
         public int rightAttackAmount;
         public int forwardAttackAmount;
         public int backwardAttackAmount;
+
+        public int attackTime;
 
         public PlayerController playerController;
     }
