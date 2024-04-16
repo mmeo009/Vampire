@@ -21,8 +21,9 @@ MonoBehaviour:
     baseDamage: 20
     baseMoveSpeed: 1
     baserotationSpeed: 10
-    baseRange: 1
-    knockBackAmount: 3
+    attackSpeed: 1
+    baseRange: 3
+    knockBackAmount: 1
     knockBackTime: 1
     attackType: 1
   - index: 2
@@ -33,9 +34,10 @@ MonoBehaviour:
     baseDamage: 10
     baseMoveSpeed: 3
     baserotationSpeed: 10
-    baseRange: 1
-    knockBackAmount: 2
-    knockBackTime: 1
+    attackSpeed: 1
+    baseRange: 2
+    knockBackAmount: 1
+    knockBackTime: 0.8
     attackType: 1
   - index: 3
     code: 111113A
@@ -45,10 +47,11 @@ MonoBehaviour:
     baseDamage: 20
     baseMoveSpeed: 2
     baserotationSpeed: 10
-    baseRange: 3
-    knockBackAmount: 15
+    attackSpeed: 3
+    baseRange: 15
+    knockBackAmount: 0
     knockBackTime: 0
-    attackType: 0
+    attackType: 2
   - index: 4
     code: 111114A
     name: "\uC790\uD3ED\uD615 \uB4DC\uB860"
@@ -57,10 +60,11 @@ MonoBehaviour:
     baseDamage: 15
     baseMoveSpeed: 5
     baserotationSpeed: 10
-    baseRange: 0
-    knockBackAmount: 1
+    attackSpeed: 0
+    baseRange: 1
+    knockBackAmount: 1.2
     knockBackTime: 1.2
-    attackType: 0
+    attackType: 3
   - index: 5
     code: 111115B
     name: Boss1
@@ -69,10 +73,11 @@ MonoBehaviour:
     baseDamage: 300
     baseMoveSpeed: 0
     baserotationSpeed: 0
-    baseRange: 15
-    knockBackAmount: 0
+    attackSpeed: 15
+    baseRange: 0
+    knockBackAmount: 1
     knockBackTime: 1
-    attackType: 1
+    attackType: 4
   - index: 6
     code: 111116B
     name: Boss2
@@ -81,10 +86,11 @@ MonoBehaviour:
     baseDamage: 400
     baseMoveSpeed: 0
     baserotationSpeed: 0
-    baseRange: 15
-    knockBackAmount: 0
+    attackSpeed: 15
+    baseRange: 0
+    knockBackAmount: 1
     knockBackTime: 1
-    attackType: 1
+    attackType: 4
   - index: 7
     code: 111117B
     name: Boss3
@@ -93,7 +99,8 @@ MonoBehaviour:
     baseDamage: 500
     baseMoveSpeed: 0
     baserotationSpeed: 0
-    baseRange: 15
-    knockBackAmount: 0
+    attackSpeed: 15
+    baseRange: 0
+    knockBackAmount: 1
     knockBackTime: 1
-    attackType: 1
+    attackType: 4

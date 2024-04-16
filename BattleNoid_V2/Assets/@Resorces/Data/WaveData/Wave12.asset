@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8b9f661bd09ea54d8aa39902a5b190a, type: 3}
+  m_Name: Wave12
+  m_EditorClassIdentifier: 
+  stageData:
+    stageNumber: 1
+    waveNumber: 12
+  timeToNextWave: 20
+  isBossStage: 0
+  monsters:
+  - monsterIndex: 2
+    monsterAmount: 39
+    additionalHp: 44
+    additionalDamage: 22
+    additionalMoveSpeed: 0.5
+  - monsterIndex: 3
+    monsterAmount: 12
+    additionalHp: 30
+    additionalDamage: 25
+    additionalMoveSpeed: 0.25
+  - monsterIndex: 4
+    monsterAmount: 6
+    additionalHp: 0
+    additionalDamage: 0
+    additionalMoveSpeed: 0

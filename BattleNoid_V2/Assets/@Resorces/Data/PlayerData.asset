@@ -17,11 +17,11 @@ MonoBehaviour:
     code: 111111P
     name: Serena
     baseHp: 100
-    baseDamage: 15
+    baseDamage: 10
     baseMoveSpeed: 4
     baseRotSpeed: 10
-    baseRange: 10
-    baseAttackSpeed: 3
+    baseRange: 12
+    baseAttackSpeed: 1
     bulletSpeed: 6
     skill1: null
     skill2: null
@@ -30,11 +30,11 @@ MonoBehaviour:
     code: 111112P
     name: Ember
     baseHp: 120
-    baseDamage: 10
-    baseMoveSpeed: 4
+    baseDamage: 15
+    baseMoveSpeed: 5
     baseRotSpeed: 10
-    baseRange: 2.5
-    baseAttackSpeed: 1.5
+    baseRange: 4
+    baseAttackSpeed: 1
     bulletSpeed: 6
     skill1: null
     skill2: null

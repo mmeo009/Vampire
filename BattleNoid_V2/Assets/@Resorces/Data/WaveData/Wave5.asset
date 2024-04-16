@@ -10,16 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d8b9f661bd09ea54d8aa39902a5b190a, type: 3}
-  m_Name: TestWave
+  m_Name: Wave5
   m_EditorClassIdentifier: 
   stageData:
     stageNumber: 1
-    waveNumber: 1
-  timeToNextWave: 2000
+    waveNumber: 5
+  timeToNextWave: 20
   isBossStage: 0
   monsters:
-  - monsterIndex: 1
-    monsterAmount: 5
-    additionalHp: 1
-    additionalDamage: 3
-    additionalMoveSpeed: 1
+  - monsterIndex: 2
+    monsterAmount: 0
+    additionalHp: 16
+    additionalDamage: 8
+    additionalMoveSpeed: 0
+  - monsterIndex: 5
+    monsterAmount: 1
+    additionalHp: 0
+    additionalDamage: 0
+    additionalMoveSpeed: 0

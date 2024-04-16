@@ -6,11 +6,12 @@ using System.Linq;
 public class WaveController : MonoBehaviour
 {
     #region PrivateVariables
+   [SerializeField] private List<WaveData> waves;
     private float timer;
     private float nowTime;
     private Transform[] spawnPoints;
     private int thisWaveNumber;
-    private List<WaveData> waves;
+
     #endregion
     #region PublicVariables
     #endregion

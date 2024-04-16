@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: b8999f8ae046d014095d7ffb348817ea
   m_currentHash:
     serializedVersion: 2
-    Hash: 00000000000000000000000000000000
+    Hash: 279f4c142f3551234f123bb4517f1097
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_BundleLocalCatalog: 0
@@ -51,6 +51,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d4350907990973949b9b6cca6c2beb1e, type: 2}
   - {fileID: 11400000, guid: 509edc440e3a1794ba44876dcb76241d, type: 2}
   - {fileID: 11400000, guid: 62c8611a1a603b84a8ef4233690f3f43, type: 2}
+  - {fileID: 11400000, guid: e4f99afe3951a54429077b5457ffb97c, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -95,6 +96,7 @@ MonoBehaviour:
     - Data
     - Monster
     - Prefabs
+    - Wave
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: e27cf6733dd6480499ca69d79ff74ce9, type: 2}
