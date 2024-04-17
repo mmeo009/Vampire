@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public float lineLength = 1f;
     public float lineWidth = 0.1f;
     public int dotAmount = 5;
+    public Vector3 cubeVector = Vector3.zero;
 
     // Update is called once per frame
     void Update()
@@ -57,17 +58,23 @@ public class PlayerController : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        Vector3 playerPosition = transform.position;
-        Quaternion playerRotation = transform.rotation;
+        Vector3 playerPosition = Managers.Player.player.playerController.transform.position;
+        Quaternion playerRotation = Managers.Player.player.playerController.transform.rotation;
 
         // 가로선
         DrawLine(playerPosition, playerRotation * Vector3.right, Color.red);
         // 세로선
         DrawLine(playerPosition, playerRotation * Vector3.forward, Color.blue);
 
+        DrawCube(cubeVector);
     }
 
-    void DrawLine(Vector3 start, Vector3 direction, Color color)
+    public void DrawCube(Vector3 point)
+    {
+        Gizmos.DrawCube(point, new Vector3(0.1f, 0.1f, 0.1f));
+    }
+
+    public void DrawLine(Vector3 start, Vector3 direction, Color color)
     {
         Gizmos.color = color;
         Vector3 end1 = start + direction * (lineLength / 2);
