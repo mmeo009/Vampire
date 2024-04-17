@@ -45,7 +45,6 @@ public class WaveController : MonoBehaviour
         foreach (var key in Managers.Monster.waveDatas.Keys)
         {
             string extracted = key.Substring(1, key.IndexOf('N') - 1);
-
             if (extracted == stage.ToString())
             {
                 keys.Add(Managers.Monster.waveDatas[key]);
@@ -57,7 +56,8 @@ public class WaveController : MonoBehaviour
             waves.Clear();
         }
 
-        waves = keys;
+        waves = keys.OrderBy(num => num.stageData.waveNumber).ToList();
+
 
         nowTime = 10f;
     }

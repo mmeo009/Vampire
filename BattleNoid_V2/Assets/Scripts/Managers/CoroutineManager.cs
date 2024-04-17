@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Linq;
 
 public class CoroutineManager : MonoBehaviour
 {
@@ -78,18 +79,13 @@ public class CoroutineManager : MonoBehaviour
 
     private static IEnumerator IE_SetWaveData(string sceneName)
     {
-        if(Managers.Monster.waveDatas == null)
-        {
-            Managers.Monster.GetWaveDatas();
-            yield return null;
-        }
 
         if (SceneManager.GetActiveScene().name != sceneName)
         {
             AsyncOperation loadLoadingScene = SceneManager.LoadSceneAsync(sceneName);
             while (!loadLoadingScene.isDone)
             {
-                yield return null;
+                yield return new WaitUntil(() => loadLoadingScene.isDone);
             }
         }
 

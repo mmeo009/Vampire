@@ -171,7 +171,7 @@ public class PlayerManager
         }
         else
         {
-            Debug.LogWarning("¹Ì¾ÈÇØ");
+            Debug.LogWarning("이상하다요");
         }
 
     }
@@ -182,25 +182,94 @@ public class PlayerManager
         {
             for(int i  = 0; i < player.forwardAttackAmount; i++)
             {
-                ShotBulletAsDirection(BulletDirection.forward, i);
+                ShotBulletAsDirection(BulletDirection.forward, i + 1);
             }
-
             for(int i = 0; i< player.leftAttackAmount; i++)
             {
-                ShotBulletAsDirection(BulletDirection.left, i);
+                ShotBulletAsDirection(BulletDirection.left, i + 1);
             }
 
-            for(int i = 0;i< player.rightAttackAmount; i++)
+            for(int i = 0; i < player.rightAttackAmount; i++)
             {
-                ShotBulletAsDirection(BulletDirection.right, i);
+                ShotBulletAsDirection(BulletDirection.right, i + 1);
             }
 
             for (int i = 0; i < player.backwardAttackAmount; i++)
             {
-                ShotBulletAsDirection(BulletDirection.back, i);
+                ShotBulletAsDirection(BulletDirection.back, i + 1);
             }
         }
         Debug.Log("빵야");
+    }
+
+
+    private Vector3 GetDotPos(Vector3 direction, int dotAmount, int dotNum)
+    {
+        Vector3 playerPosition = player.playerController.transform.position;
+        Quaternion playerRotation = player.playerController.transform.rotation;
+
+        if (dotAmount <= 1)
+        {
+            return Vector3.zero;
+        }
+
+        Vector3 end = playerPosition + (playerRotation * direction) * 0.5f;
+        float segmentLength = 1f / (dotAmount - 1);
+
+        for (int i = 0; i < dotAmount; i++)
+        {
+            Vector3 point = end - (playerRotation * direction) * (segmentLength * i);
+
+            if (i + 1 == dotNum)
+            {
+                return point - playerPosition;
+
+            }
+        }
+
+        return Vector3.zero;
+    }
+
+    private void ShotBulletAsDirection(BulletDirection direction, int amount)
+    {
+        GameObject temp = Managers.Data.Instantiate("Bullet", null, true);
+        BulletController bc = Util.GetOrAddComponent<BulletController>(temp);
+        bullets.Add(bc);
+        Vector3 dot;
+
+        if (direction == BulletDirection.forward)
+        {
+            dot = GetDotPos(Vector3.right, player.forwardAttackAmount, amount);
+            bc.direction = player.playerController.transform.forward;
+
+        }
+        else if (direction == BulletDirection.left)
+        {
+            dot = GetDotPos(Vector3.forward, player.leftAttackAmount, amount);
+            bc.direction = -player.playerController.transform.right;
+        }
+        else if (direction == BulletDirection.right)
+        {
+            dot = GetDotPos(Vector3.forward, player.rightAttackAmount, amount);
+            bc.direction = player.playerController.transform.right;
+        }
+        else if (direction == BulletDirection.back)
+        {
+            dot = GetDotPos(Vector3.right, player.backwardAttackAmount, amount);
+            bc.direction = -player.playerController.transform.forward;
+        }
+        else
+        {
+            dot = Vector3.zero;
+            Debug.LogError("Wrong Direction");
+            bc.DestroyBullet();
+        }
+
+        temp.transform.position = player.playerController.transform.position + new Vector3(dot.x, 1.3f, dot.z);
+        player.playerController.cubeVector = player.playerController.transform.position + new Vector3(dot.x, 1.3f, dot.z);
+        bc.bulletType = direction;
+        bc.moveSpeed = player.bulletSpeed;
+        bc.damage = player.attackDamage;
     }
 
     public void UseFirstSkill()
@@ -216,51 +285,5 @@ public class PlayerManager
         {
 
         }
-    }
-
-
-    private void ShotBulletAsDirection(BulletDirection direction, int amount)
-    {
-        GameObject temp = Managers.Data.Instantiate("Bullet", null, true);
-        BulletController bc = Util.GetOrAddComponent<BulletController>(temp);
-        bullets.Add(bc);
-        Vector3 addVector = new Vector3(0, 1.3f, 0);
-        if (direction == BulletDirection.forward)
-        {
-            if(amount % 2 == 0)
-            {
-                addVector += new Vector3(0, 0, (amount+1));
-            }
-            else
-            {
-                addVector += new Vector3(0, 0, -amount);
-            }
-            bc.direction = player.playerController.transform.forward;
-            temp.transform.position = player.playerController.transform.position + addVector;
-        }
-        else if (direction == BulletDirection.left)
-        {
-            bc.direction = -player.playerController.transform.right;
-            temp.transform.position = player.playerController.transform.position + addVector;
-        }
-        else if (direction == BulletDirection.right)
-        {
-            bc.direction = player.playerController.transform.right;
-            temp.transform.position = player.playerController.transform.position + addVector;
-        }
-        else if (direction == BulletDirection.back)
-        {
-            bc.direction = -player.playerController.transform.forward;
-            temp.transform.position = player.playerController.transform.position + addVector;
-        }
-        else
-        {
-            Debug.LogError("Wrong Direction");
-            bc.DestroyBullet();
-        }
-
-        bc.bulletType = direction;
-        bc.moveSpeed = player.bulletSpeed;
-        bc.damage = player.attackDamage;
     }
 }
