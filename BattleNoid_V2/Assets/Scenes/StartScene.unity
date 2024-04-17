@@ -604,7 +604,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actonType: 0
-  mythod: GameScene_001
+  mythod: UiTest 1
   button: {fileID: 0}
 --- !u!1 &1244045889
 GameObject:
