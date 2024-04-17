@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Supporter;
 
 public class Entity_Enemy : ScriptableObject
 {	
@@ -23,5 +24,7 @@ public class Entity_Enemy : ScriptableObject
 		public float knockBackAmount;
 		public float knockBackTime;
 		public int attackType;
+		public string GetCode() => code;
+		public int GetIndex() => index;
 	}
 }

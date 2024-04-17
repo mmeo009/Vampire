@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Supporter;
 
 public class Entity_Player : ScriptableObject
 {	
@@ -25,5 +26,7 @@ public class Entity_Player : ScriptableObject
 		public string secondSkillName;
 		public float secondSkillCoolDown;
 		public int cost;
+		public string GetCode() => code;
+		public int GetIndex() => index;
 	}
 }

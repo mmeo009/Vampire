@@ -190,9 +190,12 @@ namespace Supporter
         public float damagedInfi;
 
         public float attackDamage;
+        public float attackSpeed;
         public float attackRange;
         public float moveSpeed;
         public float rotationSpeed;
+
+        public int attackType;
 
         public MonsterController monsterController;
     }

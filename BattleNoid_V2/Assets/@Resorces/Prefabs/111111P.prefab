@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2635295839212320675}
   - component: {fileID: 7429812469684928482}
   - component: {fileID: 4390943330174862880}
+  - component: {fileID: 5582034263246947028}
   m_Layer: 0
   m_Name: 111111P
   m_TagString: Untagged
@@ -50,6 +51,10 @@ MonoBehaviour:
   attackTimer: 0
   moveInput: {x: 0, y: 0, z: 0}
   playerRigidbody: {fileID: 0}
+  lineLength: 1
+  lineWidth: 0.1
+  dotAmount: 5
+  cubeVector: {x: 0, y: 0, z: 0}
 --- !u!54 &4390943330174862880
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -73,10 +78,33 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 4
   m_CollisionDetection: 0
+--- !u!136 &5582034263246947028
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6357161168461157695}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.2
+  m_Height: 1.4
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!1 &7728425138079603653
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,6 +370,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AABB.m_Extent.z
       value: 0.2763636
+      objectReference: {fileID: 0}
+    - target: {fileID: -4297446187249348513, guid: fad48435330a1df4386ddae99d5449a6,
+        type: 3}
+      propertyPath: SpringBone.ColliderGroups.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -3669415264312017959, guid: fad48435330a1df4386ddae99d5449a6,
         type: 3}

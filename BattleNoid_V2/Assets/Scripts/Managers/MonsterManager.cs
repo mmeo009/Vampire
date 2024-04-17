@@ -30,6 +30,11 @@ public class MonsterManager
 
         if(monster != null)
         {
+            if(monsterCode == null)
+            {
+                monsterCode = monster.code;
+            }
+
             var monsterObject = Managers.Data.Instantiate(monsterCode, null, true);
             monsterObject.transform.position = pos.position;
             var mc = monsterObject.GetComponent<MonsterController>();
@@ -50,8 +55,10 @@ public class MonsterManager
         monster.knockBackTime = monsterData.knockBackTime;
         monster.attackDamage = monsterData.baseDamage;
         monster.attackRange = monsterData.baseRange;
+        monster.attackSpeed = monsterData.attackSpeed;
         monster.moveSpeed = monsterData.baseMoveSpeed;
         monster.rotationSpeed = monsterData.baserotationSpeed;
+        monster.attackType = monsterData.attackType;
         monster.monsterController = monsterController;
         monsterController.GetMonsterStats(monster);
     }

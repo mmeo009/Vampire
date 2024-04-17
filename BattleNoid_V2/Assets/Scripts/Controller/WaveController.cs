@@ -6,25 +6,49 @@ using System.Linq;
 public class WaveController : MonoBehaviour
 {
     #region PrivateVariables
-   [SerializeField] private List<WaveData> waves;
+    [SerializeField] private List<WaveData> waves;
+    [SerializeField] private WaveData nowWaveData;
     private float timer;
-    private float nowTime;
     private Transform[] spawnPoints;
-    private int thisWaveNumber;
+    private int nowWaveIndex;
 
     #endregion
     #region PublicVariables
     #endregion
     private void Update()
     {
-        nowTime -= Time.deltaTime;
-        if(nowTime <= 0)
+        if (timer > 0)
         {
-            SpawnMonster();
-        }    
+            timer -= Time.deltaTime;
+            if (timer <= 0)
+            {
+                SpawnMonster();
+            }
+        }
     }
 
     #region PrivateMethod
+    private void SpawnMonster()
+    {
+        if(nowWaveData != waves[0])
+        {
+            nowWaveIndex += 1;
+            nowWaveData = waves[nowWaveIndex];
+        }
+
+        for (int i = 0; i < nowWaveData.monsters.Count; i++)
+        {
+            for (int j = 0; j < nowWaveData.monsters[i].monsterAmount; j++)
+            {
+                Managers.Monster.CreateMonster(spawnPoints[Random.Range(0, spawnPoints.Length)], nowWaveData.monsters[i].monsterIndex,
+                null, nowWaveData.monsters[i].additionalHp, nowWaveData.monsters[i].additionalDamage, nowWaveData.monsters[i].additionalMoveSpeed);
+            }
+        }
+
+        timer = nowWaveData.timeToNextWave;
+    }
+    #endregion
+    #region PublicMethod
     public void LoadWaveData(int stage)
     {
         if (spawnPoints != null)
@@ -51,21 +75,17 @@ public class WaveController : MonoBehaviour
             }
         }
 
-        if(waves != null)
+        if (waves != null)
         {
             waves.Clear();
         }
 
         waves = keys.OrderBy(num => num.stageData.waveNumber).ToList();
 
-
-        nowTime = 10f;
-    }
-
-    private void SpawnMonster()
-    {
-        
+        nowWaveIndex = 0;
+        nowWaveData = waves[nowWaveIndex];
+        SpawnMonster();
+        timer = nowWaveData.timeToNextWave;
     }
     #endregion
-
 }
