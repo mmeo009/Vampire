@@ -37,7 +37,7 @@ public class DataManager
     // 府家胶 包访 单捞磐
     //=========================================================================================================
 
-    Dictionary<string, UnityEngine.Object> resourcesDictionary = new Dictionary<string, UnityEngine.Object>();
+    public Dictionary<string, UnityEngine.Object> resourcesDictionary = new Dictionary<string, UnityEngine.Object>();
     public T Load<T>(string key) where T : UnityEngine.Object
     {
         if (resourcesDictionary.TryGetValue(key, out UnityEngine.Object resource))
