@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using Supporter;
 
 [System.Serializable]
-public class ButtonManager
+public class UIManager
 {
     // UI À©µµ¿ì
     public GameObject optionWindowPrefab;

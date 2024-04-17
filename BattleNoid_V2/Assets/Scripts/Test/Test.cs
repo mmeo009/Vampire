@@ -13,7 +13,7 @@ public class Test : MonoBehaviour
         Managers.Data.LoadAllAsync<Object>("Prefabs", (key, count, totalCount) =>
         {
             Debug.Log("key : " + key + " Count : " + count + " totalCount : " + totalCount);
-            Managers.Button.optionWindowPrefab = Managers.Data.Load<GameObject>("OptionsWindow");
+            Managers.UI.optionWindowPrefab = Managers.Data.Load<GameObject>("OptionsWindow");
         });
 
     }

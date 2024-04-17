@@ -23,7 +23,6 @@ public class PlayerManager
         GameObject playerObject = Managers.Data.Instantiate(code, null, true);
         player.playerController = playerObject.GetComponent<PlayerController>();
         SetStats(OperationType.Reset, StatType.None, 0, playerData);
-        player.playerController.LoadData();
         CameraController cc = Util.GetOrAddComponent<CameraController>(player.playerController.gameObject);
         cc.FindCamera();
     }

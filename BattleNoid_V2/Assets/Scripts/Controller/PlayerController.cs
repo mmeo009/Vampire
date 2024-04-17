@@ -6,18 +6,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
-    private float moveSpeed;             //이동 속도
-    private float rotationSpeed;         //회전 속도
-    private float attackCooldown;
-    [SerializeField]
-    private float attackTimer;
-    public Vector3 moveInput = Vector3.zero;
-    public Rigidbody playerRigidbody;
-
-    void Start()
-    {
-        playerRigidbody = GetComponent<Rigidbody>();
-    }
+    [SerializeField] private float attackTimer;
+    [SerializeField] private Vector3 moveInput = Vector3.zero;
+    [SerializeField] private Rigidbody playerRigidbody;
 
     // Update is called once per frame
     void Update()
@@ -25,14 +16,12 @@ public class PlayerController : MonoBehaviour
         PlayerMove();
         CoolDown();
     }
-    public void LoadData()
-    {
-        moveSpeed = Managers.Player.player.moveSpeed;
-        rotationSpeed = Managers.Player.player.rotationSpeed;
-        attackCooldown = Managers.Player.player.attackSpeed;
-    }
+
     public void PlayerMove()
     {
+        if(playerRigidbody == null)
+            playerRigidbody = GetComponent<Rigidbody>();
+
         // 축을 가져옴
         moveInput.x = Input.GetAxisRaw("Horizontal");
         moveInput.z = Input.GetAxisRaw("Vertical");
@@ -46,10 +35,10 @@ public class PlayerController : MonoBehaviour
             Quaternion targetRotation = Quaternion.LookRotation(moveInput);
 
             //회전을 부드럽게 적용하기 위한 Slerp 를 사용
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Managers.Player.player.rotationSpeed * Time.deltaTime);
         }
 
-        playerRigidbody.velocity = moveInput * moveSpeed;
+        playerRigidbody.velocity = moveInput * Managers.Player.player.moveSpeed;
     }
     private void CoolDown()
     {
@@ -57,7 +46,7 @@ public class PlayerController : MonoBehaviour
         if(attackTimer <= 0)
         {
             Attack();
-            attackTimer = attackCooldown;
+            attackTimer = Managers.Player.player.attackSpeed;
         }
     }
     private void Attack()
