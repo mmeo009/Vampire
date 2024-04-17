@@ -11,7 +11,7 @@ public class TestMonsterSpawn : MonoBehaviour
         timer -= Time.deltaTime;
         if(timer <= 0)
         {
-            Managers.Monster.CreateMonster( this.transform, 1, "111111A");
+            Managers.Monster.CreateMonster(this.transform, 1, "111111A");
             timer = time;
             Debug.Log("½ºÆù");
         }

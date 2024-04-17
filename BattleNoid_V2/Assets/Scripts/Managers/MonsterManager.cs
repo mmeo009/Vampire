@@ -30,7 +30,6 @@ public class MonsterManager
             monsterObject.transform.position = pos.position;
             var mc = monsterObject.GetComponent<MonsterController>();
             LoadMonsterData(monster, mc);
-            mc.ChangeMonsterStats(OperationType.None,StatType.None);
             mc.ChangeMonsterStats(OperationType.Plus,StatType.MAXHP, hp);
             mc.ChangeMonsterStats(OperationType.Plus, StatType.AttackDamage, damage);
             mc.ChangeMonsterStats(OperationType.Plus, StatType.MoveSpeed, speed);
@@ -50,6 +49,7 @@ public class MonsterManager
         monster.moveSpeed = monsterData.baseMoveSpeed;
         monster.rotationSpeed = monsterData.baserotationSpeed;
         monster.monsterController = monsterController;
+        monsterController.GetMonsterStats(monster);
     }
 
 }

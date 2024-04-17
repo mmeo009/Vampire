@@ -25,11 +25,11 @@ public class Managers : MonoBehaviour
     [SerializeField] DataManager _data = new DataManager();
     [SerializeField] MonsterManager _monster = new MonsterManager();
     [SerializeField] PoolManager _pool = new PoolManager();
-    [SerializeField] ButtonManager _button = new ButtonManager();
+    [SerializeField] UIManager _UI = new UIManager();
     [SerializeField] PlayerManager _player = new PlayerManager();
     public static DataManager Data { get { return Instance?._data; } }
     public static MonsterManager Monster { get { return Instance?._monster; } }
     public static PoolManager Pool { get {  return Instance?._pool; } }
-    public static ButtonManager Button { get {  return Instance?._button; } }
+    public static UIManager UI { get {  return Instance?._UI; } }
     public static PlayerManager Player { get { return Instance?._player; } }
 }

@@ -17,7 +17,7 @@ public class ButtonController : MonoBehaviour
         if(button == null)
         button = Util.GetOrAddComponent<Button>(this.gameObject);
 
-        button.onClick.AddListener(() => Managers.Button.ButtonAction(actonType, mythod));
+        button.onClick.AddListener(() => Managers.UI.ButtonAction(actonType, mythod));
     }
 
 }

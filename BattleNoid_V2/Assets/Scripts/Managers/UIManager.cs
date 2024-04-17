@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using Supporter;
 
 [System.Serializable]
-public class ButtonManager
+public class UIManager
 {
     // UI 윈도우
     public GameObject optionWindowPrefab;
@@ -27,6 +27,7 @@ public class ButtonManager
             {
                 // 씬 로딩 로직은 여기에 추가
                 SceneManager.LoadScene("LoadingScene");
+                optionWindow = null;
                 CoroutineManager.LoadSceneWithLoadingBar(taskString);
             }
             else
@@ -46,18 +47,25 @@ public class ButtonManager
         }
         else if (type == ActionType.PauseGame && taskString != null)
         {
+
             // 시간이 정지하지 않았다면
             if (Time.timeScale == 1)
             {
                 Time.timeScale = 0;
                 if (taskString == "OptionsWindow")
                 {
-                    optionWindow = LoadWindow(optionWindowPrefab);
+                    if(optionWindow == null)
+                    {
+                        optionWindow = LoadWindow(optionWindowPrefab);
+                    }
                     optionWindow.SetActive(true);
                 }
                 else if (taskString == "CardWindow")
                 {
-                    cardWindow = LoadWindow(cardWindowPrefab);
+                    if (cardWindow == null)
+                    {
+                        cardWindow = LoadWindow(cardWindowPrefab);
+                    }
                     cardWindow.SetActive(true);
                 }
             }
@@ -66,20 +74,31 @@ public class ButtonManager
                 if (taskString == "OptionsWindow")
                 {
                     optionWindow.SetActive(false);
-                    if (!cardWindow.activeInHierarchy)
+                    if (cardWindow!= null)
                     {
+                        if(cardWindow.activeInHierarchy == false)
+                        {
+                            Time.timeScale = 1;
+                        }
                         Time.timeScale = 1;
                     }
+                    Time.timeScale = 1;
                 }
                 else if (taskString == "CardWindow")
                 {
                     cardWindow.SetActive(false);
-                    if (!optionWindow.activeInHierarchy)
+                    if (optionWindow != null)
                     {
+                        if (optionWindow.activeInHierarchy == false)
+                        {
+                            Time.timeScale = 1;
+                        }
                         Time.timeScale = 1;
                     }
+                    Time.timeScale = 1;
                 }
             }
+            Debug.Log(Time.timeScale);
         }
         else if (type == ActionType.SaveGame)
         {
@@ -97,16 +116,53 @@ public class ButtonManager
 
     private GameObject LoadWindow(GameObject gameObjectPrefab)
     {
-        if (gameObjectPrefab != null)
+        if(gameObjectPrefab.name == "OptionsWindow")
         {
-            GameObject temp = GameObject.Instantiate<GameObject>(gameObjectPrefab);
-            temp.transform.parent = GameObject.FindGameObjectWithTag("Canvas").transform;
-            temp.transform.localPosition = Vector3.zero;
-            return temp;
+            if (optionWindow == null)
+            {
+                if (gameObjectPrefab != null)
+                {
+                    GameObject temp = GameObject.Instantiate<GameObject>(gameObjectPrefab);
+                    temp.transform.parent = GameObject.FindGameObjectWithTag("Canvas").transform;
+                    temp.transform.localPosition = Vector3.zero;
+                    return temp;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+        else if(gameObjectPrefab.name == "CardWindow")
+        {
+            if (cardWindow == null)
+            {
+                if (gameObjectPrefab != null)
+                {
+                    GameObject temp = GameObject.Instantiate<GameObject>(gameObjectPrefab);
+                    temp.transform.parent = GameObject.FindGameObjectWithTag("Canvas").transform;
+                    temp.transform.localPosition = Vector3.zero;
+                    return temp;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                return null;
+            }
         }
         else
         {
             return null;
         }
+
+
     }
 }
