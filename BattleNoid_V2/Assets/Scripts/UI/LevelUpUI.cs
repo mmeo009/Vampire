@@ -5,50 +5,24 @@ using System.Collections;
 public class LevelUpUI : MonoBehaviour
 {
     public Image levelUpImage;
-    public float fadeDuration = 1f;
     public float displayDuration = 2f;
 
     void Start()
     {
-        // UI 요소를 투명하게 만듭니다.
-        levelUpImage.canvasRenderer.SetAlpha(0f);
+        // 알파값을 1로 설정하여 UI 요소를 나타나게 합니다.
+        Color tempColor = levelUpImage.color;
+        tempColor.a = 1f;
+        levelUpImage.color = tempColor;
 
-        // 페이드 인 애니메이션 시작
-        StartCoroutine(FadeIn());
+        // 일정 시간 후에 UI 요소를 비활성화합니다.
+        StartCoroutine(HideAfterDelay());
     }
 
-    IEnumerator FadeIn()
+    IEnumerator HideAfterDelay()
     {
-        // 애니메이션 시간 초기화
-        float timer = 0f;
-
-        // 페이드 인 애니메이션
-        while (timer < fadeDuration)
-        {
-            timer += Time.deltaTime;
-            levelUpImage.CrossFadeAlpha(1f, fadeDuration, false);
-            yield return null;
-        }
-
-        // 일정 시간 대기 후 페이드 아웃 애니메이션 시작
         yield return new WaitForSeconds(displayDuration);
-        StartCoroutine(FadeOut());
-    }
 
-    IEnumerator FadeOut()
-    {
-        // 애니메이션 시간 초기화
-        float timer = 0f;
-
-        // 페이드 아웃 애니메이션
-        while (timer < fadeDuration)
-        {
-            timer += Time.deltaTime;
-            levelUpImage.CrossFadeAlpha(0f, fadeDuration, false);
-            yield return null;
-        }
-
-        // 애니메이션 완료 후 UI 요소 비활성화
+        // 일정 시간이 지난 후에 UI 요소를 비활성화합니다.
         gameObject.SetActive(false);
     }
 }
