@@ -142,12 +142,14 @@ MonoBehaviour:
     moveSpeed: 0
     rotationSpeed: 0
     attackType: 0
+    viewingAngle: 0
     monsterController: {fileID: 0}
   monsterRigidbody: {fileID: 0}
   attackPivot: {fileID: 0}
   knockBackTimer: 0
   attackTimer: 0
   isFreeze: 0
+  isAttack: 0
   Player: {fileID: 0}
   freezeTimer: 0
 --- !u!54 &941751170433023074
@@ -175,7 +177,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 4
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!135 &2945563115909160810
 SphereCollider:
@@ -192,7 +194,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3

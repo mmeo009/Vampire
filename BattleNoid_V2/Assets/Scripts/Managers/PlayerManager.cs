@@ -199,7 +199,6 @@ public class PlayerManager
                 ShotBulletAsDirection(BulletDirection.back, i + 1);
             }
         }
-        Debug.Log("빵야");
     }
 
 

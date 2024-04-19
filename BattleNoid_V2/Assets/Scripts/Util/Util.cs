@@ -196,6 +196,7 @@ namespace Supporter
         public float rotationSpeed;
 
         public int attackType;
+        public float viewingAngle;
 
         public MonsterController monsterController;
     }

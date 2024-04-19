@@ -82,7 +82,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 4
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!114 &7496108321014758633
 MonoBehaviour:
@@ -108,12 +108,14 @@ MonoBehaviour:
     moveSpeed: 0
     rotationSpeed: 0
     attackType: 0
+    viewingAngle: 0
     monsterController: {fileID: 0}
   monsterRigidbody: {fileID: 0}
   attackPivot: {fileID: 0}
   knockBackTimer: 0
   attackTimer: 0
   isFreeze: 0
+  isAttack: 0
   Player: {fileID: 0}
   freezeTimer: 0
 --- !u!1 &8207158409414453397

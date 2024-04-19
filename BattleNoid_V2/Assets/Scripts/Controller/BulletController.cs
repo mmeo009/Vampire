@@ -13,7 +13,6 @@ public class BulletController : MonoBehaviour
     private void OnEnable()
     {
         timer = Managers.Player.player.attackRange;
-        Debug.Log("»ý¼º!");
     }
     private void FixedUpdate()
     {
@@ -31,7 +30,6 @@ public class BulletController : MonoBehaviour
     }
     public void DestroyBullet()
     {
-        Debug.Log("»ç¸Á!");
         Managers.Player.bullets.Remove(this as BulletController);
         Managers.Pool.Destroy(this.gameObject);
     }

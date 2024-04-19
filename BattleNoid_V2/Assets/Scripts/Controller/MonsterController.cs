@@ -13,6 +13,7 @@ public class MonsterController : MonoBehaviour
     [SerializeField] private float knockBackTimer;
     [SerializeField] private float attackTimer;
     [SerializeField] private bool isFreeze = false;
+    [SerializeField] private bool isAttack = false;
 
     public PlayerController Player;
     public float freezeTimer;
@@ -34,7 +35,20 @@ public class MonsterController : MonoBehaviour
             }
         }
 
-        if(this.transform.position.y != 0)
+        if (isAttack == true)
+        {
+            if(attackTimer > 0) 
+            {
+                attackTimer -= Time.deltaTime;
+                if (attackTimer <= 0)
+                {
+                    Attack();
+                }
+            }
+        }
+
+
+        if (this.transform.position.y != 0)
         {
             transform.position = new Vector3(transform.position.x, 0, transform.position.z);
         }
@@ -77,10 +91,12 @@ public class MonsterController : MonoBehaviour
             if (Vector3.Distance(Player.transform.position, transform.position) >= monster.attackRange)
             {
                 monsterRigidbody.velocity = (Player.transform.position - transform.position).normalized * moveSpeed;
+                isAttack = false;
             }
             else
             {
-                Attack();
+                monsterRigidbody.velocity = Vector3.zero;
+                isAttack = true;
             }
 
             if (isFreeze)
@@ -95,25 +111,14 @@ public class MonsterController : MonoBehaviour
     }
     private void Attack()
     {
-        monsterRigidbody.velocity = Vector3.zero;
-
         if (monster.attackType == 1)
         {
             Vector3 targetDiraction = (Player.transform.position - this.transform.position).normalized;
-            Quaternion targetRotation = Quaternion.LookRotation(targetDiraction);
 
-            if (transform.rotation == targetRotation)
+            if (GetMyRange() == 1)
             {
-                if (attackTimer > 0)
-                {
-                    attackTimer -= Time.deltaTime;
-
-                    if (attackTimer <= 0)
-                    {
-                        Managers.Player.SetStats(OperationType.Minus, StatType.CurrentHP, monster.attackDamage);
-                        attackTimer = monster.attackSpeed;
-                    }
-                }
+                Managers.Player.SetStats(OperationType.Minus, StatType.CurrentHP, monster.attackDamage);
+                attackTimer = monster.attackSpeed;
             }
         }
         else if(monster.attackType == 2)
@@ -144,6 +149,7 @@ public class MonsterController : MonoBehaviour
         {
             attackPivot = Util.FindChild(this.gameObject, "AttackPivot");
         }
+        attackTimer = _monster.attackSpeed;
     }
     public void ChangeMonsterStats(OperationType operation, StatType stat, float amount = 0, MonsterStats ms = null)
     {
@@ -189,6 +195,65 @@ public class MonsterController : MonoBehaviour
         monster = null;
         Managers.Pool.Destroy(this.gameObject);
     }
+    public int GetMyRange()
+    {
+        Vector3 myPos = transform.position + new Vector3(0, 1.3f, 0);
+        Vector3 toPlayer = Player.transform.position - myPos;
+        toPlayer.Normalize();
 
+        float _angle = Vector3.Angle(transform.forward, toPlayer);
+
+        if (_angle < monster.viewingAngle * 0.5f)
+        {
+            if (Vector3.Distance(myPos, Player.transform.position + new Vector3(0, 1.3f, 0)) <= monster.attackRange)
+            {
+                Debug.Log($"{gameObject.name}의 공격 범위안에 플레이어 있음");
+                return 1;
+            }
+            else
+            {
+                Debug.Log($"{gameObject.name}의 시야 범위안에 플레이어 있음");
+                return 2;
+            }
+        }
+        else
+        {
+            Debug.Log("플레이어 없소");
+            return 0;
+        }
+    }
+    private void OnDrawGizmos()
+    {
+        if(monster != null)
+        {
+            DrawLine(monster.viewingAngle);
+        }
+    }
+    
+    void DrawLine(float angle)
+    {
+        Gizmos.color = Color.blue;
+        float halfPlusAngle = angle * 0.5f + transform.eulerAngles.y;
+        float halfMinusAngle = -angle * 0.5f + transform.eulerAngles.y;
+        Vector3 angleRight = new Vector3(Mathf.Sin(halfPlusAngle * Mathf.Deg2Rad), 0, Mathf.Cos(halfPlusAngle * Mathf.Deg2Rad));
+        Vector3 angleLeft = new Vector3(Mathf.Sin(halfMinusAngle * Mathf.Deg2Rad), 0, Mathf.Cos(halfMinusAngle * Mathf.Deg2Rad));
+
+        Vector3 end1 = transform.position + new Vector3(0, 1.3f, 0) + angleRight * monster.attackRange;
+        Vector3 end2 = transform.position + new Vector3(0, 1.3f, 0) + angleLeft * monster.attackRange;
+        Gizmos.DrawLine(transform.position + new Vector3(0, 1.3f, 0), end1);
+        Gizmos.DrawLine(transform.position + new Vector3(0, 1.3f, 0), end2);
+        Gizmos.DrawLine(transform.position + new Vector3(0, 1.3f, 0), transform.position + new Vector3(0, 1.3f, 0) + transform.forward * monster.attackRange);
+
+        if(Player != null)
+        {
+            Gizmos.color = Color.yellow;
+            if(GetMyRange() == 1)
+            {
+                Gizmos.color = Color.red;
+            }
+            Gizmos.DrawLine(transform.position + new Vector3(0, 1.3f, 0), Player.transform.position);
+        }
+
+    }
 
 }

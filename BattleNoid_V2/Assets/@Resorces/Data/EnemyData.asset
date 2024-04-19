@@ -26,6 +26,7 @@ MonoBehaviour:
     knockBackAmount: 1
     knockBackTime: 0.8
     attackType: 1
+    viewingAngle: 90
   - index: 2
     code: 111112A
     name: "\uB4DC\uB860"
@@ -39,6 +40,7 @@ MonoBehaviour:
     knockBackAmount: 1
     knockBackTime: 0.8
     attackType: 1
+    viewingAngle: 180
   - index: 3
     code: 111113A
     name: "\uC6D0\uAC70\uB9AC \uB85C\uBD07"
@@ -52,6 +54,7 @@ MonoBehaviour:
     knockBackAmount: 0
     knockBackTime: 0
     attackType: 2
+    viewingAngle: 70
   - index: 4
     code: 111114A
     name: "\uC790\uD3ED\uD615 \uB4DC\uB860"
@@ -65,6 +68,7 @@ MonoBehaviour:
     knockBackAmount: 1.2
     knockBackTime: 1.2
     attackType: 3
+    viewingAngle: 30
   - index: 5
     code: 111115B
     name: Boss1
@@ -78,6 +82,7 @@ MonoBehaviour:
     knockBackAmount: 1
     knockBackTime: 1
     attackType: 4
+    viewingAngle: 30
   - index: 6
     code: 111116B
     name: Boss2
@@ -91,6 +96,7 @@ MonoBehaviour:
     knockBackAmount: 1
     knockBackTime: 1
     attackType: 4
+    viewingAngle: 30
   - index: 7
     code: 111117B
     name: Boss3
@@ -104,3 +110,4 @@ MonoBehaviour:
     knockBackAmount: 1
     knockBackTime: 1
     attackType: 4
+    viewingAngle: 30

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float attackTimer;
     [SerializeField] private Vector3 moveInput = Vector3.zero;
     [SerializeField] private Rigidbody playerRigidbody;
+    [SerializeField] private Quaternion previousRotation = Quaternion.identity;
 
     public float lineLength = 1f;
     public float lineWidth = 0.1f;
@@ -46,6 +48,14 @@ public class PlayerController : MonoBehaviour
 
             //회전을 부드럽게 적용하기 위한 Slerp 를 사용
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Managers.Player.player.rotationSpeed * Time.deltaTime);
+
+            // 가장 마지막 상태 회전 저장
+            previousRotation = transform.rotation;
+        }
+        else
+        {
+
+            transform.rotation = previousRotation;
         }
 
         playerRigidbody.velocity = moveInput * Managers.Player.player.moveSpeed;

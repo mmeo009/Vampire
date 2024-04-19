@@ -59,6 +59,7 @@ public class MonsterManager
         monster.moveSpeed = monsterData.baseMoveSpeed;
         monster.rotationSpeed = monsterData.baserotationSpeed;
         monster.attackType = monsterData.attackType;
+        monster.viewingAngle = monsterData.viewingAngle;
         monster.monsterController = monsterController;
         monsterController.GetMonsterStats(monster);
     }

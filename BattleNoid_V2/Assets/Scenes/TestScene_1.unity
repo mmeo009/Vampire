@@ -296,7 +296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c36dba95cfa554a48827c9e812f68a7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  angle: 90
+  angle: 180
   testPlayer: {fileID: 1244821527}
   nowAngle: 0
   toPlayer: {x: 0, y: 0, z: 0}
