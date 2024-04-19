@@ -82,6 +82,7 @@ public class PlayerController : MonoBehaviour
         DrawLine(playerPosition, playerRotation * Vector3.forward, Color.blue);
 
         DrawCube(cubeVector);
+
     }
 
     public void DrawCube(Vector3 point)
@@ -104,6 +105,7 @@ public class PlayerController : MonoBehaviour
             Gizmos.DrawSphere(point, 0.1f);
         }
     }
+
     private void Attack()
     {
         Managers.Player.Attack();

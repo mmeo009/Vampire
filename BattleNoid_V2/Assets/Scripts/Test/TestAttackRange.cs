@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class TestAttackRange : MonoBehaviour
 {
@@ -8,38 +10,44 @@ public class TestAttackRange : MonoBehaviour
     public GameObject testPlayer;
     public float nowAngle = 0;
     public Vector3 toPlayer;
+    public bool IsAttack;
 
 
     void Update()
     {
-        Vector3 myPos = transform.position + new Vector3(0,1.3f,0);
+        IsAttack = IsEnemyInsideOBB(testPlayer.transform.position, transform.position, transform.rotation, 1, 2);
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(transform.position + new Vector3(0, 1.3f, 0), testPlayer.transform.position);
+        //DrawLine();
+        DrawOBB(transform.position, transform.rotation, 1, 2);
+    }
+    void Check()
+    {
+        Vector3 myPos = transform.position + new Vector3(0, 1.3f, 0);
         toPlayer = testPlayer.transform.position - myPos;
         toPlayer.Normalize();
 
         float _angle = Vector3.Angle(transform.forward, toPlayer);
         nowAngle = _angle;
 
-        if (_angle < angle * 0.5f )
+        if (_angle < angle * 0.5f)
         {
-            if(Vector3.Distance(myPos, testPlayer.transform.position) <= 1)
+            if (Vector3.Distance(myPos, testPlayer.transform.position) <= 1)
             {
                 Debug.Log("적이 나의 안에 있소");
             }
             else
             {
                 Debug.Log("적이 시야에 만 있소");
-            }    
+            }
         }
         else
         {
             Debug.Log("적이 밖에 있소");
         }
 
-    }
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawLine(transform.position + new Vector3(0, 1.3f, 0), testPlayer.transform.position);
-        DrawLine();
     }
     void DrawLine()
     {
@@ -56,4 +64,43 @@ public class TestAttackRange : MonoBehaviour
         Gizmos.DrawLine(transform.position + new Vector3(0, 1.3f, 0), transform.position + new Vector3(0, 1.3f, 0) + transform.forward * 1f);
     }
 
+    public void DrawOBB(Vector3 start, Quaternion rotation, float width, float length)
+    {
+        Gizmos.color = Color.green;
+
+        float halfWidth = width / 2f;
+
+        Vector3[] points = new Vector3[]
+        {
+        start + rotation * new Vector3(-halfWidth, 1.3f, 0f),
+        start + rotation * new Vector3(halfWidth, 1.3f, 0f),
+        start + rotation * new Vector3(halfWidth, 1.3f, length),
+        start + rotation * new Vector3(-halfWidth, 1.3f, length)
+        };
+
+        // Draw the OBB
+        Gizmos.DrawLine(points[0], points[1]);
+        Gizmos.DrawLine(points[1], points[2]);
+        Gizmos.DrawLine(points[2], points[3]);
+        Gizmos.DrawLine(points[3], points[0]);
+    }
+    public bool IsEnemyInsideOBB(Vector3 point, Vector3 start, Quaternion rotation, float width, float length)
+    {
+        float halfWidth = width / 2f;
+        float halfLength = length / 2f;
+
+        Vector3 center = start + rotation * new Vector3(0f, 0f, halfLength);
+
+        Vector3 localPoint = Quaternion.Inverse(rotation) * (point - center);
+
+
+        if (Mathf.Abs(localPoint.x) <= halfWidth && Mathf.Abs(localPoint.z) <= halfLength)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }

@@ -20,26 +20,26 @@ MonoBehaviour:
     baseDamage: 10
     baseMoveSpeed: 4
     baseRotSpeed: 10
-    baseRange: 12
+    baseRange: 7
     baseAttackSpeed: 1
     bulletSpeed: 6
     firstSkillName: null
-    firstSkillCoolDown: 30
+    firstSkillCoolDown: 40
     secondSkillName: null
-    secondSkillCoolDown: 30
+    secondSkillCoolDown: 20
     cost: 0
   - index: 2
     code: 111112P
     name: Ember
-    baseHp: 120
-    baseDamage: 15
+    baseHp: 100
+    baseDamage: 4
     baseMoveSpeed: 5
     baseRotSpeed: 10
-    baseRange: 4
+    baseRange: 1.2
     baseAttackSpeed: 1
-    bulletSpeed: 6
+    bulletSpeed: 0.3
     firstSkillName: null
     firstSkillCoolDown: 0
     secondSkillName: null
-    secondSkillCoolDown: 0
+    secondSkillCoolDown: 20
     cost: 0

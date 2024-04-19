@@ -270,7 +270,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4472875009057374061, guid: b9cc8c9f055657545840a91203a19775, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2545590286562245405, guid: b9cc8c9f055657545840a91203a19775,
@@ -300,6 +301,88 @@ MonoBehaviour:
   testPlayer: {fileID: 1244821527}
   nowAngle: 0
   toPlayer: {x: 0, y: 0, z: 0}
+  IsAttack: 0
+--- !u!1 &1163081467
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1163081469}
+  - component: {fileID: 1163081468}
+  m_Layer: 0
+  m_Name: '@Managers'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1163081468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1163081467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 656bbf8851086584b9ffbd4a52e5c452, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data:
+    saveFilePath: 
+    entity_Player: {fileID: 0}
+    entity_Enemy: {fileID: 0}
+    entity_Perk: {fileID: 0}
+  _UI:
+    optionWindowPrefab: {fileID: 0}
+    cardWindowPrefab: {fileID: 0}
+    optionWindow: {fileID: 0}
+    cardWindow: {fileID: 0}
+  _player:
+    player:
+      code: 
+      hp: 0
+      xp: 0
+      currentHp: 0
+      currentXp: 0
+      hpPerSec: 0
+      spPerSec: 0
+      attackDamage: 0
+      attackRange: 0
+      attackSpeed: 0
+      moveSpeed: 0
+      bulletSpeed: 0
+      rotationSpeed: 0
+      firstSkill: 
+      secondSkill: 
+      firstCoolDown: 0
+      secondCoolDown: 0
+      currentFirstCoolDown: 0
+      currentSecondCoolDown: 0
+      leftAttackAmount: 0
+      rightAttackAmount: 0
+      forwardAttackAmount: 0
+      backwardAttackAmount: 0
+      attackTime: 0
+      playerController: {fileID: 0}
+--- !u!4 &1163081469
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1163081467}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1244821527
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,87 +484,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.3, z: 1}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1528210049
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1528210051}
-  - component: {fileID: 1528210050}
-  m_Layer: 0
-  m_Name: '@Managers'
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1528210050
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1528210049}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 656bbf8851086584b9ffbd4a52e5c452, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _data:
-    saveFilePath: 
-    entity_Player: {fileID: 0}
-    entity_Enemy: {fileID: 0}
-    entity_Perk: {fileID: 0}
-  _UI:
-    optionWindowPrefab: {fileID: 0}
-    cardWindowPrefab: {fileID: 0}
-    optionWindow: {fileID: 0}
-    cardWindow: {fileID: 0}
-  _player:
-    player:
-      code: 
-      hp: 0
-      xp: 0
-      currentHp: 0
-      currentXp: 0
-      hpPerSec: 0
-      spPerSec: 0
-      attackDamage: 0
-      attackRange: 0
-      attackSpeed: 0
-      moveSpeed: 0
-      bulletSpeed: 0
-      rotationSpeed: 0
-      firstSkill: 
-      secondSkill: 
-      firstCoolDown: 0
-      secondCoolDown: 0
-      currentFirstCoolDown: 0
-      currentSecondCoolDown: 0
-      leftAttackAmount: 0
-      rightAttackAmount: 0
-      forwardAttackAmount: 0
-      backwardAttackAmount: 0
-      attackTime: 0
-      playerController: {fileID: 0}
---- !u!4 &1528210051
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1528210049}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -703,6 +705,6 @@ SceneRoots:
   - {fileID: 1708539070}
   - {fileID: 1561997296}
   - {fileID: 367119895}
-  - {fileID: 1528210051}
   - {fileID: 910253525}
   - {fileID: 1244821531}
+  - {fileID: 1163081469}
