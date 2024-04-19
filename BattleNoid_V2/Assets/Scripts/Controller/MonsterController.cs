@@ -189,28 +189,6 @@ public class MonsterController : MonoBehaviour
         monster = null;
         Managers.Pool.Destroy(this.gameObject);
     }
-    public void OnDrawGizmos()
-    {
-        float radius = 1f;
-        int divisions = 360;
 
-        // Vector3.Dot()
-
-        Vector3 pos = transform.position + new Vector3(0, 1.3f, 0);
-        Gizmos.color = Color.blue;
-        float angleIncrement = 360f / divisions;
-
-
-        for (int i = 0; i < divisions; i++)
-        {
-            float angle = i * angleIncrement;
-            float nextAngle = (i + 1) * angleIncrement;
-
-            Vector3 startPoint = pos + Quaternion.Euler(0, angle, 0) * Vector3.forward * radius;
-            Vector3 endPoint = pos + Quaternion.Euler(0, nextAngle, 0) * Vector3.forward * radius;
-
-            Gizmos.DrawLine(startPoint, endPoint);
-        }
-    }
 
 }
