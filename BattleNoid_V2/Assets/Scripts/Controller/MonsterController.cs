@@ -34,11 +34,6 @@ public class MonsterController : MonoBehaviour
             }
         }
 
-        if (attackTimer > 0f)
-        {
-            attackTimer -= Time.deltaTime;
-        }
-
         if(this.transform.position.y != 0)
         {
             transform.position = new Vector3(transform.position.x, 0, transform.position.z);
@@ -55,16 +50,6 @@ public class MonsterController : MonoBehaviour
         else if(other.CompareTag("Monster"))
         {
             Physics.IgnoreCollision(other, other);
-        }
-    }
-
-    private void OnCollisionStay(Collision collision)
-    {
-        if (collision.gameObject.tag == "Player" && attackTimer <= 0f)
-        {
-            Managers.Player.SetStats(OperationType.Minus, StatType.CurrentHP, monster.attackDamage);
-            attackTimer = monster.attackSpeed;
-            knockBackTimer = monster.knockBackTime;
         }
     }
 
@@ -89,7 +74,7 @@ public class MonsterController : MonoBehaviour
                 }
             }
 
-            if (Vector3.Distance(Player.transform.position, transform.position) > monster.attackRange)
+            if (Vector3.Distance(Player.transform.position, transform.position) >= monster.attackRange)
             {
                 monsterRigidbody.velocity = (Player.transform.position - transform.position).normalized * moveSpeed;
             }
@@ -110,7 +95,28 @@ public class MonsterController : MonoBehaviour
     }
     private void Attack()
     {
-        if (monster.attackType == 2)
+        monsterRigidbody.velocity = Vector3.zero;
+
+        if (monster.attackType == 1)
+        {
+            Vector3 targetDiraction = (Player.transform.position - this.transform.position).normalized;
+            Quaternion targetRotation = Quaternion.LookRotation(targetDiraction);
+
+            if (transform.rotation == targetRotation)
+            {
+                if (attackTimer > 0)
+                {
+                    attackTimer -= Time.deltaTime;
+
+                    if (attackTimer <= 0)
+                    {
+                        Managers.Player.SetStats(OperationType.Minus, StatType.CurrentHP, monster.attackDamage);
+                        attackTimer = monster.attackSpeed;
+                    }
+                }
+            }
+        }
+        else if(monster.attackType == 2)
         {
             attackPivot.GetComponent<Transform>();
             //TODO ÃÑ¾Ë »§¾ß Ãß°¡
@@ -183,4 +189,28 @@ public class MonsterController : MonoBehaviour
         monster = null;
         Managers.Pool.Destroy(this.gameObject);
     }
+    public void OnDrawGizmos()
+    {
+        float radius = 1f;
+        int divisions = 360;
+
+        // Vector3.Dot()
+
+        Vector3 pos = transform.position + new Vector3(0, 1.3f, 0);
+        Gizmos.color = Color.blue;
+        float angleIncrement = 360f / divisions;
+
+
+        for (int i = 0; i < divisions; i++)
+        {
+            float angle = i * angleIncrement;
+            float nextAngle = (i + 1) * angleIncrement;
+
+            Vector3 startPoint = pos + Quaternion.Euler(0, angle, 0) * Vector3.forward * radius;
+            Vector3 endPoint = pos + Quaternion.Euler(0, nextAngle, 0) * Vector3.forward * radius;
+
+            Gizmos.DrawLine(startPoint, endPoint);
+        }
+    }
+
 }

@@ -17,23 +17,23 @@ MonoBehaviour:
     code: 111111A
     name: TestEnemy
     stage: 1
-    baseHp: 5
-    baseDamage: 20
-    baseMoveSpeed: 1
-    baserotationSpeed: 10
+    baseHp: 20
+    baseDamage: 10
+    baseMoveSpeed: 3
+    baserotationSpeed: 3
     attackSpeed: 1
-    baseRange: 3
+    baseRange: 2
     knockBackAmount: 1
-    knockBackTime: 1
+    knockBackTime: 0.8
     attackType: 1
   - index: 2
     code: 111112A
     name: "\uB4DC\uB860"
     stage: 1
-    baseHp: 40
+    baseHp: 20
     baseDamage: 10
     baseMoveSpeed: 3
-    baserotationSpeed: 10
+    baserotationSpeed: 3
     attackSpeed: 1
     baseRange: 2
     knockBackAmount: 1
@@ -43,10 +43,10 @@ MonoBehaviour:
     code: 111113A
     name: "\uC6D0\uAC70\uB9AC \uB85C\uBD07"
     stage: 6
-    baseHp: 30
+    baseHp: 15
     baseDamage: 20
     baseMoveSpeed: 2
-    baserotationSpeed: 10
+    baserotationSpeed: 3
     attackSpeed: 3
     baseRange: 15
     knockBackAmount: 0
@@ -56,10 +56,10 @@ MonoBehaviour:
     code: 111114A
     name: "\uC790\uD3ED\uD615 \uB4DC\uB860"
     stage: 11
-    baseHp: 25
+    baseHp: 12.5
     baseDamage: 15
     baseMoveSpeed: 5
-    baserotationSpeed: 10
+    baserotationSpeed: 3
     attackSpeed: 0
     baseRange: 1
     knockBackAmount: 1.2
