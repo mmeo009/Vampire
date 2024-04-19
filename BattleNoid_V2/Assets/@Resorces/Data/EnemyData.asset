@@ -19,10 +19,10 @@ MonoBehaviour:
     stage: 1
     baseHp: 20
     baseDamage: 10
-    baseMoveSpeed: 3
-    baserotationSpeed: 3
+    baseMoveSpeed: 1.5
+    baserotationSpeed: 1
     attackSpeed: 1
-    baseRange: 2
+    baseRange: 1
     knockBackAmount: 1
     knockBackTime: 0.8
     attackType: 1
@@ -33,10 +33,10 @@ MonoBehaviour:
     stage: 1
     baseHp: 20
     baseDamage: 10
-    baseMoveSpeed: 3
-    baserotationSpeed: 3
+    baseMoveSpeed: 1.5
+    baserotationSpeed: 1
     attackSpeed: 1
-    baseRange: 2
+    baseRange: 1
     knockBackAmount: 1
     knockBackTime: 0.8
     attackType: 1
@@ -47,10 +47,10 @@ MonoBehaviour:
     stage: 6
     baseHp: 15
     baseDamage: 20
-    baseMoveSpeed: 2
-    baserotationSpeed: 3
+    baseMoveSpeed: 1.5
+    baserotationSpeed: 1
     attackSpeed: 3
-    baseRange: 15
+    baseRange: 5
     knockBackAmount: 0
     knockBackTime: 0
     attackType: 2
@@ -61,10 +61,10 @@ MonoBehaviour:
     stage: 11
     baseHp: 12.5
     baseDamage: 15
-    baseMoveSpeed: 5
-    baserotationSpeed: 3
+    baseMoveSpeed: 3
+    baserotationSpeed: 1
     attackSpeed: 0
-    baseRange: 1
+    baseRange: 0
     knockBackAmount: 1.2
     knockBackTime: 1.2
     attackType: 3
