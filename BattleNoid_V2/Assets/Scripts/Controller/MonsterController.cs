@@ -26,7 +26,7 @@ public class MonsterController : MonoBehaviour
     {
         Move();
 
-        if(freezeTimer > 0)
+        if(isFreeze == true)
         {
             freezeTimer -= Time.deltaTime;
             if(freezeTimer <= 0)
@@ -58,12 +58,17 @@ public class MonsterController : MonoBehaviour
         if (other.CompareTag("Bullet"))
         {
             BulletController bullet = other.GetComponent<BulletController>();
-            ChangeMonsterStats(OperationType.Minus, StatType.CurrentHP, bullet.damage);
+
+            if(bullet.bulletType == BulletType.Freeze)
+            {
+                Freeze(bullet.damage);
+            }
+            else
+            {
+                ChangeMonsterStats(OperationType.Minus, StatType.CurrentHP, bullet.damage);
+            }
+
             bullet.DestroyBullet();
-        }
-        else if(other.CompareTag("Monster"))
-        {
-            Physics.IgnoreCollision(other, other);
         }
     }
 
@@ -88,25 +93,29 @@ public class MonsterController : MonoBehaviour
                 }
             }
 
-            if (Vector3.Distance(Player.transform.position, transform.position) >= monster.attackRange)
+            if (isFreeze == false)
             {
-                monsterRigidbody.velocity = (Player.transform.position - transform.position).normalized * moveSpeed;
-                isAttack = false;
+                if (Vector3.Distance(Player.transform.position, transform.position) >= monster.attackRange)
+                {
+                    monsterRigidbody.velocity = (Player.transform.position - transform.position).normalized * moveSpeed;
+                    isAttack = false;
+                }
+                else
+                {
+                    monsterRigidbody.velocity = Vector3.zero;
+                    isAttack = true;
+                }
+
+                Vector3 targetDiraction = (Player.transform.position - this.transform.position).normalized;
+                Quaternion targetRotation = Quaternion.LookRotation(targetDiraction);
+                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, monster.rotationSpeed * Time.deltaTime);
             }
             else
             {
                 monsterRigidbody.velocity = Vector3.zero;
-                isAttack = true;
             }
 
-            if (isFreeze)
-            {
-                moveSpeed = 0;
-            }
 
-            Vector3 targetDiraction = (Player.transform.position - this.transform.position).normalized;
-            Quaternion targetRotation = Quaternion.LookRotation(targetDiraction);
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, monster.rotationSpeed * Time.deltaTime);
         }
     }
     private void Attack()
@@ -123,17 +132,19 @@ public class MonsterController : MonoBehaviour
         {
             if (GetMyRange() == 1)
             {
-                attackPivot.GetComponent<Transform>();
                 GameObject temp = Managers.Data.Instantiate("Bullet", null, true);
                 BulletController bc = Util.GetOrAddComponent<BulletController>(temp);
                 Managers.Data.bullets.Add(bc);
+                bc.transform.position = attackPivot.transform.position;
                 bc.bulletType = BulletType.Enemy;
                 bc.direction = transform.forward;
+                bc.moveSpeed = 3f;
+                bc.range = monster.attackRange;
             }
         }
     }
 
-    public void Freeze(int amount)
+    public void Freeze(float amount)
     {
         isFreeze = true;
         freezeTimer = amount;
@@ -258,7 +269,6 @@ public class MonsterController : MonoBehaviour
             }
             Gizmos.DrawLine(transform.position + new Vector3(0, 1.3f, 0), Player.transform.position);
         }
-
     }
 
 }

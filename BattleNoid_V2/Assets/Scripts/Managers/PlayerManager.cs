@@ -275,6 +275,7 @@ public class PlayerManager
         bc.bulletType = direction;
         bc.moveSpeed = player.bulletSpeed;
         bc.damage = player.attackDamage;
+        bc.range = player.attackRange;
     }
 
     public void UseFirstSkill(MonsterController enemy = null, float damage = 0f)
@@ -290,11 +291,19 @@ public class PlayerManager
             }
         }
     }
-    public void UseSecondSkill()
+    public void UseSecondSkill(MonsterController enemy = null, float damage = 0f)
     {
         if (player.code == "111111P")
         {
-
+            GameObject temp = Managers.Data.Instantiate("Bullet", null, true);
+            BulletController bc = Util.GetOrAddComponent<BulletController>(temp);
+            Managers.Data.bullets.Add(bc);
+            bc.transform.position = player.playerController.transform.position + new Vector3(0, 1.3f, 0);
+            bc.bulletType = BulletType.Freeze;
+            bc.direction = player.playerController.transform.forward;
+            bc.moveSpeed = player.bulletSpeed;
+            bc.damage = damage;
+            bc.range = player.attackRange;
         }
     }
 }

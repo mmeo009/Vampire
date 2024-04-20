@@ -10,9 +10,10 @@ public class BulletController : MonoBehaviour
     public float moveSpeed;
     public float timer;
     public float damage;
+    public float range;
     private void OnEnable()
     {
-        timer = Managers.Player.player.attackRange;
+        timer = range;
     }
     private void FixedUpdate()
     {

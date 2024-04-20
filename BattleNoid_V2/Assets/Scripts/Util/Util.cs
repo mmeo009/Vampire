@@ -136,6 +136,7 @@ namespace Supporter
         Back,
         Target,
         Enemy,
+        Freeze,
     }
 
     [System.Serializable]
