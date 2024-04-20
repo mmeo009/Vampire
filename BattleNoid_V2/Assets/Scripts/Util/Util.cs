@@ -167,6 +167,9 @@ namespace Supporter
         public float currentFirstCoolDown;
         public float currentSecondCoolDown;
 
+        public bool isFirstSkillActive;
+        public bool isSecondSkillActive;
+
         public int leftAttackAmount;
         public int rightAttackAmount;
         public int forwardAttackAmount;

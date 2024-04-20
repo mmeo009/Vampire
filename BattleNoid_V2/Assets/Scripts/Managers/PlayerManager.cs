@@ -161,6 +161,13 @@ public class PlayerManager
             player.moveSpeed = resetData.baseMoveSpeed;
             player.rotationSpeed = resetData.baseRotSpeed;
             player.bulletSpeed = resetData.bulletSpeed;
+
+            player.firstCoolDown = resetData.firstSkillCoolDown;
+            player.secondCoolDown = resetData.secondSkillCoolDown;
+
+            player.isFirstSkillActive = true;
+            player.isSecondSkillActive = true;
+
             player.leftAttackAmount = 0;
             player.rightAttackAmount = 0;
             player.forwardAttackAmount = 1;
@@ -271,11 +278,17 @@ public class PlayerManager
         bc.damage = player.attackDamage;
     }
 
-    public void UseFirstSkill()
+    public void UseFirstSkill(MonsterController enemy = null, float damage = 0f)
     {
         if (player.code == "111111P")
         {
+            if(enemy!=  null)
+            {
+                if (damage == 0f)
+                    damage = player.attackDamage;
 
+                enemy.ChangeMonsterStats(OperationType.Minus, StatType.CurrentHP, damage);
+            }
         }
     }
     public void UseSecondSkill()

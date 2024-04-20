@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour
     public int dotAmount = 5;
     public Vector3 cubeVector = Vector3.zero;
 
-    // Update is called once per frame
     void Update()
     {
         PlayerMove();
@@ -27,6 +26,24 @@ public class PlayerController : MonoBehaviour
         {
             transform.position = new Vector3(transform.position.x, 0, transform.position.z);
         }
+
+        if(Managers.Player.player.currentFirstCoolDown > 0)
+        {
+            Managers.Player.player.currentFirstCoolDown -= Time.deltaTime;
+            if(Managers.Player.player.currentFirstCoolDown <= 0)
+            {
+                Managers.Player.player.isFirstSkillActive = true;
+            }
+        }
+
+        if (Managers.Player.player.currentSecondCoolDown > 0)
+        {
+            Managers.Player.player.currentSecondCoolDown -= Time.deltaTime;
+            if (Managers.Player.player.currentSecondCoolDown <= 0)
+            {
+                Managers.Player.player.isSecondSkillActive = true;
+            }
+        }
     }
 
     public void PlayerMove()
@@ -34,35 +51,60 @@ public class PlayerController : MonoBehaviour
         if(playerRigidbody == null)
             playerRigidbody = GetComponent<Rigidbody>();
 
-        // 축을 가져옴
         moveInput.x = Input.GetAxisRaw("Horizontal");
         moveInput.z = Input.GetAxisRaw("Vertical");
 
-        // 대각선 가속 방지
         moveInput.Normalize();
 
-        //이동 항향 벡터를 기반으로 회전 각도를 계산
         if (moveInput != Vector3.zero)
         {
             Quaternion targetRotation = Quaternion.LookRotation(moveInput);
 
-            //회전을 부드럽게 적용하기 위한 Slerp 를 사용
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Managers.Player.player.rotationSpeed * Time.deltaTime);
 
-            // 가장 마지막 상태 회전 저장
             previousRotation = transform.rotation;
         }
         else
         {
-
             transform.rotation = previousRotation;
         }
 
         playerRigidbody.velocity = moveInput * Managers.Player.player.moveSpeed;
+
+        if(Input.GetKeyDown(KeyCode.Q))
+        {
+            if(Managers.Player.player.isFirstSkillActive == true)
+            {
+                Managers.Player.player.currentFirstCoolDown = Managers.Player.player.firstCoolDown;
+                Managers.Player.player.isFirstSkillActive = false;
+
+                HashSet<MonsterController> monsters = new HashSet<MonsterController>(Managers.Monster.monsters);
+
+                foreach (MonsterController mc in monsters)
+                {
+                    if (IsEnemyInsideOBB(mc.transform.position, transform.rotation, 2, 4) == true)
+                    {
+                        Managers.Player.UseFirstSkill(mc, 300);
+                        Debug.Log(mc.transform);
+                    }
+                }
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (Managers.Player.player.isSecondSkillActive == true)
+            {
+                Managers.Player.UseSecondSkill();
+                Managers.Player.player.currentSecondCoolDown = Managers.Player.player.secondCoolDown;
+                Managers.Player.player.isSecondSkillActive = false;
+            }
+        }
     }
     private void CoolDown()
     {
         attackTimer -= Time.deltaTime;
+
         if (attackTimer <= 0)
         {
             Attack();
@@ -73,19 +115,16 @@ public class PlayerController : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        Vector3 playerPosition = Managers.Player.player.playerController.transform.position;
-        Quaternion playerRotation = Managers.Player.player.playerController.transform.rotation;
+        DrawLine(transform.position, transform.rotation * Vector3.right, Color.red);
 
-        // 가로선
-        DrawLine(playerPosition, playerRotation * Vector3.right, Color.red);
-        // 세로선
-        DrawLine(playerPosition, playerRotation * Vector3.forward, Color.blue);
+        DrawLine(transform.position, transform.rotation * Vector3.forward, Color.blue);
 
-        DrawCube(cubeVector);
+        DrawAttackPivot(cubeVector);
 
+        DrawOBB(transform.rotation, 2, 4);
     }
 
-    public void DrawCube(Vector3 point)
+    public void DrawAttackPivot(Vector3 point)
     {
         Gizmos.DrawCube(point, new Vector3(0.1f, 0.1f, 0.1f));
     }
@@ -109,5 +148,43 @@ public class PlayerController : MonoBehaviour
     private void Attack()
     {
         Managers.Player.Attack();
+    }
+    public void DrawOBB(Quaternion rotation, float width, float length)
+    {
+        Gizmos.color = Color.green;
+
+        float halfWidth = width / 2f;
+
+        Vector3[] points = new Vector3[]
+        {
+        transform.position + rotation * new Vector3(-halfWidth, 1f, 0f),
+        transform.position + rotation * new Vector3(halfWidth, 1f, 0f),
+        transform.position + rotation * new Vector3(halfWidth, 1f, length),
+        transform.position + rotation * new Vector3(-halfWidth, 1f, length)
+        };
+
+        Gizmos.DrawLine(points[0], points[1]);
+        Gizmos.DrawLine(points[1], points[2]);
+        Gizmos.DrawLine(points[2], points[3]);
+        Gizmos.DrawLine(points[3], points[0]);
+    }
+    public bool IsEnemyInsideOBB(Vector3 point, Quaternion rotation, float width, float length)
+    {
+        float halfWidth = width / 2f;
+        float halfLength = length / 2f;
+
+        Vector3 center = this.transform.position + rotation * new Vector3(0f, 0f, halfLength);
+
+        Vector3 localPoint = Quaternion.Inverse(rotation) * (point - center);
+
+
+        if (Mathf.Abs(localPoint.x) <= halfWidth && Mathf.Abs(localPoint.z) <= halfLength)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
