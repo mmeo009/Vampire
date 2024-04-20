@@ -128,13 +128,14 @@ namespace Supporter
         MAXXP
 
     }
-    public enum BulletDirection
+    public enum BulletType
     {
-        forward,
-        left,
-        right,
-        back,
-        target,
+        Forward,
+        Left,
+        Right,
+        Back,
+        Target,
+        Enemy,
     }
 
     [System.Serializable]

@@ -113,8 +113,6 @@ public class MonsterController : MonoBehaviour
     {
         if (monster.attackType == 1)
         {
-            Vector3 targetDiraction = (Player.transform.position - this.transform.position).normalized;
-
             if (GetMyRange() == 1)
             {
                 Managers.Player.SetStats(OperationType.Minus, StatType.CurrentHP, monster.attackDamage);
@@ -123,8 +121,15 @@ public class MonsterController : MonoBehaviour
         }
         else if(monster.attackType == 2)
         {
-            attackPivot.GetComponent<Transform>();
-            //TODO ÃÑ¾Ë »§¾ß Ãß°¡
+            if (GetMyRange() == 1)
+            {
+                attackPivot.GetComponent<Transform>();
+                GameObject temp = Managers.Data.Instantiate("Bullet", null, true);
+                BulletController bc = Util.GetOrAddComponent<BulletController>(temp);
+                Managers.Data.bullets.Add(bc);
+                bc.bulletType = BulletType.Enemy;
+                bc.direction = transform.forward;
+            }
         }
     }
 

@@ -5,7 +5,7 @@ using Supporter;
 
 public class BulletController : MonoBehaviour
 {
-    public BulletDirection bulletType;
+    public BulletType bulletType;
     public Vector3 direction;
     public float moveSpeed;
     public float timer;
@@ -30,7 +30,7 @@ public class BulletController : MonoBehaviour
     }
     public void DestroyBullet()
     {
-        Managers.Player.bullets.Remove(this as BulletController);
+        Managers.Data.bullets.Remove(this as BulletController);
         Managers.Pool.Destroy(this.gameObject);
     }
 }

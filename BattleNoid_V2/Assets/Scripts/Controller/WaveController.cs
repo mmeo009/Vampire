@@ -8,9 +8,10 @@ public class WaveController : MonoBehaviour
     #region PrivateVariables
     [SerializeField] private List<WaveData> waves;
     [SerializeField] private WaveData nowWaveData;
-    private float timer;
+    [SerializeField] private int nowWaveIndex;
+    [SerializeField] private float timer;
     private Transform[] spawnPoints;
-    private int nowWaveIndex;
+
 
     #endregion
     #region PublicVariables
@@ -30,18 +31,18 @@ public class WaveController : MonoBehaviour
     #region PrivateMethod
     private void SpawnMonster()
     {
-        if(nowWaveData != waves[0])
-        {
-            nowWaveIndex += 1;
-            nowWaveData = waves[nowWaveIndex];
-        }
+        nowWaveData = waves[nowWaveIndex];
+        nowWaveIndex += 1;
 
         for (int i = 0; i < nowWaveData.monsters.Count; i++)
         {
             for (int j = 0; j < nowWaveData.monsters[i].monsterAmount; j++)
             {
-                Managers.Monster.CreateMonster(spawnPoints[Random.Range(0, spawnPoints.Length)], nowWaveData.monsters[i].monsterIndex,
-                null, nowWaveData.monsters[i].additionalHp, nowWaveData.monsters[i].additionalDamage, nowWaveData.monsters[i].additionalMoveSpeed);
+                if(nowWaveData.monsters[i].monsterIndex <= 3)
+                {
+                    Managers.Monster.CreateMonster(spawnPoints[Random.Range(0, spawnPoints.Length)], nowWaveData.monsters[i].monsterIndex,
+                    null, nowWaveData.monsters[i].additionalHp, nowWaveData.monsters[i].additionalDamage, nowWaveData.monsters[i].additionalMoveSpeed);
+                }
             }
         }
 

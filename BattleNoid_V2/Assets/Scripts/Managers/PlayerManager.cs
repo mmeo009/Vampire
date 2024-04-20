@@ -9,7 +9,6 @@ using System.Diagnostics.Tracing;
 public class PlayerManager
 {
     public PlayerStats player;
-    public HashSet<BulletController> bullets = new HashSet<BulletController>();
 
     public void CreatePlayer(int index, string code)
     {
@@ -189,21 +188,21 @@ public class PlayerManager
         {
             for(int i  = 0; i < player.forwardAttackAmount; i++)
             {
-                ShotBulletAsDirection(BulletDirection.forward, i + 1);
+                ShotBulletAsDirection(BulletType.Forward, i + 1);
             }
             for(int i = 0; i< player.leftAttackAmount; i++)
             {
-                ShotBulletAsDirection(BulletDirection.left, i + 1);
+                ShotBulletAsDirection(BulletType.Left, i + 1);
             }
 
             for(int i = 0; i < player.rightAttackAmount; i++)
             {
-                ShotBulletAsDirection(BulletDirection.right, i + 1);
+                ShotBulletAsDirection(BulletType.Right, i + 1);
             }
 
             for (int i = 0; i < player.backwardAttackAmount; i++)
             {
-                ShotBulletAsDirection(BulletDirection.back, i + 1);
+                ShotBulletAsDirection(BulletType.Back, i + 1);
             }
         }
     }
@@ -236,30 +235,30 @@ public class PlayerManager
         return Vector3.zero;
     }
 
-    private void ShotBulletAsDirection(BulletDirection direction, int amount)
+    private void ShotBulletAsDirection(BulletType direction, int amount)
     {
         GameObject temp = Managers.Data.Instantiate("Bullet", null, true);
         BulletController bc = Util.GetOrAddComponent<BulletController>(temp);
-        bullets.Add(bc);
+        Managers.Data.bullets.Add(bc);
         Vector3 dot;
 
-        if (direction == BulletDirection.forward)
+        if (direction == BulletType.Forward)
         {
             dot = GetDotPos(Vector3.right, player.forwardAttackAmount, amount);
             bc.direction = player.playerController.transform.forward;
 
         }
-        else if (direction == BulletDirection.left)
+        else if (direction == BulletType.Left)
         {
             dot = GetDotPos(Vector3.forward, player.leftAttackAmount, amount);
             bc.direction = -player.playerController.transform.right;
         }
-        else if (direction == BulletDirection.right)
+        else if (direction == BulletType.Right)
         {
             dot = GetDotPos(Vector3.forward, player.rightAttackAmount, amount);
             bc.direction = player.playerController.transform.right;
         }
-        else if (direction == BulletDirection.back)
+        else if (direction == BulletType.Back)
         {
             dot = GetDotPos(Vector3.right, player.backwardAttackAmount, amount);
             bc.direction = -player.playerController.transform.forward;

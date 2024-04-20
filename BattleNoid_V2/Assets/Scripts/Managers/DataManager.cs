@@ -38,6 +38,9 @@ public class DataManager
     //=========================================================================================================
 
     public Dictionary<string, UnityEngine.Object> resourcesDictionary = new Dictionary<string, UnityEngine.Object>();
+
+    public HashSet<BulletController> bullets = new HashSet<BulletController>();
+
     public T Load<T>(string key) where T : UnityEngine.Object
     {
         if (resourcesDictionary.TryGetValue(key, out UnityEngine.Object resource))
