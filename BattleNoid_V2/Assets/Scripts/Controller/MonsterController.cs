@@ -140,7 +140,21 @@ public class MonsterController : MonoBehaviour
                 bc.direction = transform.forward;
                 bc.moveSpeed = 3f;
                 bc.range = monster.attackRange;
+
+                attackTimer = monster.attackSpeed;
             }
+        }
+        else if(monster.attackType == 3)
+        {
+            Collider[] colls = Physics.OverlapSphere(transform.position, 2);
+            foreach(Collider col in colls)
+            {
+                if(col.tag == "Player")
+                {
+                    Managers.Player.SetStats(OperationType.Minus, StatType.CurrentHP, monster.attackDamage);
+                }
+            }
+            MonsterDie();
         }
     }
 
