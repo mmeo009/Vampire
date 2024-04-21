@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using Supporter;
 
 public class Entity_Perk : ScriptableObject
 {	
@@ -16,12 +15,9 @@ public class Entity_Perk : ScriptableObject
 		public string name;
 		public int perkType;
 		public string perkRarity;
-		public bool isReplicatable;
 		public int taskAmount;
-		public string taskType;
 		public string taskCondition;
 		public string taskReturnAmount;
-		public string GetCode() => code;
-		public int GetIndex() => index;
+		public string onlyFor;
 	}
 }

@@ -9,7 +9,7 @@ public class PerkManager : MonoBehaviour
     public PerkData teskType(Entity_Perk.Param perk)
     {
         int teskAmount = perk.taskAmount;
-        string taskType = perk.taskType;
+        string taskType = null;
         string taskCondition = perk.taskCondition;
         PerkTeskData[] data = new PerkTeskData[teskAmount];
         PerkData perkData = new PerkData();
@@ -26,7 +26,6 @@ public class PerkManager : MonoBehaviour
             }
             perkData.code = perk.code;
             perkData.name = perk.name;
-            perkData.replicatable = perk.isReplicatable;
             perkData.perkTesks = data;
             return perkData;
         }
