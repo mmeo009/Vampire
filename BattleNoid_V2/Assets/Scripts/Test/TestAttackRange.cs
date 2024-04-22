@@ -12,6 +12,12 @@ public class TestAttackRange : MonoBehaviour
     public Vector3 toPlayer;
     public bool IsAttack;
 
+    public float width;
+    public float length;
+
+    public Vector3 startPos;
+    public Vector3 target;
+
 
     void Update()
     {
@@ -22,7 +28,35 @@ public class TestAttackRange : MonoBehaviour
         Gizmos.DrawLine(transform.position + new Vector3(0, 1.3f, 0), testPlayer.transform.position);
         //DrawLine();
         DrawOBB(transform.position, transform.rotation, 1, 2);
+
+        DrawTriangle();
     }
+
+    void DrawTriangle()
+    {
+        // 삼각형의 세 꼭지점 계산
+        Vector3 pointA = startPos + Quaternion.Euler(0, -90, 0) * (Vector3.forward * width / 2);
+        Vector3 pointB = startPos + Quaternion.Euler(0, 90, 0) * (Vector3.forward * width / 2);
+        Vector3 pointC = startPos + (Vector3.forward * length);
+
+        // 삼각형 그리기
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(pointA, pointB);
+        Gizmos.DrawLine(pointB, pointC);
+        Gizmos.DrawLine(pointC, pointA);
+
+        // 주어진 점 그리기
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(target, 0.1f);
+
+        // 주어진 점이 삼각형 내부에 있는지 확인
+        if (IsPointInRange(startPos, width, length, target))
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawLine(startPos, target);
+        }
+    }
+
     void Check()
     {
         Vector3 myPos = transform.position + new Vector3(0, 1.3f, 0);
@@ -102,5 +136,30 @@ public class TestAttackRange : MonoBehaviour
         {
             return false;
         }
+    }
+
+    // 삼각형 내부에 주어진 점이 있는지 확인하는 함수
+    private bool IsPointInRange(Vector3 startPos, float width, float length, Vector3 target)
+    {
+        // 주어진 각도에 따라 삼각형의 세 점 계산
+        Vector3 pointA = startPos + Quaternion.Euler(0, -90, 0) * (Vector3.forward * width / 2);
+        Vector3 pointB = startPos + Quaternion.Euler(0, 90, 0) * (Vector3.forward * width / 2);
+        Vector3 pointC = startPos + (Vector3.forward * length);
+
+        // 주어진 점이 세 변을 지나는지 확인
+        bool sideAB = IsOnSameSide(pointA, pointB, target, startPos);
+        bool sideBC = IsOnSameSide(pointB, pointC, target, startPos);
+        bool sideCA = IsOnSameSide(pointC, pointA, target, startPos);
+
+        // 주어진 점이 세 변을 지나는 경우 삼각형 내부에 있음
+        return sideAB && sideBC && sideCA;
+    }
+
+    // 주어진 두 점과 시작점 사이의 점이 같은 쪽에 있는지 확인하는 함수
+    private bool IsOnSameSide(Vector3 pointA, Vector3 pointB, Vector3 target, Vector3 startPos)
+    {
+        Vector3 dir = Vector3.Cross((pointB - pointA), (startPos - pointA));
+        float dot = Vector3.Dot(dir, target - pointA);
+        return dot >= 0;
     }
 }

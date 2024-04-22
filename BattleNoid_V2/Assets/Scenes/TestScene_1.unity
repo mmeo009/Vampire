@@ -302,6 +302,10 @@ MonoBehaviour:
   nowAngle: 0
   toPlayer: {x: 0, y: 0, z: 0}
   IsAttack: 0
+  width: 2
+  length: 2
+  startPos: {x: 0, y: 0, z: 0}
+  target: {x: 0, y: 0, z: 0}
 --- !u!1 &1163081467
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,6 +366,8 @@ MonoBehaviour:
       secondCoolDown: 0
       currentFirstCoolDown: 0
       currentSecondCoolDown: 0
+      isFirstSkillActive: 0
+      isSecondSkillActive: 0
       leftAttackAmount: 0
       rightAttackAmount: 0
       forwardAttackAmount: 0
