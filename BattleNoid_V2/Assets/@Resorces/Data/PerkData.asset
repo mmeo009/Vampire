@@ -12,4 +12,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8efd65ecf9e16b46a4de687fc9aaaf2, type: 3}
   m_Name: PerkData
   m_EditorClassIdentifier: 
-  param: []
+  param:
+  - index: 1
+    code: 111111C
+    name: "\uC0DD\uCCB4 \uAC15\uD654"
+    perkType: 1
+    perkRarity: COMMON
+    taskAmount: 1
+    taskCondition: ASPD
+    taskReturnAmount: 1.2*
+    onlyFor: null
+  - index: 2
+    code: 111112C
+    name: "\uACF5\uACA9\uC131 \uAC15\uD654 \uD504\uB85C\uD1A0\uCF5C"
+    perkType: 1
+    perkRarity: COMMON
+    taskAmount: 1
+    taskCondition: ADMG
+    taskReturnAmount: 1.2*
+    onlyFor: null
+  - index: 3
+    code: 111113C
+    name: "\uACF5\uACA9 \uBCF4\uC870 \uB4DC\uB860"
+    perkType: 1
+    perkRarity: COMMON
+    taskAmount: 1
+    taskCondition: AAML
+    taskReturnAmount: 1+
+    onlyFor: 111111P
