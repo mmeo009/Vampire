@@ -230,9 +230,19 @@ public class PlayerController : MonoBehaviour
     {
         Collider[] colls = Physics.OverlapSphere(transform.position, range);
         List<MonsterController> monsters = new List<MonsterController>();
+
+        foreach (Collider col in colls)
+        {
+            MonsterController monster = col.GetComponent<MonsterController>();
+            if (monster != null)
+            {
+                monsters.Add(monster);
+            }
+        }
+
         monsters.OrderBy(monsters => Vector3.Distance(transform.position, monsters.transform.position));
 
-        if (monsters != null)
+        if (monsters.Count > 0)
         {
             if (monsters.Count <= nearestOrder)
             {

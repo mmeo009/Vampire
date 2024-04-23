@@ -334,10 +334,17 @@ public class PlayerManager
         }
         else if(player.code == "111112P")
         {
-            var mc = player.playerController.FindNearbyMonster(1, player.attackRange * 2);
-            player.playerController.transform.position = mc.transform.position - mc.transform.forward;
-            damage = player.attackDamage;
-            mc.ChangeMonsterStats(OperationType.Minus, StatType.CurrentHP, damage);
+            var mc = player.playerController.FindNearbyMonster(1, 5);
+
+            if (mc != null)
+            {
+                player.playerController.transform.position = mc.transform.position - mc.transform.forward;
+                damage = 10;
+                mc.ChangeMonsterStats(OperationType.Minus, StatType.CurrentHP, damage);
+            }
+            else
+                return;
+
         }
     }
 }
