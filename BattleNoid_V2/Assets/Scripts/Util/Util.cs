@@ -74,6 +74,7 @@ namespace Supporter
     [SerializeField]
     public enum PlayerType
     {
+        All,
         TestPlayer,
         Serena,
         Ember
@@ -95,24 +96,14 @@ namespace Supporter
         Minus,
         Set,
         Reset,
+        PlusPercent,
+        MinusPercent,
         None
     }
     [SerializeField]
     public enum Skill
     {
         TestPlayer_Default,
-    }
-
-    public enum PerkTesk
-    {
-        None = 0,
-        PlusPercent,
-        MinusPercent,
-        SatAsAmount,
-        PlusAndMinus,
-        SetBool,
-        Timer,
-        If,
     }
 
     public enum StatType
@@ -125,8 +116,13 @@ namespace Supporter
         CurrentHP,
         MAXHP,
         CurrentXP,
-        MAXXP
-
+        MAXXP,
+        LeftAmount,
+        RightAmount,
+        ForwardAmount,
+        BackAmount,
+        FirstSkillCoolDown,
+        SecondSkillCoolDown,
     }
     public enum BulletType
     {
@@ -138,7 +134,13 @@ namespace Supporter
         Enemy,
         Freeze,
     }
-
+    public enum Rarity
+    {
+        Common,
+        Rare,
+        Epic,
+        Legendary
+    }
     [System.Serializable]
     public class PlayerStats
     {
@@ -218,20 +220,6 @@ namespace Supporter
         public string code;
         public bool hasThisCharacter;
         public int level;
-    }
-    [System.Serializable]
-    public class PerkData
-    {
-        public string name;
-        public string code;
-        public bool replicatable = false;
-        public PerkTeskData[] perkTesks;
-    }
-    public class PerkTeskData
-    {
-        public int teskNum;
-        public PerkTesk tesk;
-        public StatType targetData;
     }
     [System.Serializable]
     public class MonststerStats

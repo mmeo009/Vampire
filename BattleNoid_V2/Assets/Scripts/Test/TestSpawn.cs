@@ -6,6 +6,6 @@ public class TestSpawn : MonoBehaviour
 {
     void Start()
     {
-        Managers.Player.CreatePlayer(1, "111111P");
+        Managers.Player.CreatePlayer(2, "111112P");
     }
 }

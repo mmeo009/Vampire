@@ -16,8 +16,10 @@ public class TestAttackRange : MonoBehaviour
 
     void Update()
     {
+        
         //IsAttack = IsEnemyInsideOBB(testPlayer.transform.position, transform.position, transform.rotation, 1, 2);
-        AttackMelee(transform.position + new Vector3(0, 1.3f, 0), testPlayer.transform.position, 1);
+        AttackMelee(transform.forward, new Vector3(testPlayer.transform.position.x, 0, testPlayer.transform.position.z), 1);
+
     }
     private void OnDrawGizmos()
     {
@@ -28,7 +30,8 @@ public class TestAttackRange : MonoBehaviour
     }
     void AttackMelee(Vector3 startPos, Vector3 targetPos, float attackRange)
     {
-        dot = Vector3.Dot(startPos, targetPos);
+        Vector3 toTarget = targetPos - transform.position;
+        dot = Vector3.Dot(startPos, toTarget.normalized);
 
         if (dot <= 1)
         {
@@ -40,7 +43,6 @@ public class TestAttackRange : MonoBehaviour
             {
                 Debug.Log("ถ฿พั!");
             }
-            Debug.Log(Vector3.Distance(startPos, targetPos));
         }
         else
         {

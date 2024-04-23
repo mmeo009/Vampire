@@ -23,12 +23,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - Data
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 3b0ec216dd22ae14f8347b807a348863
-    m_Address: PerkData
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Data
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 69f814c73fd93f14ea81e7ca5675e018
     m_Address: PlayerData
     m_ReadOnly: 0

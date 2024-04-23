@@ -14,8 +14,13 @@ public class ButtonController : MonoBehaviour
     #endregion
     private void Start()
     {
-        if(button == null)
-        button = Util.GetOrAddComponent<Button>(this.gameObject);
+        Invoke("AddButtonTesk", 1f);
+    }
+
+    private void AddButtonTesk()
+    {
+        if (button == null)
+            button = Util.GetOrAddComponent<Button>(this.gameObject);
 
         button.onClick.AddListener(() => Managers.UI.ButtonAction(actonType, mythod));
     }

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -73,31 +74,44 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Q))
         {
-            if(Managers.Player.player.isFirstSkillActive == true)
+            if (Managers.Player.player.isFirstSkillActive == true)
             {
                 Managers.Player.player.currentFirstCoolDown = Managers.Player.player.firstCoolDown;
                 Managers.Player.player.isFirstSkillActive = false;
 
-                HashSet<MonsterController> monsters = new HashSet<MonsterController>(Managers.Monster.monsters);
-
-                foreach (MonsterController mc in monsters)
+                if (Managers.Player.player.code == "111111P")
                 {
-                    if (IsEnemyInsideOBB(mc.transform.position, transform.rotation, 2, 4) == true)
+
+                    HashSet<MonsterController> monsters = new HashSet<MonsterController>(Managers.Monster.monsters);
+
+                    foreach (MonsterController mc in monsters)
                     {
-                        Managers.Player.UseFirstSkill(mc, 300);
-                        Debug.Log(mc.transform);
+                        if (IsEnemyInsideSquare(mc.transform.position, transform.rotation, 2, 4) == true)
+                        {
+                            Managers.Player.UseFirstSkill(mc, 300);
+                            Debug.Log(mc.transform);
+                        }
                     }
                 }
+                else if (Managers.Player.player.code == "111112P")
+                {
+                    return;
+                }
             }
+
         }
 
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (Managers.Player.player.isSecondSkillActive == true)
             {
-                Managers.Player.UseSecondSkill();
                 Managers.Player.player.currentSecondCoolDown = Managers.Player.player.secondCoolDown;
                 Managers.Player.player.isSecondSkillActive = false;
+
+                if (Managers.Player.player.code == "111111P" || Managers.Player.player.code == "111112P")
+                {
+                    Managers.Player.UseSecondSkill();
+                }
             }
         }
     }
@@ -168,7 +182,7 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawLine(points[2], points[3]);
         Gizmos.DrawLine(points[3], points[0]);
     }
-    public bool IsEnemyInsideOBB(Vector3 point, Quaternion rotation, float width, float length)
+    public bool IsEnemyInsideSquare(Vector3 point, Quaternion rotation, float width, float length)
     {
         float halfWidth = width / 2f;
         float halfLength = length / 2f;
@@ -187,4 +201,51 @@ public class PlayerController : MonoBehaviour
             return false;
         }
     }
+    public bool IsEnemyInsideMeleeArea(Vector3 point, Vector3 targetPos, float attackRange)
+    {
+        Vector3 toTarget = targetPos - this.transform.position;
+
+        float dot = Vector3.Dot(point, toTarget.normalized);
+
+        if (dot >= 0)
+        {
+            if (Vector3.Distance(transform.position, targetPos) <= attackRange)
+            {
+                //Debug.Log("공격 가능");
+                return true;
+            }
+            else
+            {
+                //Debug.Log("공격 불가능 거리가 멈" + "거리 : " + Vector3.Distance(transform.position, targetPos));
+                return false;
+            }
+        }
+        else
+        {
+            //Debug.Log("공격 불 가능 앞에 없음");
+            return false;
+        }
+    }
+    public MonsterController FindNearbyMonster(int nearestOrder, float range)
+    {
+        Collider[] colls = Physics.OverlapSphere(transform.position, range);
+        List<MonsterController> monsters = new List<MonsterController>();
+        monsters.OrderBy(monsters => Vector3.Distance(transform.position, monsters.transform.position));
+
+        if (monsters != null)
+        {
+            if (monsters.Count <= nearestOrder)
+            {
+                return monsters.Last();
+            }
+            else
+            {
+                return monsters[nearestOrder];
+            }
+        }
+        else
+            return null;
+
+    }
+
 }

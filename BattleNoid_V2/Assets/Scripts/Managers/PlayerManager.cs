@@ -205,6 +205,28 @@ public class PlayerManager
                 ShotBulletAsDirection(BulletType.Back, i + 1);
             }
         }
+
+        else if(player.code == "111112P")
+        {
+            HashSet<MonsterController> monsters = new HashSet<MonsterController>(Managers.Monster.monsters);
+
+            foreach (MonsterController mc in monsters)
+            {
+                if (player.playerController.IsEnemyInsideMeleeArea(player.playerController.transform.forward, mc.transform.position, player.attackRange) == true)
+                {
+                    if(mc.GetMyRange() == 0)
+                    {
+                        Debug.Log("끄리티컬!");
+                        UseFirstSkill(mc);
+                    }
+                    else
+                    {
+                        mc.ChangeMonsterStats(OperationType.Minus, StatType.CurrentHP, player.attackDamage);
+                    }
+                }
+            }
+
+        }
     }
 
 
@@ -290,6 +312,11 @@ public class PlayerManager
                 enemy.ChangeMonsterStats(OperationType.Minus, StatType.CurrentHP, damage);
             }
         }
+        else if(player.code == "111112P")
+        {
+            damage = player.attackDamage * 2;
+            enemy.ChangeMonsterStats(OperationType.Minus, StatType.CurrentHP, damage);
+        }
     }
     public void UseSecondSkill(MonsterController enemy = null, float damage = 0f)
     {
@@ -304,6 +331,13 @@ public class PlayerManager
             bc.moveSpeed = player.bulletSpeed;
             bc.damage = damage;
             bc.range = player.attackRange;
+        }
+        else if(player.code == "111112P")
+        {
+            var mc = player.playerController.FindNearbyMonster(1, player.attackRange * 2);
+            player.playerController.transform.position = mc.transform.position - mc.transform.forward;
+            damage = player.attackDamage;
+            mc.ChangeMonsterStats(OperationType.Minus, StatType.CurrentHP, damage);
         }
     }
 }

@@ -237,18 +237,18 @@ public class MonsterController : MonoBehaviour
         {
             if (Vector3.Distance(myPos, Player.transform.position + new Vector3(0, 1.3f, 0)) <= monster.attackRange)
             {
-                Debug.Log($"{gameObject.name}의 공격 범위안에 플레이어 있음");
+                // Debug.Log($"{gameObject.name}의 공격 범위안에 플레이어 있음");
                 return 1;
             }
             else
             {
-                Debug.Log($"{gameObject.name}의 시야 범위안에 플레이어 있음");
+                // Debug.Log($"{gameObject.name}의 시야 범위안에 플레이어 있음");
                 return 2;
             }
         }
         else
         {
-            Debug.Log("플레이어 없소");
+            // Debug.Log("플레이어 없소");
             return 0;
         }
     }
