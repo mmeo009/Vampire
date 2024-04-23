@@ -24,7 +24,7 @@ MonoBehaviour:
     onlyFor: null
   - index: 2
     code: 111112C
-    name: "\uACF5\uACA9\uC131 \uAC15\uD654 \uD504\uB85C\uD1A0\uCF5C"
+    name: "\uACF5\uACA9\uC131 \uAC15\uD654"
     perkType: 1
     perkRarity: COMMON
     taskAmount: 1
@@ -40,3 +40,210 @@ MonoBehaviour:
     taskCondition: AAML
     taskReturnAmount: 1+
     onlyFor: 111111P
+  - index: 4
+    code: 111114C
+    name: "\uBCF4\uD638 \uCCB4\uC81C \uC791\uB3D9"
+    perkType: 1
+    perkRarity: COMMON
+    taskAmount: 1
+    taskCondition: HP
+    taskReturnAmount: 10+
+    onlyFor: null
+  - index: 5
+    code: 111115C
+    name: "\uB2E8\uC21C \uAD6C\uC870 \uC218\uC2DD"
+    perkType: 1
+    perkRarity: COMMON
+    taskAmount: 1
+    taskCondition: MSPD
+    taskReturnAmount: 1.2*
+    onlyFor: null
+  - index: 6
+    code: 111116C
+    name: "\uB113\uC740 \uC2DC\uC57C"
+    perkType: 1
+    perkRarity: COMMON
+    taskAmount: 1
+    taskCondition: ARNG
+    taskReturnAmount: 1.2*
+    onlyFor: null
+  - index: 7
+    code: 211111R
+    name: "\uD30C\uCE20 \uC5C5\uADF8\uB808\uC774\uB4DC"
+    perkType: 2
+    perkRarity: RARE
+    taskAmount: 1
+    taskCondition: ALLSTAT
+    taskReturnAmount: 1.3*
+    onlyFor: null
+  - index: 8
+    code: 211112R
+    name: "\uAD11\uD3ED\uD654"
+    perkType: 2
+    perkRarity: RARE
+    taskAmount: 1
+    taskCondition: ADMG
+    taskReturnAmount: 1.5*
+    onlyFor: null
+  - index: 9
+    code: 211113R
+    name: "\uB2E4\uC911 \uACF5\uACA9"
+    perkType: 2
+    perkRarity: RARE
+    taskAmount: 1
+    taskCondition: AAML
+    taskReturnAmount: 2+
+    onlyFor: 111111P
+  - index: 10
+    code: 211114R
+    name: "\uD035 \uCC28\uC9C0"
+    perkType: 2
+    perkRarity: RARE
+    taskAmount: 1
+    taskCondition: ASPD
+    taskReturnAmount: 1.5*
+    onlyFor: null
+  - index: 11
+    code: 211115R
+    name: "\uCD94\uAC00 \uBB34\uC7A5"
+    perkType: 2
+    perkRarity: RARE
+    taskAmount: 1
+    taskCondition: HP
+    taskReturnAmount: 1.3*
+    onlyFor: null
+  - index: 12
+    code: 311111E
+    name: "\uC720\uC5F0\uD55C \uC0AC\uACE0\uD68C\uB85C"
+    perkType: 3
+    perkRarity: EPIC
+    taskAmount: 1
+    taskCondition: ALLSTAT
+    taskReturnAmount: 1.5*
+    onlyFor: null
+  - index: 13
+    code: 311112E
+    name: "\uCD08\uC804\uB3C4"
+    perkType: 3
+    perkRarity: EPIC
+    taskAmount: 1
+    taskCondition: MSPD
+    taskReturnAmount: 1.5*
+    onlyFor: null
+  - index: 14
+    code: 311113E
+    name: "\uC644\uC804\uBB34\uC7A5"
+    perkType: 3
+    perkRarity: EPIC
+    taskAmount: 1
+    taskCondition: ADMG/HP
+    taskReturnAmount: 2* / 1.5*
+    onlyFor: null
+  - index: 15
+    code: 311114E
+    name: "\uC12C\uBA78\uBAA8\uB4DC"
+    perkType: 3
+    perkRarity: EPIC
+    taskAmount: 1
+    taskCondition: ADMG/-HP
+    taskReturnAmount: 2.5*/0.8*
+    onlyFor: null
+  - index: 16
+    code: 311115E
+    name: "\uB9DD\uC6D0\uB80C\uC988"
+    perkType: 3
+    perkRarity: EPIC
+    taskAmount: 1
+    taskCondition: ARNG
+    taskReturnAmount: 1.5* / 1.2*
+    onlyFor: null
+  - index: 17
+    code: 
+    name: 
+    perkType: 0
+    perkRarity: 
+    taskAmount: 0
+    taskCondition: 
+    taskReturnAmount: 
+    onlyFor: 
+  - index: 18
+    code: 
+    name: 
+    perkType: 0
+    perkRarity: 
+    taskAmount: 0
+    taskCondition: 
+    taskReturnAmount: 
+    onlyFor: 
+  - index: 19
+    code: 
+    name: 
+    perkType: 0
+    perkRarity: 
+    taskAmount: 0
+    taskCondition: 
+    taskReturnAmount: 
+    onlyFor: 
+  - index: 20
+    code: 
+    name: 
+    perkType: 0
+    perkRarity: 
+    taskAmount: 0
+    taskCondition: 
+    taskReturnAmount: 
+    onlyFor: 
+  - index: 21
+    code: 
+    name: 
+    perkType: 0
+    perkRarity: 
+    taskAmount: 0
+    taskCondition: 
+    taskReturnAmount: 
+    onlyFor: 
+  - index: 22
+    code: 
+    name: 
+    perkType: 0
+    perkRarity: 
+    taskAmount: 0
+    taskCondition: 
+    taskReturnAmount: 
+    onlyFor: 
+  - index: 23
+    code: 
+    name: 
+    perkType: 0
+    perkRarity: 
+    taskAmount: 0
+    taskCondition: 
+    taskReturnAmount: 
+    onlyFor: 
+  - index: 24
+    code: 
+    name: 
+    perkType: 0
+    perkRarity: 
+    taskAmount: 0
+    taskCondition: 
+    taskReturnAmount: 
+    onlyFor: 
+  - index: 25
+    code: 
+    name: 
+    perkType: 0
+    perkRarity: 
+    taskAmount: 0
+    taskCondition: 
+    taskReturnAmount: 
+    onlyFor: 
+  - index: 26
+    code: 
+    name: 
+    perkType: 0
+    perkRarity: 
+    taskAmount: 0
+    taskCondition: 
+    taskReturnAmount: 
+    onlyFor: 
