@@ -54,8 +54,10 @@ public class UIManager
                 Time.timeScale = 0;
                 if (taskString == "OptionsWindow")
                 {
-                    if(optionWindow == null)
+                    Debug.Log("버튼누름");
+                    if (optionWindow == null)
                     {
+                        
                         optionWindow = LoadWindow(optionWindowPrefab);
                     }
                     optionWindow.SetActive(true);
@@ -73,11 +75,13 @@ public class UIManager
             {       // 시간이 정지 해 있다면
                 if (taskString == "OptionsWindow")
                 {
+                    Debug.Log("버튼누름");
                     optionWindow.SetActive(false);
                     if (cardWindow!= null)
                     {
                         if(cardWindow.activeInHierarchy == false)
                         {
+                            Debug.Log("버튼누름2");
                             Time.timeScale = 1;
                         }
                         Time.timeScale = 1;
