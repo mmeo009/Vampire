@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 39062059d6962004cafc9abcf2cead3d, type: 3}
-  m_Name: TestCard
+  m_Name: Card 11
   m_EditorClassIdentifier: 
-  cardName: "\uCD08\uC6D4\uACF5\uD559 \uD314"
-  character: 0
-  rarity: 0
+  cardName: "\uC6D0\uACA9 \uBB34\uC7A5 \uC9C0\uC6D0(\uC6B0)"
+  character: 2
+  rarity: 2
   cardTesks:
-  - stat: 3
+  - stat: 2
     operationType: 4
-    amount: 1.2
-  - stat: 3
-    operationType: 4
-    amount: 1.2
+    amount: 1.5
+  - stat: 9
+    operationType: 0
+    amount: 1
