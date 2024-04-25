@@ -86,7 +86,7 @@ public class CharacterSelection : MonoBehaviour
                 yield return null;
             }
 
-            // 일정 시간 동안 이미지 유지
+             // 일정 시간 동안 이미지 유지
             yield return new WaitForSeconds(sequence.displayDuration);
         }
     }
