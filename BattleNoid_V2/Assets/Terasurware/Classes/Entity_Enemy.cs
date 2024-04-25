@@ -1,13 +1,14 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Supporter;
 
 public class Entity_Enemy : ScriptableObject
 {	
 	public List<Param> param = new List<Param> ();
 
 	[System.SerializableAttribute]
-	public class Param
+	public class Param : ICodeProvider
 	{
 		
 		public int index;
@@ -24,5 +25,9 @@ public class Entity_Enemy : ScriptableObject
 		public float knockBackTime;
 		public int attackType;
 		public float viewingAngle;
+		public string GetCode()
+		{
+			return code;
+		}
 	}
 }

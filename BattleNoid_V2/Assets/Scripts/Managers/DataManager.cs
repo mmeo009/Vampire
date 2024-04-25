@@ -245,17 +245,16 @@ public class DataManager
     // 코드로 데이터 가져오기
     private T GetDataByCode<T>(Dictionary<int, T> dictionary, string code)
     {
-        // FirstOrDefault(x => x(조건)) 조건과 부합하는 첫번째 값을 찾아오는 메서드 System.Linq;
-        var pair = dictionary.FirstOrDefault(x => ((IEntityWithCode)x.Value).code == code);
-        if (!pair.Equals(default(KeyValuePair<int, T>)))
+        foreach (var item in dictionary)
         {
-            return pair.Value;
+            if (item.Value is ICodeProvider entity && entity.GetCode() == code)
+            {
+                return item.Value;
+            }
         }
-        else
-        {
-            Debug.LogError($"코드 {code}에 해당하는 데이터가 없습니다!");
-            return default(T);
-        }
+
+        Debug.LogError($"코드 {code}에 해당하는 데이터가 없습니다!");
+        return default(T);
     }
 
     // 게임 데이터 저장

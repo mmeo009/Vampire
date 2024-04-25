@@ -3,11 +3,9 @@ using UnityEngine;
 
 namespace Supporter
 {
-    // IEntityWithCode는 코드(code) 속성을 가져야 하는 인터페이스. 다양한 클래스에서 공통적으로 가지고 있는 string 형식의 code를 사용하기 위해 사용
-    public interface IEntityWithCode
+    public interface ICodeProvider
     {
-        // 코드를 나타내는 읽기 전용 속성
-        string code { get; }
+        string GetCode();
     }
     public class Util
     {

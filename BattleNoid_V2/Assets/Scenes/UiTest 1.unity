@@ -497,6 +497,7 @@ MonoBehaviour:
   character2ImageSequence: {fileID: 341358095}
   character1Button: {fileID: 318830204}
   character2Button: {fileID: 610574435}
+  startButton: {fileID: 1412298621}
 --- !u!1 &341358093
 GameObject:
   m_ObjectHideFlags: 0
@@ -903,6 +904,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actonType: 2
   mythod: OptionsWindow
+  playerCode: 
   button: {fileID: 480949214}
 --- !u!1 &610574433
 GameObject:
@@ -1045,6 +1047,7 @@ MonoBehaviour:
   character2ImageSequence: {fileID: 341358095}
   character1Button: {fileID: 318830204}
   character2Button: {fileID: 610574435}
+  startButton: {fileID: 1412298621}
 --- !u!222 &610574438
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1200,6 +1203,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actonType: 2
   mythod: OptionsWindow
+  playerCode: 
   button: {fileID: 613034815}
 --- !u!1 &616284982
 GameObject:
@@ -2439,6 +2443,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actonType: 0
   mythod: GameScene_001
+  playerCode: 111111P
   button: {fileID: 1412298618}
 --- !u!1 &1416276287
 GameObject:

@@ -10,6 +10,7 @@ public class ButtonController : MonoBehaviour
     #region PublicVariables
     public ActionType actonType;
     public string mythod;
+    public string playerCode;
     public Button button;
     #endregion
     private void Start()
@@ -17,12 +18,12 @@ public class ButtonController : MonoBehaviour
         Invoke("AddButtonTesk", 1f);
     }
 
-    private void AddButtonTesk()
+    public void AddButtonTesk()
     {
         if (button == null)
             button = Util.GetOrAddComponent<Button>(this.gameObject);
 
-        button.onClick.AddListener(() => Managers.UI.ButtonAction(actonType, mythod));
+        button.onClick.AddListener(() => Managers.UI.ButtonAction(actonType, mythod, playerCode));
     }
 
 }

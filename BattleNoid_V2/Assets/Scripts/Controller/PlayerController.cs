@@ -79,6 +79,9 @@ public class PlayerController : MonoBehaviour
                 Managers.Player.player.currentFirstCoolDown = Managers.Player.player.firstCoolDown;
                 Managers.Player.player.isFirstSkillActive = false;
 
+                var temp = Instantiate<GameObject>(Managers.Player.SkillEffect.Find(skill => skill.name.Contains('1')), transform.position, transform.rotation);
+                Destroy(temp, 0.3f);
+
                 if (Managers.Player.player.code == "111111P")
                 {
 
@@ -97,6 +100,7 @@ public class PlayerController : MonoBehaviour
                 {
                     return;
                 }
+
             }
 
         }
@@ -107,6 +111,9 @@ public class PlayerController : MonoBehaviour
             {
                 Managers.Player.player.currentSecondCoolDown = Managers.Player.player.secondCoolDown;
                 Managers.Player.player.isSecondSkillActive = false;
+
+                var temp = Instantiate<GameObject>(Managers.Player.SkillEffect.Find(skill => skill.name.Contains('2')), transform.position, transform.rotation);
+                Destroy(temp, 0.3f);
 
                 if (Managers.Player.player.code == "111111P" || Managers.Player.player.code == "111112P")
                 {

@@ -7,8 +7,9 @@ using Supporter;
 public class UIManager
 {
     // UI 윈도우
-    public GameObject optionWindowPrefab;
-    public GameObject cardWindowPrefab;
+    public GameObject OptionWindowPrefab;
+    public GameObject CardWindowPrefab;
+    public GameObject CardPrefab;
 
     public GameObject optionWindow;
     public GameObject cardWindow;
@@ -19,7 +20,7 @@ public class UIManager
     }
 
     // 대체적으로 모든 씬 이동 로직 및 여기에 적어놓을 예정임
-    public void ButtonAction(ActionType type, string taskString = null)
+    public void ButtonAction(ActionType type, string taskString = null, string playerCode = null)
     {
         if (type == ActionType.SceneMove)
         {
@@ -28,7 +29,14 @@ public class UIManager
                 // 씬 로딩 로직은 여기에 추가
                 SceneManager.LoadScene("LoadingScene");
                 optionWindow = null;
-                CoroutineManager.LoadSceneWithLoadingBar(taskString);
+                if(playerCode != null)
+                {
+                    CoroutineManager.LoadSceneWithLoadingBar(taskString);
+                }
+                else
+                {
+                    CoroutineManager.LoadSceneWithLoadingBar(taskString);
+                }
             }
             else
             {
@@ -58,7 +66,7 @@ public class UIManager
                     if (optionWindow == null)
                     {
                         
-                        optionWindow = LoadWindow(optionWindowPrefab);
+                        optionWindow = LoadWindow(OptionWindowPrefab);
                     }
                     optionWindow.SetActive(true);
                 }
@@ -66,7 +74,7 @@ public class UIManager
                 {
                     if (cardWindow == null)
                     {
-                        cardWindow = LoadWindow(cardWindowPrefab);
+                        cardWindow = LoadWindow(CardWindowPrefab);
                     }
                     cardWindow.SetActive(true);
                 }

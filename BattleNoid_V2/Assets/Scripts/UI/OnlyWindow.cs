@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class OnlyWindow : MonoBehaviour
 {
-    public async void Start()
+    public void Start()
     {
 
         Managers.Data.LoadAllAsync<Object>("Prefabs", (key, count, totalCount) =>
         {
 
-            Managers.UI.optionWindowPrefab = Managers.Data.Load<GameObject>("OptionsWindow");
+            Managers.UI.OptionWindowPrefab = Managers.Data.Load<GameObject>("OptionsWindow");
         });
 
     }

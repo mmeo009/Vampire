@@ -74,7 +74,7 @@ public class MonsterController : MonoBehaviour
 
     private void Move()
     {
-        if(monster != null)
+        if(monster != null && Player != null)
         {
             float moveSpeed = monster.moveSpeed;
 

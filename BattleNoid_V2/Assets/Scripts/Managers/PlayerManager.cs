@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Supporter;
 using Unity.VisualScripting;
@@ -9,6 +10,7 @@ using System.Diagnostics.Tracing;
 public class PlayerManager
 {
     public PlayerStats player;
+    public List<GameObject> SkillEffect = new List<GameObject>();
 
     public void CreatePlayer(int index, string code)
     {
@@ -24,6 +26,16 @@ public class PlayerManager
         SetStats(OperationType.Reset, StatType.None, 0, playerData);
         CameraController cc = Util.GetOrAddComponent<CameraController>(player.playerController.gameObject);
         cc.FindCamera();
+        Managers.Data.LoadAllAsync<Object>("Effect", (key, count, totalCount) =>
+        {
+            Debug.Log("key : " + key + " Count : " + count + " totalCount : " + totalCount);
+            if(key.Contains(playerData.name))
+            {
+                var skill = Managers.Data.Load<GameObject>(key);
+                SkillEffect.Add(skill);
+            }
+        });
+
     }
 
     public void SetStats(OperationType operation, StatType statType, float amount, Entity_Player.Param resetData = null)
@@ -328,7 +340,7 @@ public class PlayerManager
             bc.transform.position = player.playerController.transform.position + new Vector3(0, 1.3f, 0);
             bc.bulletType = BulletType.Freeze;
             bc.direction = player.playerController.transform.forward;
-            bc.moveSpeed = player.bulletSpeed;
+            bc.moveSpeed = 30f;
             bc.damage = damage;
             bc.range = player.attackRange;
         }
