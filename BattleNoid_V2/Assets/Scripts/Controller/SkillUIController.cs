@@ -9,7 +9,7 @@ public class SkillUIController : MonoBehaviour
 {
     [SerializeField] private TMP_Text coolTime;
     [SerializeField] private Image image;
-    [Header("얘만 1,2로 수정")][Range(0,1)][SerializeField] private int skillNum;
+    [Header("얘만 1,2로 수정")][Range(1,2)][SerializeField] private int skillNum;
     [SerializeField] private string skillName;
 
     private void OnEnable()
