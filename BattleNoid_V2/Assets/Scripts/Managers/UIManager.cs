@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Supporter;
+using System.Linq;
 
 [System.Serializable]
 public class UIManager
@@ -176,11 +177,23 @@ public class UIManager
         }
     }
 
-    public void InitSkillUI(Image image)
+    public void InitSkillUI(Image image, string skillName)
     {
+        var _sprite = Managers.Data.Load<Sprite>(skillName);
+
+        if (_sprite != null)
+        {
+            image.sprite = _sprite;
+        }
+        else
+        { 
+            Debug.LogError($"{skillName}라는 스킬의 이미지를 찾을 수 없어");
+        }
+
         image.type = Image.Type.Filled;
         image.fillMethod = Image.FillMethod.Radial360;
         image.fillOrigin = (int)Image.Origin360.Top;
         image.fillClockwise = false;
     }
+
 }

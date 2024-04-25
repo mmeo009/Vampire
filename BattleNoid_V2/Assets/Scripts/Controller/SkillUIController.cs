@@ -10,12 +10,13 @@ public class SkillUIController : MonoBehaviour
     [SerializeField] private TMP_Text coolTime;
     [SerializeField] private Image image;
     [Header("¾ê¸¸ 1,2·Î ¼öÁ¤")][Range(0,1)][SerializeField] private int skillNum;
+    [SerializeField] private string skillName;
 
     private void OnEnable()
     {
         Util.GetOrAddComponent<Image>(this.gameObject);
         coolTime = GetComponent<TMP_Text>();
-        Managers.UI.InitSkillUI(image);
+        Managers.UI.InitSkillUI(image, skillName);
     }
     private void Update()
     {
