@@ -17,6 +17,7 @@ public class CoolTime : MonoBehaviour
     void Start()
     {
         Init_UI();
+        isEnded = Managers.Player.player.isFirstSkillActive;
     }
 
     void Update()
