@@ -207,7 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 889c8e23252a13140b573338945439ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actonType: 0
+  actonType: 2
   mythod: OptionsWindow
   playerCode: 
   button: {fileID: 689359620805126946}
