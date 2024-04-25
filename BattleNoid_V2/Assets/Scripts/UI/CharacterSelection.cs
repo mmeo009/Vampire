@@ -8,7 +8,7 @@ public class CharacterSelection : MonoBehaviour
     public ImageSequence character2ImageSequence; // 두 번째 캐릭터의 이미지 시퀀스
     public Button character1Button; // 첫 번째 캐릭터 버튼
     public Button character2Button; // 두 번째 캐릭터 버튼
-    public ButtonController startButton;
+   // private ButtonController startButton;
 
     private ImageSequence currentCharacterSequence; // 현재 선택된 캐릭터의 이미지 시퀀스
 
@@ -39,8 +39,8 @@ public class CharacterSelection : MonoBehaviour
         ShowCharacterImages(character1ImageSequence);
         character2Button.interactable = true; // 두 번째 캐릭터 버튼 활성화
         character1Button.interactable = false; // 첫 번째 캐릭터 버튼 비활성화
-        startButton.playerCode = "111111P";
-        startButton.AddButtonTesk();
+        //startButton.playerCode = "111111P";
+        //startButton.AddButtonTesk();
     }
 
     // 두 번째 캐릭터 버튼을 클릭할 때 호출되는 함수
@@ -49,8 +49,8 @@ public class CharacterSelection : MonoBehaviour
         ShowCharacterImages(character2ImageSequence);
         character1Button.interactable = true; // 첫 번째 캐릭터 버튼 활성화
         character2Button.interactable = false; // 두 번째 캐릭터 버튼 비활성화
-        startButton.playerCode = "111112P";
-        startButton.AddButtonTesk();
+        //startButton.playerCode = "111112P";
+        //startButton.AddButtonTesk();
     }
 
 
@@ -86,7 +86,7 @@ public class CharacterSelection : MonoBehaviour
                 yield return null;
             }
 
-             // 일정 시간 동안 이미지 유지
+            // 일정 시간 동안 이미지 유지
             yield return new WaitForSeconds(sequence.displayDuration);
         }
     }
