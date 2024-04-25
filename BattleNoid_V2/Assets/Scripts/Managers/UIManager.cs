@@ -174,7 +174,13 @@ public class UIManager
         {
             return null;
         }
+    }
 
-
+    public void InitSkillUI(Image image)
+    {
+        image.type = Image.Type.Filled;
+        image.fillMethod = Image.FillMethod.Radial360;
+        image.fillOrigin = (int)Image.Origin360.Top;
+        image.fillClockwise = false;
     }
 }

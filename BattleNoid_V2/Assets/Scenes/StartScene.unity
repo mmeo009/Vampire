@@ -314,6 +314,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actonType: 1
   mythod: 
+  playerCode: 
   button: {fileID: 0}
 --- !u!1 &959008945
 GameObject:
@@ -605,6 +606,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actonType: 0
   mythod: UiTest 1
+  playerCode: 
   button: {fileID: 0}
 --- !u!1 &1244045889
 GameObject:
@@ -961,6 +963,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actonType: 2
   mythod: OptionsWindow
+  playerCode: 
   button: {fileID: 1500781009}
 --- !u!1 &1695095490
 GameObject:

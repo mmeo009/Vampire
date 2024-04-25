@@ -11,7 +11,7 @@ public class CardController : MonoBehaviour
     [SerializeField] private TMP_Text perkStats;  // 카드의 특성을 표시하는 TMP_Text UI 요소
     [SerializeField] private Button button;  // 카드를 사용하기 위한 버튼 UI 요소
 
-    void Awake()
+    void OnEnable()
     {
         myData = Managers.Card.GetCard();  // 카드 데이터를 가져옴
 
