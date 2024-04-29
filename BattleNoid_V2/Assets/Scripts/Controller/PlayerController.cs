@@ -10,8 +10,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float attackTimer;
     [SerializeField] private Vector3 moveInput = Vector3.zero;
-    [SerializeField] private Rigidbody playerRigidbody;
     [SerializeField] private Quaternion previousRotation = Quaternion.identity;
+    [SerializeField] private Animator playerAnimator;
 
     public float lineLength = 1f;
     public float lineWidth = 0.1f;
@@ -49,9 +49,6 @@ public class PlayerController : MonoBehaviour
 
     public void PlayerMove()
     {
-        if(playerRigidbody == null)
-            playerRigidbody = GetComponent<Rigidbody>();
-
         moveInput.x = Input.GetAxisRaw("Horizontal");
         moveInput.z = Input.GetAxisRaw("Vertical");
 
@@ -70,9 +67,20 @@ public class PlayerController : MonoBehaviour
             transform.rotation = previousRotation;
         }
 
-        playerRigidbody.velocity = moveInput * Managers.Player.player.moveSpeed;
+        var input = moveInput * Managers.Player.player.moveSpeed;
 
-        if(Input.GetKeyDown(KeyCode.Q))
+        if(input != Vector3.zero)
+        {
+            playerAnimator.SetBool("Run", true);
+        }
+        else
+        {
+            playerAnimator.SetBool("Run", false);
+        }
+
+        transform.position += input * Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             if (Managers.Player.player.isFirstSkillActive == true)
             {
@@ -168,7 +176,16 @@ public class PlayerController : MonoBehaviour
 
     private void Attack()
     {
-        Managers.Player.Attack();
+
+        if(Managers.Player.player.code == "111112P")
+        {
+            playerAnimator.SetTrigger("Attack");
+            Managers.Player.Attack();
+        }
+        else
+        {
+            Managers.Player.Attack();
+        }    
     }
     public void DrawOBB(Quaternion rotation, float width, float length)
     {

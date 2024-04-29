@@ -51,8 +51,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackTimer: 0
   moveInput: {x: 0, y: 0, z: 0}
-  playerRigidbody: {fileID: 0}
   previousRotation: {x: 0, y: 0, z: 0, w: 1}
+  playerAnimator: {fileID: 5875638601494643911}
   lineLength: 1
   lineWidth: 0.1
   dotAmount: 5
@@ -308,6 +308,11 @@ PrefabInstance:
       propertyPath: m_AABB.m_Extent.z
       value: 0.3526482
       objectReference: {fileID: 0}
+    - target: {fileID: 4870552773557632513, guid: 19ad99bc962e1a946ae1de3161bd1215,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 9ee1865d11977e242a32af8f457b3872, type: 2}
     - target: {fileID: 5159078012444724336, guid: 19ad99bc962e1a946ae1de3161bd1215,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -454,6 +459,12 @@ PrefabInstance:
     m_AddedComponents: []
   m_SourcePrefab: {fileID: -3956505258223990651, guid: 19ad99bc962e1a946ae1de3161bd1215,
     type: 3}
+--- !u!95 &5875638601494643911 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4870552773557632513, guid: 19ad99bc962e1a946ae1de3161bd1215,
+    type: 3}
+  m_PrefabInstance: {fileID: 1305441206038919878}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6162439151201334966 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5159078012444724336, guid: 19ad99bc962e1a946ae1de3161bd1215,

@@ -51,8 +51,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackTimer: 0
   moveInput: {x: 0, y: 0, z: 0}
-  playerRigidbody: {fileID: 0}
   previousRotation: {x: 0, y: 0, z: 0, w: 1}
+  playerAnimator: {fileID: 1056833004589598306}
   lineLength: 1
   lineWidth: 0.1
   dotAmount: 5
@@ -571,6 +571,12 @@ PrefabInstance:
 --- !u!4 &767221534879200275 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5159078012444724336, guid: 5ef8707bc33aa39499b5bc916473ce65,
+    type: 3}
+  m_PrefabInstance: {fileID: 5565620062679398499}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1056833004589598306 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4870552773557632513, guid: 5ef8707bc33aa39499b5bc916473ce65,
     type: 3}
   m_PrefabInstance: {fileID: 5565620062679398499}
   m_PrefabAsset: {fileID: 0}
