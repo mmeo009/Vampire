@@ -2,11 +2,100 @@ fileFormatVersion: 2
 guid: 5ef8707bc33aa39499b5bc916473ce65
 ScriptedImporter:
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: aa
+    second: {fileID: -4981769727764245264, guid: 5ef8707bc33aa39499b5bc916473ce65,
+      type: 3}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: angry
+    second: {fileID: -680168811974642460, guid: 5ef8707bc33aa39499b5bc916473ce65,
+      type: 3}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: blink
+    second: {fileID: -1282421089175907701, guid: 5ef8707bc33aa39499b5bc916473ce65,
+      type: 3}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: blinkLeft
+    second: {fileID: 117516076257945462, guid: 5ef8707bc33aa39499b5bc916473ce65, type: 3}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: blinkRight
+    second: {fileID: -3630277102334738080, guid: 5ef8707bc33aa39499b5bc916473ce65,
+      type: 3}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: ee
+    second: {fileID: -2564424997208761075, guid: 5ef8707bc33aa39499b5bc916473ce65,
+      type: 3}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: happy
+    second: {fileID: 1331549646584460956, guid: 5ef8707bc33aa39499b5bc916473ce65,
+      type: 3}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: ih
+    second: {fileID: 7592938696408043630, guid: 5ef8707bc33aa39499b5bc916473ce65,
+      type: 3}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: neutral
+    second: {fileID: -7143853869815321999, guid: 5ef8707bc33aa39499b5bc916473ce65,
+      type: 3}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: oh
+    second: {fileID: 7301602523032170006, guid: 5ef8707bc33aa39499b5bc916473ce65,
+      type: 3}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: ou
+    second: {fileID: -3069254169857426044, guid: 5ef8707bc33aa39499b5bc916473ce65,
+      type: 3}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: relaxed
+    second: {fileID: -673667479763519131, guid: 5ef8707bc33aa39499b5bc916473ce65,
+      type: 3}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: sad
+    second: {fileID: -4140618486940527717, guid: 5ef8707bc33aa39499b5bc916473ce65,
+      type: 3}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: surprised
+    second: {fileID: 8367322364097770655, guid: 5ef8707bc33aa39499b5bc916473ce65,
+      type: 3}
+  - first:
+      type: UniVRM10:VRM10Object
+      assembly: VRM10
+      name: _vrm1_
+    second: {fileID: 5929401533440927806, guid: 5ef8707bc33aa39499b5bc916473ce65,
+      type: 3}
   serializedVersion: 2
   userData: 
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: f66ead3390398f443aa127b741826ad9, type: 3}
   MigrateToVrm1: 1
-  RenderPipeline: 0
+  RenderPipeline: 1
