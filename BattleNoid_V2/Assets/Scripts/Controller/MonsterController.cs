@@ -2,13 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Supporter;
+using DG.Tweening;
 
-[RequireComponent(typeof(Rigidbody))]
 public class MonsterController : MonoBehaviour
 {
 
     [SerializeField] private MonsterStats monster;
-    [SerializeField] private Rigidbody monsterRigidbody;
     [SerializeField] private GameObject attackPivot;
     [SerializeField] private float knockBackTimer;
     [SerializeField] private float attackTimer;
@@ -97,12 +96,11 @@ public class MonsterController : MonoBehaviour
             {
                 if (Vector3.Distance(Player.transform.position, transform.position) >= monster.attackRange)
                 {
-                    monsterRigidbody.velocity = (Player.transform.position - transform.position).normalized * moveSpeed;
+                    transform.DOMove(Player.transform.position, moveSpeed);
                     isAttack = false;
                 }
                 else
                 {
-                    monsterRigidbody.velocity = Vector3.zero;
                     isAttack = true;
                 }
 
@@ -110,11 +108,6 @@ public class MonsterController : MonoBehaviour
                 Quaternion targetRotation = Quaternion.LookRotation(targetDiraction);
                 transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, monster.rotationSpeed * Time.deltaTime);
             }
-            else
-            {
-                monsterRigidbody.velocity = Vector3.zero;
-            }
-
 
         }
     }
@@ -168,7 +161,6 @@ public class MonsterController : MonoBehaviour
     public void GetMonsterStats(MonsterStats _monster)
     {
         Player = Managers.Player.player.playerController;
-        monsterRigidbody = GetComponent<Rigidbody>();
 
         if (monster == null)
         {
