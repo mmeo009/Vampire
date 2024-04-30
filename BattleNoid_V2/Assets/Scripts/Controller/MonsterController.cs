@@ -91,12 +91,13 @@ public class MonsterController : MonoBehaviour
                     moveSpeed = Mathf.Abs(moveSpeed * 0.5f);
                 }
             }
+            Vector3 direction = (Player.transform.position - transform.position).normalized;
 
             if (isFreeze == false)
             {
                 if (Vector3.Distance(Player.transform.position, transform.position) >= monster.attackRange)
                 {
-                    transform.DOMove(Player.transform.position, moveSpeed);
+                    transform.position += direction * moveSpeed * Time.deltaTime;
                     isAttack = false;
                 }
                 else

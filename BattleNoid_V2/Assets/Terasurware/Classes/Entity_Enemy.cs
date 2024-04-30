@@ -25,6 +25,9 @@ public class Entity_Enemy : ScriptableObject
 		public float knockBackTime;
 		public int attackType;
 		public float viewingAngle;
+		public int additonalHp;
+		public int additionalDamage;
+		public int additionalMoveSpeed;
 		public string GetCode()
 		{
 			return code;
