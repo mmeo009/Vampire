@@ -8,9 +8,13 @@ using static UnityEngine.Rendering.HDROutputUtils;
 [System.Serializable]
 public class MonsterManager
 {
+    [HideInInspector] public int spawnedMonsterAmount;
+
     public HashSet<MonsterController> monsters = new HashSet<MonsterController>();
 
     public Dictionary<string, WaveData> waveDatas;
+
+
 
     public void GetWaveDatas()
     {
@@ -24,7 +28,7 @@ public class MonsterManager
         });
     }
 
-    public void CreateMonster(Transform pos, int monsterIndex, string monsterCode = null, float hp = 0, float damage = 0, float speed = 0)
+    public void CreateMonster(Transform pos, int monsterIndex, string monsterCode = null, int playerLevel = 0)
     {
         Entity_Enemy.Param monster = Managers.Data.GetDataFromDictionary(Managers.Data.enemyDictionary, monsterIndex, monsterCode);
 
@@ -39,9 +43,9 @@ public class MonsterManager
             monsterObject.transform.position = pos.position;
             var mc = monsterObject.GetComponent<MonsterController>();
             LoadMonsterData(monster, mc);
-            mc.ChangeMonsterStats(OperationType.Plus,StatType.MAXHP, hp);
-            mc.ChangeMonsterStats(OperationType.Plus, StatType.AttackDamage, damage);
-            mc.ChangeMonsterStats(OperationType.Plus, StatType.MoveSpeed, speed);
+            mc.ChangeMonsterStats(OperationType.Plus,StatType.MAXHP, playerLevel * monster.additonalHp);
+            mc.ChangeMonsterStats(OperationType.Plus, StatType.AttackDamage, playerLevel * monster.additionalDamage);
+            mc.ChangeMonsterStats(OperationType.Plus, StatType.MoveSpeed, playerLevel * monster.additionalMoveSpeed);
             monsters.Add(mc);
         }
     }

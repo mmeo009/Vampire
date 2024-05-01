@@ -143,6 +143,7 @@ namespace Supporter
     public class PlayerStats
     {
         public string code;
+        public int level;
 
         public float hp;
         public float xp;

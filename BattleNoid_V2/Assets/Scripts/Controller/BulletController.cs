@@ -13,7 +13,7 @@ public class BulletController : MonoBehaviour
     public float range;
     private void OnEnable()
     {
-        timer = range;
+        timer = (range / moveSpeed);
     }
     private void FixedUpdate()
     {

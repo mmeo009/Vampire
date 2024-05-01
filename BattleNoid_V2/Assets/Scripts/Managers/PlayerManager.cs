@@ -165,6 +165,7 @@ public class PlayerManager
         else if (operation == OperationType.Reset && resetData != null)
         {
             player.code = resetData.code;
+            player.level = 1;
             player.hp = resetData.baseHp;
             player.attackDamage = resetData.baseDamage;
             player.attackSpeed = resetData.baseAttackSpeed;

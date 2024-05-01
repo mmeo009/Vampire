@@ -77,13 +77,26 @@ public class MonsterController : MonoBehaviour
         {
             float moveSpeed = monster.moveSpeed;
 
+            Collider[] nearbyMonsters = Physics.OverlapSphere(transform.position, 2);
+            List<MonsterController> nearbyMonsterController = new List<MonsterController>();
+
+            foreach(Collider collider in nearbyMonsters)
+            {
+                nearbyMonsterController.Add(collider.transform.GetComponent<MonsterController>());
+            }
+
+            if (nearbyMonsters.Length > 0)
+            {
+                // TODO : 몬스터 끼리 멀어지기
+            }
+
             if (knockBackTimer > 0)
             {
                 knockBackTimer -= Time.deltaTime;
 
                 if (moveSpeed > 0)
                 {
-                    moveSpeed = -moveSpeed * monster.knockBackAmount;
+                    moveSpeed = - moveSpeed * monster.knockBackAmount;
                 }
 
                 if (knockBackTimer < 0)
@@ -91,12 +104,13 @@ public class MonsterController : MonoBehaviour
                     moveSpeed = Mathf.Abs(moveSpeed * 0.5f);
                 }
             }
+            Vector3 direction = (Player.transform.position - transform.position).normalized;
 
             if (isFreeze == false)
             {
                 if (Vector3.Distance(Player.transform.position, transform.position) >= monster.attackRange)
                 {
-                    transform.DOMove(Player.transform.position, moveSpeed);
+                    transform.position += direction * moveSpeed * Time.deltaTime;
                     isAttack = false;
                 }
                 else
@@ -216,6 +230,7 @@ public class MonsterController : MonoBehaviour
         Managers.Monster.monsters.Remove(this as MonsterController);
         monster = null;
         Managers.Pool.Destroy(this.gameObject);
+        Managers.Monster.spawnedMonsterAmount--;
     }
     public int GetMyRange()
     {
