@@ -15,103 +15,86 @@ MonoBehaviour:
   param:
   - index: 1
     code: 111111A
-    name: TestEnemy
-    stage: 1
-    baseHp: 20
-    baseDamage: 10
-    baseMoveSpeed: 1.5
-    baserotationSpeed: 1
-    attackSpeed: 1
-    baseRange: 1
-    knockBackAmount: 1
-    knockBackTime: 0.8
-    attackType: 1
-    viewingAngle: 90
-    additonalHp: 0
-    additionalDamage: 0
-    additionalMoveSpeed: 0
-  - index: 2
-    code: 111112A
     name: "\uB4DC\uB860"
     stage: 1
     baseHp: 20
     baseDamage: 10
     baseMoveSpeed: 1.5
     baserotationSpeed: 1
-    attackSpeed: 1
+    attackSpeed: 2
     baseRange: 1
-    knockBackAmount: 1
+    knockBackAmount: 3
     knockBackTime: 0.8
     attackType: 1
     viewingAngle: 180
-    additonalHp: 0
-    additionalDamage: 0
-    additionalMoveSpeed: 0
-  - index: 3
-    code: 111113A
+    additonalHp: 5
+    additionalDamage: 2
+    additionalMoveSpeed: 1
+  - index: 2
+    code: 111112A
     name: "\uC6D0\uAC70\uB9AC \uB85C\uBD07"
-    stage: 6
+    stage: 1
     baseHp: 15
     baseDamage: 20
     baseMoveSpeed: 1.5
     baserotationSpeed: 1
     attackSpeed: 3
     baseRange: 5
-    knockBackAmount: 0
+    knockBackAmount: 2
     knockBackTime: 0
     attackType: 2
     viewingAngle: 70
-    additonalHp: 0
-    additionalDamage: 0
-    additionalMoveSpeed: 0
-  - index: 4
-    code: 111114A
+    additonalHp: 5
+    additionalDamage: 5
+    additionalMoveSpeed: 1
+  - index: 3
+    code: 111113A
     name: "\uC790\uD3ED\uD615 \uB4DC\uB860"
-    stage: 11
+    stage: 1
     baseHp: 12.5
     baseDamage: 15
     baseMoveSpeed: 3
     baserotationSpeed: 1
     attackSpeed: 0
     baseRange: 0
-    knockBackAmount: 1.2
+    knockBackAmount: 5
     knockBackTime: 1.2
     attackType: 3
     viewingAngle: 30
-    additonalHp: 0
-    additionalDamage: 0
-    additionalMoveSpeed: 0
+    additonalHp: 5
+    additionalDamage: 7
+    additionalMoveSpeed: 2
+  - index: 4
+    code: 111114A
+    name: "\uBC29\uC5B4\uD615 \uB85C\uBD07"
+    stage: 1
+    baseHp: 40
+    baseDamage: 3
+    baseMoveSpeed: 2
+    baserotationSpeed: 1
+    attackSpeed: 5
+    baseRange: 1
+    knockBackAmount: 2
+    knockBackTime: 1
+    attackType: 1
+    viewingAngle: 30
+    additonalHp: 10
+    additionalDamage: 2
+    additionalMoveSpeed: 1
   - index: 5
-    code: 111115B
-    name: Boss1
-    stage: 5
-    baseHp: 400
-    baseDamage: 300
-    baseMoveSpeed: 0
-    baserotationSpeed: 0
-    attackSpeed: 15
-    baseRange: 0
-    knockBackAmount: 1
+    code: 111115A
+    name: "\uD68C\uC804\uD615 \uB85C\uBD07"
+    stage: 1
+    baseHp: 15
+    baseDamage: 15
+    baseMoveSpeed: 2
+    baserotationSpeed: 1
+    attackSpeed: 8
+    baseRange: 5
+    knockBackAmount: 2
     knockBackTime: 1
     attackType: 4
     viewingAngle: 30
-    additonalHp: 0
-    additionalDamage: 0
-    additionalMoveSpeed: 0
-  - index: 6
-    code: 111116B
-    name: Boss2
-    stage: 10
-    baseHp: 600
-    baseDamage: 400
-    baseMoveSpeed: 0
-    baserotationSpeed: 0
-    attackSpeed: 15
-    baseRange: 0
-    knockBackAmount: 1
-    knockBackTime: 1
-    attackType: 4
-    viewingAngle: 30
-    additonalHp: 0
-    additionalDamage: 0
-    additionalMoveSpeed: 0
+    additonalHp: 4
+    additionalDamage: 2
+    additionalMoveSpeed: 1

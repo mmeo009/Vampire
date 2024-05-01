@@ -17,22 +17,22 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: c5c634b58be0f0941b2240a459566eb9
   m_SerializeEntries:
-  - m_GUID: 0bb1aacb454f68245867192f845047d2
-    m_Address: 111111A
+  - m_GUID: 3482e6239748f854086ab8c9273a7a72
+    m_Address: 111113A
     m_ReadOnly: 0
     m_SerializedLabels:
     - Monster
     - Prefabs
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b9cc8c9f055657545840a91203a19775
-    m_Address: 111112A
+    m_Address: 111111A
     m_ReadOnly: 0
     m_SerializedLabels:
     - Monster
     - Prefabs
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ce98d6ee15c2e504582ce126995c5abf
-    m_Address: 111113A
+    m_Address: 111112A
     m_ReadOnly: 0
     m_SerializedLabels:
     - Monster
