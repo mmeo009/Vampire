@@ -12,23 +12,15 @@ public class WaveController : MonoBehaviour
     [SerializeField] private Transform[] spawnPoints;
     #endregion
     #region PublicVariables
-    [HideInInspector] public Transform[] SpawnPoints
-    {
-        get
-        {
-            var _spawnPoints = GameObject.FindGameObjectsWithTag("SpawnPoint");
-            spawnPoints = new Transform[_spawnPoints.Length];
-
-            for (int i = 0; i < _spawnPoints.Length; i++)
-            {
-                spawnPoints[i] = _spawnPoints[i].transform;
-            }
-            return spawnPoints;
-        }
-    }
-
 
     #endregion
+    private void OnEnable()
+    {
+        if(spawnPoints == null) 
+        {
+            spawnPoints = FindSpawnPoints();
+        }
+    }
     private void Update()
     {
         if(timer > 0)
@@ -42,6 +34,18 @@ public class WaveController : MonoBehaviour
         }
     }
     #region PrivateMethod
+    private Transform[] FindSpawnPoints()
+    {
+        var _points = GameObject.FindGameObjectsWithTag("SpawnPoint");
+        var tempSpawnPoints = new Transform[_points.Length];
+
+        for (int i = 0; i < _points.Length; i++)
+        {
+            tempSpawnPoints[i] = _points[i].transform;
+        }
+        return tempSpawnPoints;
+    }
+
     private void SpawnMonster()
     {
         int spawnPoint = Random.Range(0,spawnPoints.Length);

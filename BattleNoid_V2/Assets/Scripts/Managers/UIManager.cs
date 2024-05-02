@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Supporter;
 using System.Linq;
+using TMPro;
 
 [System.Serializable]
 public class UIManager
@@ -19,8 +20,6 @@ public class UIManager
     {
         Debug.Log(type.ToString());
     }
-
-    // 대체적으로 모든 씬 이동 로직 및 여기에 적어놓을 예정임
     public void ButtonAction(ActionType type, string taskString = null, string playerCode = null)
     {
         if (type == ActionType.SceneMove)
@@ -196,4 +195,16 @@ public class UIManager
         image.fillClockwise = false;
     }
 
+    public class ButtonUI
+    {
+        public TMP_Text text;
+        public Button button;
+        public Image image;
+        public ButtonUI(GameObject buttonObject) 
+        {
+            text = buttonObject.GetComponent<TMP_Text>();
+            button = buttonObject.GetComponent<Button>();
+            image = buttonObject.GetComponent<Image>();
+        }
+    }
 }
