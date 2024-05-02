@@ -3,11 +3,9 @@ using UnityEngine;
 
 namespace Supporter
 {
-    // IEntityWithCode는 코드(code) 속성을 가져야 하는 인터페이스. 다양한 클래스에서 공통적으로 가지고 있는 string 형식의 code를 사용하기 위해 사용
-    public interface IEntityWithCode
+    public interface ICodeProvider
     {
-        // 코드를 나타내는 읽기 전용 속성
-        string code { get; }
+        string GetCode();
     }
     public class Util
     {
@@ -74,6 +72,7 @@ namespace Supporter
     [SerializeField]
     public enum PlayerType
     {
+        All,
         TestPlayer,
         Serena,
         Ember
@@ -95,24 +94,14 @@ namespace Supporter
         Minus,
         Set,
         Reset,
+        PlusPercent,
+        MinusPercent,
         None
     }
     [SerializeField]
     public enum Skill
     {
         TestPlayer_Default,
-    }
-
-    public enum PerkTesk
-    {
-        None = 0,
-        PlusPercent,
-        MinusPercent,
-        SatAsAmount,
-        PlusAndMinus,
-        SetBool,
-        Timer,
-        If,
     }
 
     public enum StatType
@@ -125,22 +114,36 @@ namespace Supporter
         CurrentHP,
         MAXHP,
         CurrentXP,
-        MAXXP
-
+        MAXXP,
+        LeftAmount,
+        RightAmount,
+        ForwardAmount,
+        BackAmount,
+        FirstSkillCoolDown,
+        SecondSkillCoolDown,
     }
-    public enum BulletDirection
+    public enum BulletType
     {
-        forward,
-        left,
-        right,
-        back,
-        target,
+        Forward,
+        Left,
+        Right,
+        Back,
+        Target,
+        Enemy,
+        Freeze,
     }
-
+    public enum Rarity
+    {
+        Common,
+        Rare,
+        Epic,
+        Legendary
+    }
     [System.Serializable]
     public class PlayerStats
     {
         public string code;
+        public int level;
 
         public float hp;
         public float xp;
@@ -166,6 +169,9 @@ namespace Supporter
 
         public float currentFirstCoolDown;
         public float currentSecondCoolDown;
+
+        public bool isFirstSkillActive;
+        public bool isSecondSkillActive;
 
         public int leftAttackAmount;
         public int rightAttackAmount;
@@ -196,6 +202,7 @@ namespace Supporter
         public float rotationSpeed;
 
         public int attackType;
+        public float viewingAngle;
 
         public MonsterController monsterController;
     }
@@ -212,20 +219,6 @@ namespace Supporter
         public string code;
         public bool hasThisCharacter;
         public int level;
-    }
-    [System.Serializable]
-    public class PerkData
-    {
-        public string name;
-        public string code;
-        public bool replicatable = false;
-        public PerkTeskData[] perkTesks;
-    }
-    public class PerkTeskData
-    {
-        public int teskNum;
-        public PerkTesk tesk;
-        public StatType targetData;
     }
     [System.Serializable]
     public class MonststerStats

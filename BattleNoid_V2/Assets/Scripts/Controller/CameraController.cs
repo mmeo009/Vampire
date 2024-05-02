@@ -1,11 +1,13 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using UniGLTF.Extensions.VRMC_vrm;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    private Camera mainCamera; // 변수명 변경
+    [SerializeField] private Camera miniMapCamera;
+    [SerializeField] private Camera mainCamera;
     public PlayerController Player;
 
     private void Update()
@@ -28,6 +30,17 @@ public class CameraController : MonoBehaviour
                 }
             }
         }
+        
+        if(miniMapCamera == null)
+        {
+            miniMapCamera = GameObject.FindWithTag("MiniMapCamera")?.GetComponent<Camera>();
+            if (miniMapCamera == null)
+            {
+                var minimap = Managers.Data.Instantiate("MiniMapCamera", null, false);
+                minimap.transform.LookAt(Player.transform.position);
+                miniMapCamera = minimap.GetComponent<Camera>();
+            }
+        }
     }
 
     private void FollowPlayer()
@@ -35,7 +48,12 @@ public class CameraController : MonoBehaviour
         if (Player != null && mainCamera != null)
         {
             Vector3 playerPos = Player.transform.position;
-            mainCamera.transform.position = new Vector3(playerPos.x, playerPos.y + 6, playerPos.z - 10);
+            mainCamera.transform.position = new Vector3(playerPos.x, playerPos.y + 8, playerPos.z - 8);
+        }
+        if(Player != null && miniMapCamera != null)
+        {
+            Vector3 playerPos = Player.transform.position;
+            miniMapCamera.transform.position = new Vector3(playerPos.x, playerPos.y + 20, playerPos.z);
         }
     }
 }

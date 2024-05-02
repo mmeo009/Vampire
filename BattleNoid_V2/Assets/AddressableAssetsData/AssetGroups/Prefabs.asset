@@ -23,6 +23,18 @@ MonoBehaviour:
     m_SerializedLabels:
     - Prefabs
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 08d0195b016b48744af152387016b152
+    m_Address: MiniMapCamera
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefabs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3a54ad3cb9a6c8b409d41f52c22c944e
+    m_Address: 111112P
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefabs
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: bf07e3f029d5b3e4ba2fab625231286b, type: 2}
   m_SchemaSet:

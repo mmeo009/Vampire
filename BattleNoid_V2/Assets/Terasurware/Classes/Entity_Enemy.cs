@@ -8,7 +8,7 @@ public class Entity_Enemy : ScriptableObject
 	public List<Param> param = new List<Param> ();
 
 	[System.SerializableAttribute]
-	public class Param
+	public class Param : ICodeProvider
 	{
 		
 		public int index;
@@ -24,7 +24,13 @@ public class Entity_Enemy : ScriptableObject
 		public float knockBackAmount;
 		public float knockBackTime;
 		public int attackType;
-		public string GetCode() => code;
-		public int GetIndex() => index;
+		public float viewingAngle;
+		public int additonalHp;
+		public int additionalDamage;
+		public int additionalMoveSpeed;
+		public string GetCode()
+		{
+			return code;
+		}
 	}
 }

@@ -25,11 +25,11 @@ public class CoroutineManager : MonoBehaviour
     {
         monoInstance.StopCoroutine(coroutine);
     }
-    public static void LoadSceneWithLoadingBar(string sceneName)
+    public static void LoadSceneWithLoadingBar(string sceneName, string playerCode = null)
     {
-        StartCoroutine(IE_LoadingScene(sceneName));
+        StartCoroutine(IE_LoadingScene(sceneName, playerCode));
     }
-    private static IEnumerator IE_LoadingScene(string sceneName)
+    private static IEnumerator IE_LoadingScene(string sceneName, string playerCode = null)
     {
         Image loadingBar;
 
@@ -71,6 +71,13 @@ public class CoroutineManager : MonoBehaviour
                     op.allowSceneActivation = true;
 
                     yield return new WaitUntil(() => op.isDone);
+
+                    if (playerCode != null)
+                    {
+                        Managers.Player.CreatePlayer(0, playerCode);
+                        yield return null;
+                    }
+
                     yield return StartCoroutine(IE_SetWaveData(sceneName));
                 }
             }
@@ -94,7 +101,7 @@ public class CoroutineManager : MonoBehaviour
             var temp = new GameObject();
             temp.name = "@WaveController";
             var waveController = temp.AddComponent<WaveController>();
-            waveController.LoadWaveData(1);
+
         }
         else
         {

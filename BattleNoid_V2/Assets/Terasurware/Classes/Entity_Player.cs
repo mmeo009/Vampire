@@ -8,7 +8,7 @@ public class Entity_Player : ScriptableObject
 	public List<Param> param = new List<Param> ();
 
 	[System.SerializableAttribute]
-	public class Param
+	public class Param : ICodeProvider
 	{
 		
 		public int index;
@@ -26,7 +26,9 @@ public class Entity_Player : ScriptableObject
 		public string secondSkillName;
 		public float secondSkillCoolDown;
 		public int cost;
-		public string GetCode() => code;
-		public int GetIndex() => index;
+		public string GetCode()
+		{
+			return code;
+		}
 	}
 }

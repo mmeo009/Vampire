@@ -5,15 +5,15 @@ using Supporter;
 
 public class BulletController : MonoBehaviour
 {
-    public BulletDirection bulletType;
+    public BulletType bulletType;
     public Vector3 direction;
     public float moveSpeed;
     public float timer;
     public float damage;
+    public float range;
     private void OnEnable()
     {
-        timer = Managers.Player.player.attackRange;
-        Debug.Log("»ý¼º!");
+        timer = (range / moveSpeed);
     }
     private void FixedUpdate()
     {
@@ -31,8 +31,7 @@ public class BulletController : MonoBehaviour
     }
     public void DestroyBullet()
     {
-        Debug.Log("»ç¸Á!");
-        Managers.Player.bullets.Remove(this as BulletController);
+        Managers.Data.bullets.Remove(this as BulletController);
         Managers.Pool.Destroy(this.gameObject);
     }
 }

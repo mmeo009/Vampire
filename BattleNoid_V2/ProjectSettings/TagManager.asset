@@ -9,6 +9,8 @@ TagManager:
   - Canvas
   - SpawnPoint
   - Monster
+  - EnemyBullet
+  - MiniMapCamera
   layers:
   - Default
   - TransparentFX
@@ -16,7 +18,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Invisible
   - 
   - 
   - 

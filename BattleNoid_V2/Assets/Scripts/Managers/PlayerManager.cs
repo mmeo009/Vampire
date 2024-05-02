@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Supporter;
 using Unity.VisualScripting;
@@ -9,7 +10,7 @@ using System.Diagnostics.Tracing;
 public class PlayerManager
 {
     public PlayerStats player;
-    public HashSet<BulletController> bullets = new HashSet<BulletController>();
+    public List<GameObject> SkillEffect = new List<GameObject>();
 
     public void CreatePlayer(int index, string code)
     {
@@ -25,6 +26,16 @@ public class PlayerManager
         SetStats(OperationType.Reset, StatType.None, 0, playerData);
         CameraController cc = Util.GetOrAddComponent<CameraController>(player.playerController.gameObject);
         cc.FindCamera();
+        Managers.Data.LoadAllAsync<Object>("Effect", (key, count, totalCount) =>
+        {
+            Debug.Log("key : " + key + " Count : " + count + " totalCount : " + totalCount);
+            if(key.Contains(playerData.name))
+            {
+                var skill = Managers.Data.Load<GameObject>(key);
+                SkillEffect.Add(skill);
+            }
+        });
+
     }
 
     public void SetStats(OperationType operation, StatType statType, float amount, Entity_Player.Param resetData = null)
@@ -154,6 +165,7 @@ public class PlayerManager
         else if (operation == OperationType.Reset && resetData != null)
         {
             player.code = resetData.code;
+            player.level = 1;
             player.hp = resetData.baseHp;
             player.attackDamage = resetData.baseDamage;
             player.attackSpeed = resetData.baseAttackSpeed;
@@ -161,6 +173,13 @@ public class PlayerManager
             player.moveSpeed = resetData.baseMoveSpeed;
             player.rotationSpeed = resetData.baseRotSpeed;
             player.bulletSpeed = resetData.bulletSpeed;
+
+            player.firstCoolDown = resetData.firstSkillCoolDown;
+            player.secondCoolDown = resetData.secondSkillCoolDown;
+
+            player.isFirstSkillActive = true;
+            player.isSecondSkillActive = true;
+
             player.leftAttackAmount = 0;
             player.rightAttackAmount = 0;
             player.forwardAttackAmount = 1;
@@ -182,24 +201,45 @@ public class PlayerManager
         {
             for(int i  = 0; i < player.forwardAttackAmount; i++)
             {
-                ShotBulletAsDirection(BulletDirection.forward, i + 1);
+                ShotBulletAsDirection(BulletType.Forward, i + 1);
             }
             for(int i = 0; i< player.leftAttackAmount; i++)
             {
-                ShotBulletAsDirection(BulletDirection.left, i + 1);
+                ShotBulletAsDirection(BulletType.Left, i + 1);
             }
 
             for(int i = 0; i < player.rightAttackAmount; i++)
             {
-                ShotBulletAsDirection(BulletDirection.right, i + 1);
+                ShotBulletAsDirection(BulletType.Right, i + 1);
             }
 
             for (int i = 0; i < player.backwardAttackAmount; i++)
             {
-                ShotBulletAsDirection(BulletDirection.back, i + 1);
+                ShotBulletAsDirection(BulletType.Back, i + 1);
             }
         }
-        Debug.Log("빵야");
+
+        else if(player.code == "111112P")
+        {
+            HashSet<MonsterController> monsters = new HashSet<MonsterController>(Managers.Monster.monsters);
+
+            foreach (MonsterController mc in monsters)
+            {
+                if (player.playerController.IsEnemyInsideMeleeArea(player.playerController.transform.forward, mc.transform.position, player.attackRange) == true)
+                {
+                    if(mc.GetMyRange() == 0)
+                    {
+                        Debug.Log("끄리티컬!");
+                        UseFirstSkill(mc);
+                    }
+                    else
+                    {
+                        mc.ChangeMonsterStats(OperationType.Minus, StatType.CurrentHP, player.attackDamage);
+                    }
+                }
+            }
+
+        }
     }
 
 
@@ -230,30 +270,30 @@ public class PlayerManager
         return Vector3.zero;
     }
 
-    private void ShotBulletAsDirection(BulletDirection direction, int amount)
+    private void ShotBulletAsDirection(BulletType direction, int amount)
     {
         GameObject temp = Managers.Data.Instantiate("Bullet", null, true);
         BulletController bc = Util.GetOrAddComponent<BulletController>(temp);
-        bullets.Add(bc);
+        Managers.Data.bullets.Add(bc);
         Vector3 dot;
 
-        if (direction == BulletDirection.forward)
+        if (direction == BulletType.Forward)
         {
             dot = GetDotPos(Vector3.right, player.forwardAttackAmount, amount);
             bc.direction = player.playerController.transform.forward;
 
         }
-        else if (direction == BulletDirection.left)
+        else if (direction == BulletType.Left)
         {
             dot = GetDotPos(Vector3.forward, player.leftAttackAmount, amount);
             bc.direction = -player.playerController.transform.right;
         }
-        else if (direction == BulletDirection.right)
+        else if (direction == BulletType.Right)
         {
             dot = GetDotPos(Vector3.forward, player.rightAttackAmount, amount);
             bc.direction = player.playerController.transform.right;
         }
-        else if (direction == BulletDirection.back)
+        else if (direction == BulletType.Back)
         {
             dot = GetDotPos(Vector3.right, player.backwardAttackAmount, amount);
             bc.direction = -player.playerController.transform.forward;
@@ -270,19 +310,53 @@ public class PlayerManager
         bc.bulletType = direction;
         bc.moveSpeed = player.bulletSpeed;
         bc.damage = player.attackDamage;
+        bc.range = player.attackRange;
     }
 
-    public void UseFirstSkill()
+    public void UseFirstSkill(MonsterController enemy = null, float damage = 0f)
     {
         if (player.code == "111111P")
         {
+            if(enemy!=  null)
+            {
+                if (damage == 0f)
+                    damage = player.attackDamage;
 
+                enemy.ChangeMonsterStats(OperationType.Minus, StatType.CurrentHP, damage);
+            }
+        }
+        else if(player.code == "111112P")
+        {
+            damage = player.attackDamage * 2;
+            enemy.ChangeMonsterStats(OperationType.Minus, StatType.CurrentHP, damage);
         }
     }
-    public void UseSecondSkill()
+    public void UseSecondSkill(MonsterController enemy = null, float damage = 0f)
     {
         if (player.code == "111111P")
         {
+            GameObject temp = Managers.Data.Instantiate("Bullet", null, true);
+            BulletController bc = Util.GetOrAddComponent<BulletController>(temp);
+            Managers.Data.bullets.Add(bc);
+            bc.transform.position = player.playerController.transform.position + new Vector3(0, 1.3f, 0);
+            bc.bulletType = BulletType.Freeze;
+            bc.direction = player.playerController.transform.forward;
+            bc.moveSpeed = 30f;
+            bc.damage = damage;
+            bc.range = player.attackRange;
+        }
+        else if(player.code == "111112P")
+        {
+            var mc = player.playerController.FindNearbyMonster(1, 5);
+
+            if (mc != null)
+            {
+                player.playerController.transform.position = mc.transform.position - mc.transform.forward;
+                damage = 10;
+                mc.ChangeMonsterStats(OperationType.Minus, StatType.CurrentHP, damage);
+            }
+            else
+                return;
 
         }
     }

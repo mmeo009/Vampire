@@ -6,86 +6,59 @@ using System.Linq;
 public class WaveController : MonoBehaviour
 {
     #region PrivateVariables
-    [SerializeField] private List<WaveData> waves;
-    [SerializeField] private WaveData nowWaveData;
-    private float timer;
-    private Transform[] spawnPoints;
-    private int nowWaveIndex;
+    [SerializeField] private int waveNum;
 
+    [SerializeField] private float timer;
+    [SerializeField] private Transform[] spawnPoints;
     #endregion
     #region PublicVariables
+    [HideInInspector] public Transform[] SpawnPoints
+    {
+        get
+        {
+            var _spawnPoints = GameObject.FindGameObjectsWithTag("SpawnPoint");
+            spawnPoints = new Transform[_spawnPoints.Length];
+
+            for (int i = 0; i < _spawnPoints.Length; i++)
+            {
+                spawnPoints[i] = _spawnPoints[i].transform;
+            }
+            return spawnPoints;
+        }
+    }
+
+
     #endregion
     private void Update()
     {
-        if (timer > 0)
+        if(timer > 0)
         {
             timer -= Time.deltaTime;
-            if (timer <= 0)
+
+            if(timer <= 0)
             {
                 SpawnMonster();
             }
         }
     }
-
     #region PrivateMethod
     private void SpawnMonster()
     {
-        if(nowWaveData != waves[0])
+        int spawnPoint = Random.Range(0,spawnPoints.Length);
+        int playerLevel = Managers.Player.player.level / 3;
+        int monsterIndex = Random.Range(0, Managers.Data.enemyDictionary.Count);
+        int spawnAmount = Random.Range(0,100 - Managers.Monster.spawnedMonsterAmount);
+
+        for(int i = 0;i < spawnAmount; i++)
         {
-            nowWaveIndex += 1;
-            nowWaveData = waves[nowWaveIndex];
+            Managers.Monster.CreateMonster(spawnPoints[spawnPoint], monsterIndex, null, playerLevel);
+            Managers.Monster.spawnedMonsterAmount++;
         }
 
-        for (int i = 0; i < nowWaveData.monsters.Count; i++)
-        {
-            for (int j = 0; j < nowWaveData.monsters[i].monsterAmount; j++)
-            {
-                Managers.Monster.CreateMonster(spawnPoints[Random.Range(0, spawnPoints.Length)], nowWaveData.monsters[i].monsterIndex,
-                null, nowWaveData.monsters[i].additionalHp, nowWaveData.monsters[i].additionalDamage, nowWaveData.monsters[i].additionalMoveSpeed);
-            }
-        }
-
-        timer = nowWaveData.timeToNextWave;
+        timer = spawnAmount * 5;
     }
     #endregion
     #region PublicMethod
-    public void LoadWaveData(int stage)
-    {
-        if (spawnPoints != null)
-        {
-            spawnPoints = null;
-        }
 
-        var _spawnPoints = GameObject.FindGameObjectsWithTag("SpawnPoint");
-        spawnPoints = new Transform[_spawnPoints.Length];
-
-        for (int i = 0; i < _spawnPoints.Length; i++)
-        {
-            spawnPoints[i] = _spawnPoints[i].transform;
-        }
-
-        List<WaveData> keys = new List<WaveData>();
-
-        foreach (var key in Managers.Monster.waveDatas.Keys)
-        {
-            string extracted = key.Substring(1, key.IndexOf('N') - 1);
-            if (extracted == stage.ToString())
-            {
-                keys.Add(Managers.Monster.waveDatas[key]);
-            }
-        }
-
-        if (waves != null)
-        {
-            waves.Clear();
-        }
-
-        waves = keys.OrderBy(num => num.stageData.waveNumber).ToList();
-
-        nowWaveIndex = 0;
-        nowWaveData = waves[nowWaveIndex];
-        SpawnMonster();
-        timer = nowWaveData.timeToNextWave;
-    }
     #endregion
 }
