@@ -175,11 +175,11 @@ public class PlayerController : MonoBehaviour
 
     private void Attack()
     {
-
         if(Managers.Player.player.code == "111112P")
         {
             playerAnimator.SetTrigger("Attack");
             Managers.Player.Attack();
+            Invoke("Managers.Player.Attack", 2.3f / playerAnimator.GetFloat("AttackSpeed"));
         }
         else
         {

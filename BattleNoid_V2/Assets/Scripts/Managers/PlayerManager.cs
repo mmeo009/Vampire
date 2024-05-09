@@ -221,6 +221,7 @@ public class PlayerManager
 
         else if(player.code == "111112P")
         {
+            Debug.Log("땅!");
             HashSet<MonsterController> monsters = new HashSet<MonsterController>(Managers.Monster.monsters);
 
             foreach (MonsterController mc in monsters)
