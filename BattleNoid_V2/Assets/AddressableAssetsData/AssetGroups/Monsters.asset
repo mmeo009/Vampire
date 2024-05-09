@@ -31,13 +31,6 @@ MonoBehaviour:
     - Monster
     - Prefabs
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ce98d6ee15c2e504582ce126995c5abf
-    m_Address: 111112A
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Monster
-    - Prefabs
-    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: bf07e3f029d5b3e4ba2fab625231286b, type: 2}
   m_SchemaSet:
