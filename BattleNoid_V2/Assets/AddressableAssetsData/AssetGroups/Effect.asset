@@ -29,6 +29,30 @@ MonoBehaviour:
     m_SerializedLabels:
     - Effect
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 77b928dd6773e7345b2d8aaecea188cd
+    m_Address: Sparks
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Effect
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 85a8865d1bf4a63478038fae23776de8
+    m_Address: SmokeEffect
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Effect
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 98be6bed85902b24d93e2fbfd2547a9c
+    m_Address: Smoke
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Effect
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cfe915442be1702438bc41f1e31907f0
+    m_Address: SmallExplosionEffect
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Effect
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: bf07e3f029d5b3e4ba2fab625231286b, type: 2}
   m_SchemaSet:

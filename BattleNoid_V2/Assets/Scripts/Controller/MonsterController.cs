@@ -68,6 +68,16 @@ public class MonsterController : MonoBehaviour
             }
 
             bullet.DestroyBullet();
+
+            ContactPoint cp = other.GetComponent<Collision>().GetContact(0);
+
+            Quaternion rot = Quaternion.LookRotation(-cp.normal);
+
+            var sparkEffect = Instantiate(Managers.Data.Load<GameObject>("Sparks") , cp.point, rot);
+
+            Destroy(other.gameObject);
+            Destroy(sparkEffect, 0.5f);
+
         }
     }
 
