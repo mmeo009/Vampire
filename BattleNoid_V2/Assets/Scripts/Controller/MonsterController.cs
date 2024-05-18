@@ -24,8 +24,9 @@ public class MonsterController : MonoBehaviour
     private void Update()
     {
         Move();
+        MaintainDistance();
 
-        if(isFreeze == true)
+        if (isFreeze == true)
         {
             freezeTimer -= Time.deltaTime;
             if(freezeTimer <= 0)
@@ -134,6 +135,32 @@ public class MonsterController : MonoBehaviour
             }
 
         }
+    }
+    private void MaintainDistance()
+    {
+        Vector3 separation = Vector3.zero;
+        int neighborCount = 0;
+
+        foreach (var other in Managers.Monster.monsters)
+        {
+            if (other != this.gameObject)
+            {
+                float distance = Vector3.Distance(transform.position, other.transform.position);
+                if (distance < 2f)
+                {
+                    Vector3 diff = transform.position - other.transform.position;
+                    separation += diff.normalized / distance;
+                    neighborCount++;
+                }
+            }
+        }
+
+        if (neighborCount > 0)
+        {
+            separation /= neighborCount;
+        }
+
+        transform.position += separation * 1f * Time.deltaTime;
     }
     private void Attack()
     {

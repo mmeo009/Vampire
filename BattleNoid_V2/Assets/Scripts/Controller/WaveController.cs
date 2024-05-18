@@ -19,6 +19,7 @@ public class WaveController : MonoBehaviour
         if(spawnPoints == null) 
         {
             spawnPoints = FindSpawnPoints();
+            SpawnMonster();
         }
     }
     private void Update()
