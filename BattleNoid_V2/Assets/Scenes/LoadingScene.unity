@@ -275,7 +275,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -13.4002075, y: -7.32959}
+  m_AnchoredPosition: {x: 44, y: -7.32959}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &174938085
@@ -298,7 +298,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uD558\uC774\n"
+  m_text: '
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b2eb0a896108ff84bb4e55642c844a9f, type: 2}
   m_sharedMaterial: {fileID: -3345167699192438975, guid: b2eb0a896108ff84bb4e55642c844a9f,
@@ -362,7 +364,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -443.77673, y: -97.29663, z: -336.6449, w: -97.555664}
+  m_margin: {x: -352.66425, y: -97.29663, z: -231.80487, w: -97.555664}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -993,6 +995,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 1282593079}
   - {fileID: 50829489}
+  - {fileID: 1424616901}
   - {fileID: 1326611545}
   - {fileID: 869045327}
-  - {fileID: 1424616901}
