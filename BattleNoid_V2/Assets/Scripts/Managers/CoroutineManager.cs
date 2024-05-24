@@ -100,7 +100,7 @@ public class CoroutineManager : MonoBehaviour
         {
             var temp = new GameObject();
             temp.name = "@WaveController";
-            var waveController = temp.AddComponent<WaveController>();
+            var waveController = temp.AddComponent<SpawnerController>();
 
         }
         else

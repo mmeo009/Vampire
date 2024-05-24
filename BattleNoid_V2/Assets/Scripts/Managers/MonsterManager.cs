@@ -14,7 +14,7 @@ public class MonsterManager
 
     public Dictionary<string, WaveData> waveDatas;
 
-
+    [SerializeField] private List<SpawnerController> spawnerController = new List<SpawnerController>();
 
     public void GetWaveDatas()
     {
@@ -28,7 +28,7 @@ public class MonsterManager
         });
     }
 
-    public void CreateMonster(Transform pos, int monsterIndex, string monsterCode = null, int playerLevel = 0)
+    public void CreateMonster(Vector3 pos, int monsterIndex, string monsterCode = null, int playerLevel = 0)
     {
         Entity_Enemy.Param monster = Managers.Data.GetDataFromDictionary(Managers.Data.enemyDictionary, monsterIndex, monsterCode);
 
@@ -40,7 +40,7 @@ public class MonsterManager
             }
 
             var monsterObject = Managers.Data.Instantiate(monsterCode, null, true);
-            monsterObject.transform.position = pos.position;
+            monsterObject.transform.position = pos;
             var mc = monsterObject.GetComponent<MonsterController>();
             LoadMonsterData(monster, mc);
             mc.ChangeMonsterStats(OperationType.Plus,StatType.MAXHP, playerLevel * monster.additonalHp);
