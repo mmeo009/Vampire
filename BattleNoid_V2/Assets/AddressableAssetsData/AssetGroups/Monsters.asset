@@ -31,6 +31,55 @@ MonoBehaviour:
     - Monster
     - Prefabs
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c8c9e42cb56cee04783f84dd18b9bf7e
+    m_Address: 111114A
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Monster
+    - Prefabs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 949881bbda770454b8145599ada16b2c
+    m_Address: 111115A
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefabs
+    - Monster
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 19e97c023ca8c434cb9a6e9841b18005
+    m_Address: 111120A
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefabs
+    - Monster
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e7386fafb0577644caca3c806b5b6aad
+    m_Address: 111119A
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefabs
+    - Monster
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 88936823be4e3ac479c360cfb6bb7a6c
+    m_Address: 111118A
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefabs
+    - Monster
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 032736ae5fb44624abed3f27622fc52c
+    m_Address: 111117A
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefabs
+    - Monster
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3d11aa462cee08042902e6a95acf3426
+    m_Address: 111116A
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefabs
+    - Monster
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: bf07e3f029d5b3e4ba2fab625231286b, type: 2}
   m_SchemaSet:
