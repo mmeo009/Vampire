@@ -46,6 +46,7 @@ public class MonsterManager
             mc.ChangeMonsterStats(OperationType.Plus,StatType.MAXHP, playerLevel * monster.additonalHp);
             mc.ChangeMonsterStats(OperationType.Plus, StatType.AttackDamage, playerLevel * monster.additionalDamage);
             mc.ChangeMonsterStats(OperationType.Plus, StatType.MoveSpeed, playerLevel * monster.additionalMoveSpeed);
+            mc.Player = Managers.Player.player.playerController;
             monsters.Add(mc);
         }
     }

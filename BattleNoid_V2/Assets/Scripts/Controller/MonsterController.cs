@@ -70,13 +70,12 @@ public class MonsterController : MonoBehaviour
 
             bullet.DestroyBullet();
 
-            ContactPoint cp = other.GetComponent<Collision>().GetContact(0);
+            Vector3 cP = other.ClosestPointOnBounds(transform.position);
 
-            Quaternion rot = Quaternion.LookRotation(-cp.normal);
+            Quaternion rot = Quaternion.LookRotation(-cP);
 
-            var sparkEffect = Instantiate(Managers.Data.Load<GameObject>("Sparks") , cp.point, rot);
+            var sparkEffect = Instantiate(Managers.Data.Load<GameObject>("Sparks") , cP, rot);
 
-            Destroy(other.gameObject);
             Destroy(sparkEffect, 0.5f);
 
         }
@@ -84,6 +83,10 @@ public class MonsterController : MonoBehaviour
 
     private void Move()
     {
+        if(Player == null)
+        {
+            Player = Managers.Player.player.playerController;
+        }
         if(monster != null && Player != null)
         {
             float moveSpeed = monster.moveSpeed;
@@ -146,7 +149,8 @@ public class MonsterController : MonoBehaviour
             if (other != this.gameObject)
             {
                 float distance = Vector3.Distance(transform.position, other.transform.position);
-                if (distance < 2f)
+                
+                if (distance < 2f && distance > 0f)
                 {
                     Vector3 diff = transform.position - other.transform.position;
                     separation += diff.normalized / distance;
