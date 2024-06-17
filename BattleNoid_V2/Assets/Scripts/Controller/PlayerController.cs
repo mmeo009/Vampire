@@ -79,6 +79,8 @@ public class PlayerController : MonoBehaviour
 
         transform.position += input * Time.deltaTime;
 
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, -30, 30), transform.position.y, Mathf.Clamp(transform.position.z, -30, 30));
+
         if (Input.GetKeyDown(KeyCode.Q))
         {
             if (Managers.Player.player.isFirstSkillActive == true)

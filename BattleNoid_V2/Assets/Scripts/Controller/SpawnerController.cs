@@ -58,6 +58,7 @@ public class SpawnerController   : MonoBehaviour
     {
         if(Managers.Monster.monsters.Count >= 90)
         {
+            timer = Managers.Monster.spawnedMonsterAmount * 5;
             return;
         }
 
@@ -71,7 +72,7 @@ public class SpawnerController   : MonoBehaviour
             Managers.Monster.spawnedMonsterAmount++;
         }
 
-        timer = spawnAmount * 5;
+        timer = spawnAmount * (20 + Managers.Player.player.level);
     }
     #endregion
     #region PublicMethod

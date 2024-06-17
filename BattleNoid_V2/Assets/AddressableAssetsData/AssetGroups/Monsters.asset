@@ -25,7 +25,7 @@ MonoBehaviour:
     - Prefabs
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b9cc8c9f055657545840a91203a19775
-    m_Address: 111111A
+    m_Address: 111112A
     m_ReadOnly: 0
     m_SerializedLabels:
     - Monster
@@ -75,6 +75,13 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 3d11aa462cee08042902e6a95acf3426
     m_Address: 111116A
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefabs
+    - Monster
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0bb1aacb454f68245867192f845047d2
+    m_Address: 111111A
     m_ReadOnly: 0
     m_SerializedLabels:
     - Prefabs

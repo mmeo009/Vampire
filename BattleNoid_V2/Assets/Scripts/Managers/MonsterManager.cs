@@ -51,6 +51,9 @@ public class MonsterManager
         }
     }
 
+    public void CreateSpawner()
+    {
+    }
     private void LoadMonsterData(Entity_Enemy.Param monsterData, MonsterController monsterController)
     {
         MonsterStats monster = new MonsterStats();

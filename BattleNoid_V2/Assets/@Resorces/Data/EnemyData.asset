@@ -76,14 +76,14 @@ MonoBehaviour:
     baseRange: 1
     knockBackAmount: 2
     knockBackTime: 1
-    attackType: 1
+    attackType: 4
     viewingAngle: 30
     additonalHp: 10
     additionalDamage: 2
     additionalMoveSpeed: 1
   - index: 5
     code: 111115A
-    name: "\uD68C\uC804\uD615 \uB85C\uBD07"
+    name: "\uB3CC\uC9C4\uD615 \uB85C\uBD07"
     stage: 1
     baseHp: 15
     baseDamage: 15
@@ -93,8 +93,8 @@ MonoBehaviour:
     baseRange: 5
     knockBackAmount: 2
     knockBackTime: 1
-    attackType: 4
-    viewingAngle: 30
+    attackType: 5
+    viewingAngle: 10
     additonalHp: 4
     additionalDamage: 2
     additionalMoveSpeed: 1

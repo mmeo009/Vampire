@@ -13,6 +13,8 @@ public class MonsterController : MonoBehaviour
     [SerializeField] private float attackTimer;
     [SerializeField] private bool isFreeze = false;
     [SerializeField] private bool isAttack = false;
+    [SerializeField] private bool lockOn = false;
+    [SerializeField] private Vector3 lockOnTargetPosition;
 
     public PlayerController Player;
     public float freezeTimer;
@@ -23,8 +25,11 @@ public class MonsterController : MonoBehaviour
     }
     private void Update()
     {
-        Move();
-        MaintainDistance();
+        if(isAttack == false)
+        {
+            Move();
+            MaintainDistance();
+        }
 
         if (isFreeze == true)
         {
@@ -47,6 +52,10 @@ public class MonsterController : MonoBehaviour
             }
         }
 
+        if(lockOn == true)
+        {
+            Attack();
+        }
 
         if (this.transform.position.y != 0)
         {
@@ -87,22 +96,10 @@ public class MonsterController : MonoBehaviour
         {
             Player = Managers.Player.player.playerController;
         }
+
         if(monster != null && Player != null)
         {
             float moveSpeed = monster.moveSpeed;
-
-            Collider[] nearbyMonsters = Physics.OverlapSphere(transform.position, 2);
-            List<MonsterController> nearbyMonsterController = new List<MonsterController>();
-
-            foreach(Collider collider in nearbyMonsters)
-            {
-                nearbyMonsterController.Add(collider.transform.GetComponent<MonsterController>());
-            }
-
-            if (nearbyMonsters.Length > 0)
-            {
-                // TODO : 몬스터 끼리 멀어지기
-            }
 
             if (knockBackTimer > 0)
             {
@@ -138,6 +135,8 @@ public class MonsterController : MonoBehaviour
             }
 
         }
+
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, -30, 30), transform.position.y, Mathf.Clamp(transform.position.z, -30, 30));
     }
     private void MaintainDistance()
     {
@@ -204,8 +203,44 @@ public class MonsterController : MonoBehaviour
             }
             MonsterDie();
         }
-    }
+        else if(monster.attackType == 4)
+        {
+            Collider[] colls = Physics.OverlapSphere(transform.position, monster.attackRange);
 
+            foreach (Collider col in colls)
+            {
+                if (col.tag == "Player")
+                {
+                    Managers.Player.SetStats(OperationType.Minus, StatType.CurrentHP, monster.attackDamage);
+                }
+            }
+
+            attackTimer = monster.attackSpeed;
+        }
+        else if (monster.attackType == 5)
+        {
+            if (lockOn == false)
+            {
+                lockOnTargetPosition = transform.position + transform.forward * 10f;
+                lockOnTargetPosition.y = 0;
+                lockOn = true;
+            }
+            else
+            {
+                Vector3 currentPosition = new Vector3(transform.position.x, 0, transform.position.z);
+                Vector3 targetPosition = new Vector3(lockOnTargetPosition.x, 0, lockOnTargetPosition.z);
+
+                transform.position = Vector3.MoveTowards(currentPosition, targetPosition, Time.deltaTime * 5f);
+
+                if (Vector3.Distance(currentPosition, targetPosition) < 0.01f)
+                {
+                    lockOn = false;
+                    isAttack = false;
+                    attackTimer = monster.attackSpeed;
+                }
+            }
+        }
+    }
     public void Freeze(float amount)
     {
         isFreeze = true;

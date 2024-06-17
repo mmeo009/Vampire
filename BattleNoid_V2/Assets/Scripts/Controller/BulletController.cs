@@ -33,5 +33,6 @@ public class BulletController : MonoBehaviour
     {
         Managers.Data.bullets.Remove(this as BulletController);
         Managers.Pool.Destroy(this.gameObject);
+        this.transform.position = Vector3.zero;
     }
 }
