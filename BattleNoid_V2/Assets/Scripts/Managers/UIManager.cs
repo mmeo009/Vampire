@@ -120,10 +120,6 @@ public class UIManager
         {
             Managers.Data.LoadGameData();
         }
-        else if(type == ActionType.LoadWaveData)
-        {
-            Managers.Monster.GetWaveDatas();
-        }
     }
 
     private GameObject LoadWindow(GameObject gameObjectPrefab)

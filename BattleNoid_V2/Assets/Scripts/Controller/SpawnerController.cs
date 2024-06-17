@@ -2,21 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Supporter;
 
 public class SpawnerController   : MonoBehaviour
 {
     #region PrivateVariables
-    [SerializeField] private int waveNum;
     [SerializeField] private float timer;
     [SerializeField] private int monsterIndex;
+    [SerializeField] private float spawnerHp;
     #endregion
     #region PublicVariables
-    public float radius;
+    public float radius = 1;
     #endregion
     private void OnEnable()
     {
-        waveNum = Random.Range(0, Managers.Data.enemyDictionary.Count);
-        SpawnMonster();
+        monsterIndex = Random.Range(0, Managers.Data.enemyDictionary.Count);
+        spawnerHp = 100f;
+        timer = 3f;
     }
     private void OnDrawGizmosSelected()
     {
@@ -26,17 +28,47 @@ public class SpawnerController   : MonoBehaviour
 
         Gizmos.color = Color.red;
 
-        Gizmos.DrawSphere(GetSpawnPos(radius), 0.2f);
+        Gizmos.DrawSphere(GetSpawnPos(transform.position, radius) + new Vector3(0,1,0), 0.2f);
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Bullet")
+        {
+            BulletController bullet = other.GetComponent<BulletController>();
+
+            if (bullet.bulletType == BulletType.Freeze)
+            {
+                return;
+            }
+            else
+            {
+                spawnerHp -= bullet.damage;
+                if(spawnerHp <= 0)
+                {
+                    Managers.Pool.Destroy(this.gameObject);
+                }
+            }
+
+            Vector3 cP = other.ClosestPointOnBounds(transform.position);
+
+            Quaternion rot = Quaternion.LookRotation(-cP);
+
+            var sparkEffect = Instantiate(Managers.Data.Load<GameObject>("Sparks"), cP, rot);
+
+            Destroy(sparkEffect, 0.5f);
+
+            bullet.DestroyBullet();
+        }
     }
 
-    private Vector3 GetSpawnPos(float radius)
+    private Vector3 GetSpawnPos(Vector3 start,float radius)
     {
         float angle = Random.Range(0f, Mathf.PI * 2);
 
         float x = Mathf.Cos(angle) * radius;
         float z = Mathf.Sin(angle) * radius;
 
-        Vector3 pointOnCircle = new Vector3(transform.position.x + x, transform.position.y + 1, transform.position.z + z);
+        Vector3 pointOnCircle = new Vector3(start.x + x, start.y, start.z + z);
 
         return pointOnCircle;
     }
@@ -62,9 +94,16 @@ public class SpawnerController   : MonoBehaviour
             return;
         }
 
-        Vector3 pos = GetSpawnPos(radius);
+        Vector3 pos = GetSpawnPos(transform.position, radius);
+        Debug.Log(pos + ":" + transform.position);
         int playerLevel = Managers.Player.player.level / 3;
-        int spawnAmount = Random.Range(0,100 - Managers.Monster.spawnedMonsterAmount);
+
+        int spawnAmount = Random.Range(0, 10);
+
+        if (Managers.Monster.spawnedMonsterAmount > 30)
+        {
+            spawnAmount = Mathf.Clamp(spawnAmount, 1, 3);
+        }
 
         for(int i = 0;i < spawnAmount; i++)
         {

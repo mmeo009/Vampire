@@ -77,35 +77,8 @@ public class CoroutineManager : MonoBehaviour
                         Managers.Player.CreatePlayer(0, playerCode);
                         yield return null;
                     }
-
-                    yield return StartCoroutine(IE_SetWaveData(sceneName));
                 }
             }
-        }
-    }
-
-    private static IEnumerator IE_SetWaveData(string sceneName)
-    {
-
-        if (SceneManager.GetActiveScene().name != sceneName)
-        {
-            AsyncOperation loadLoadingScene = SceneManager.LoadSceneAsync(sceneName);
-            while (!loadLoadingScene.isDone)
-            {
-                yield return new WaitUntil(() => loadLoadingScene.isDone);
-            }
-        }
-
-        if (sceneName == "GameScene_001")
-        {
-            var temp = new GameObject();
-            temp.name = "@WaveController";
-            var waveController = temp.AddComponent<SpawnerController>();
-
-        }
-        else
-        {
-            yield break;
         }
     }
 }

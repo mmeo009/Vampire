@@ -12,21 +12,10 @@ public class MonsterManager
 
     public HashSet<MonsterController> monsters = new HashSet<MonsterController>();
 
-    public Dictionary<string, WaveData> waveDatas;
+    [SerializeField] private List<SpawnerController> spawnerControllers = new List<SpawnerController>();
 
-    [SerializeField] private List<SpawnerController> spawnerController = new List<SpawnerController>();
-
-    public void GetWaveDatas()
-    {
-        waveDatas = new Dictionary<string, WaveData>();
-        Managers.Data.LoadAllAsync<WaveData>("Wave", (key, count, totalCount) =>
-        {
-            Debug.Log("key : " + key + " Count : " + count + " totalCount : " + totalCount);
-            var data = Managers.Data.Load<WaveData>(key);
-            waveDatas.Add($"S{data.stageData.stageNumber}N{data.stageData.waveNumber}", data);
-            Debug.Log(waveDatas.ContainsValue(data));
-        });
-    }
+    [SerializeField] private float timer = 10f;
+    [SerializeField] private float maxTime = 30f;
 
     public void CreateMonster(Vector3 pos, int monsterIndex, string monsterCode = null, int playerLevel = 0)
     {
@@ -53,6 +42,24 @@ public class MonsterManager
 
     public void CreateSpawner()
     {
+        if(Managers.Player.player.playerController != null)
+        {
+            if(timer > 0)
+            {
+                timer -= Time.deltaTime;
+            }
+
+            if(timer <= 0)
+            {
+                if (spawnerControllers.Count < 7)
+                {
+                    GameObject temp = Managers.Data.Instantiate("Spawner");
+                    temp.transform.position = new Vector3(Random.Range(-30, 30), 0, Random.Range(-30, 30));
+                    spawnerControllers.Add(temp.GetComponent<SpawnerController>());
+                    timer = maxTime;
+                }
+            }
+        }
     }
     private void LoadMonsterData(Entity_Enemy.Param monsterData, MonsterController monsterController)
     {

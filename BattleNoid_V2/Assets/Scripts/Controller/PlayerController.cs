@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        Managers.Monster.CreateSpawner();
         PlayerMove();
         CoolDown();
 

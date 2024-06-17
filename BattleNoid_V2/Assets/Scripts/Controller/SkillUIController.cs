@@ -14,8 +14,6 @@ public class SkillUIController : MonoBehaviour
 
     private void OnEnable()
     {
-        Util.GetOrAddComponent<Image>(this.gameObject);
-        coolTime = GetComponent<TMP_Text>();
         Managers.UI.InitSkillUI(image, skillName);
     }
     private void Update()

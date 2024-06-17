@@ -25,9 +25,10 @@ public class MonsterController : MonoBehaviour
     }
     private void Update()
     {
+        Move();
+
         if(isAttack == false)
         {
-            Move();
             MaintainDistance();
         }
 
@@ -80,8 +81,12 @@ public class MonsterController : MonoBehaviour
             bullet.DestroyBullet();
 
             Vector3 cP = other.ClosestPointOnBounds(transform.position);
+            Quaternion rot = Quaternion.LookRotation(Player.transform.position);
 
-            Quaternion rot = Quaternion.LookRotation(-cP);
+            if (cP!= Vector3.zero)
+            {
+                rot = Quaternion.LookRotation(-cP);
+            }
 
             var sparkEffect = Instantiate(Managers.Data.Load<GameObject>("Sparks") , cP, rot);
 
@@ -107,7 +112,7 @@ public class MonsterController : MonoBehaviour
 
                 if (moveSpeed > 0)
                 {
-                    moveSpeed = - moveSpeed * monster.knockBackAmount;
+                    moveSpeed = -moveSpeed * monster.knockBackAmount;
                 }
 
                 if (knockBackTimer < 0)
@@ -115,7 +120,8 @@ public class MonsterController : MonoBehaviour
                     moveSpeed = Mathf.Abs(moveSpeed * 0.5f);
                 }
             }
-            Vector3 direction = (Player.transform.position - transform.position).normalized;
+
+                Vector3 direction = (Player.transform.position - transform.position).normalized;
 
             if (isFreeze == false)
             {
@@ -219,24 +225,27 @@ public class MonsterController : MonoBehaviour
         }
         else if (monster.attackType == 5)
         {
-            if (lockOn == false)
+            if(GetMyRange() == 1)
             {
-                lockOnTargetPosition = transform.position + transform.forward * 10f;
-                lockOnTargetPosition.y = 0;
-                lockOn = true;
-            }
-            else
-            {
-                Vector3 currentPosition = new Vector3(transform.position.x, 0, transform.position.z);
-                Vector3 targetPosition = new Vector3(lockOnTargetPosition.x, 0, lockOnTargetPosition.z);
-
-                transform.position = Vector3.MoveTowards(currentPosition, targetPosition, Time.deltaTime * 5f);
-
-                if (Vector3.Distance(currentPosition, targetPosition) < 0.01f)
+                if (lockOn == false)
                 {
-                    lockOn = false;
-                    isAttack = false;
-                    attackTimer = monster.attackSpeed;
+                    lockOnTargetPosition = transform.position + transform.forward * 10f;
+                    lockOnTargetPosition.y = 0;
+                    lockOn = true;
+                }
+                else
+                {
+                    Vector3 currentPosition = new Vector3(transform.position.x, 0, transform.position.z);
+                    Vector3 targetPosition = new Vector3(lockOnTargetPosition.x, 0, lockOnTargetPosition.z);
+
+                    transform.position = Vector3.MoveTowards(currentPosition, targetPosition, Time.deltaTime * 5f);
+
+                    if (Vector3.Distance(currentPosition, targetPosition) < 0.01f)
+                    {
+                        lockOn = false;
+                        isAttack = false;
+                        attackTimer = monster.attackSpeed;
+                    }
                 }
             }
         }
