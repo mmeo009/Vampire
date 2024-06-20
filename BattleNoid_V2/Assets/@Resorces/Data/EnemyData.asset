@@ -24,7 +24,7 @@ MonoBehaviour:
     attackSpeed: 2
     baseRange: 1
     knockBackAmount: 3
-    knockBackTime: 0.8
+    knockBackTime: 1
     attackType: 1
     viewingAngle: 180
     additonalHp: 5
@@ -41,9 +41,9 @@ MonoBehaviour:
     attackSpeed: 3
     baseRange: 5
     knockBackAmount: 2
-    knockBackTime: 0
+    knockBackTime: 1
     attackType: 2
-    viewingAngle: 70
+    viewingAngle: 30
     additonalHp: 5
     additionalDamage: 5
     additionalMoveSpeed: 1
@@ -51,14 +51,14 @@ MonoBehaviour:
     code: 111113A
     name: "\uC790\uD3ED\uD615 \uB4DC\uB860"
     stage: 1
-    baseHp: 12.5
-    baseDamage: 15
+    baseHp: 12
+    baseDamage: 10
     baseMoveSpeed: 3
     baserotationSpeed: 1
-    attackSpeed: 0
+    attackSpeed: 1
     baseRange: 0
     knockBackAmount: 5
-    knockBackTime: 1.2
+    knockBackTime: 1
     attackType: 3
     viewingAngle: 30
     additonalHp: 5
@@ -94,7 +94,58 @@ MonoBehaviour:
     knockBackAmount: 2
     knockBackTime: 1
     attackType: 5
-    viewingAngle: 10
+    viewingAngle: 50
     additonalHp: 4
     additionalDamage: 2
+    additionalMoveSpeed: 1
+  - index: 6
+    code: 111116A
+    name: "\uADFC\uC811 \uB85C\uBD07"
+    stage: 1
+    baseHp: 21
+    baseDamage: 8
+    baseMoveSpeed: 1.4
+    baserotationSpeed: 1
+    attackSpeed: 2
+    baseRange: 1
+    knockBackAmount: 3
+    knockBackTime: 1
+    attackType: 1
+    viewingAngle: 180
+    additonalHp: 5
+    additionalDamage: 2
+    additionalMoveSpeed: 1
+  - index: 7
+    code: 111117A
+    name: "\uC6D0\uAC70\uB9AC \uB85C\uBD07"
+    stage: 1
+    baseHp: 10
+    baseDamage: 20
+    baseMoveSpeed: 1.4
+    baserotationSpeed: 1
+    attackSpeed: 3
+    baseRange: 1
+    knockBackAmount: 3
+    knockBackTime: 1
+    attackType: 2
+    viewingAngle: 30
+    additonalHp: 5
+    additionalDamage: 2
+    additionalMoveSpeed: 1
+  - index: 8
+    code: 111118A
+    name: "\uC9C0\uB8B0 \uB85C\uBD07"
+    stage: 1
+    baseHp: 12
+    baseDamage: 10
+    baseMoveSpeed: 3
+    baserotationSpeed: 1
+    attackSpeed: 1
+    baseRange: 0
+    knockBackAmount: 5
+    knockBackTime: 1
+    attackType: 3
+    viewingAngle: 30
+    additonalHp: 5
+    additionalDamage: 7
     additionalMoveSpeed: 1

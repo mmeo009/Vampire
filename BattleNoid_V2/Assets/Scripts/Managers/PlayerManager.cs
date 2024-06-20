@@ -37,7 +37,27 @@ public class PlayerManager
         });
 
     }
+    public void LevelUp(int xp)
+    {
+        player.currentXp += xp;
 
+        if(player.xp <= 10)
+        {
+            player.xp = 10;
+        }
+
+        if(player.currentXp >= player.xp)
+        {
+            player.currentXp -= player.xp;
+            player.level++;
+            SetStats(OperationType.Plus, StatType.MAXHP, 5);
+            SetStats(OperationType.Plus, StatType.MoveSpeed, 1);
+            SetStats(OperationType.Minus, StatType.AttackSpeed, 0.01f);
+            SetStats(OperationType.Plus, StatType.AttackDamage, 2);
+            SetStats(OperationType.Plus, StatType.AttackRange, 1);
+            player.xp = player.xp + 10;
+        }
+    }
     public void SetStats(OperationType operation, StatType statType, float amount, Entity_Player.Param resetData = null)
     {
         if (operation == OperationType.Plus)
@@ -184,7 +204,7 @@ public class PlayerManager
             player.rightAttackAmount = 0;
             player.forwardAttackAmount = 1;
             player.backwardAttackAmount = 0;
-            player.xp = 5;
+            player.xp = 10;
             player.currentXp = 0;
             player.currentHp = player.hp;
         }

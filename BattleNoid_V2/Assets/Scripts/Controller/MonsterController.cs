@@ -312,6 +312,7 @@ public class MonsterController : MonoBehaviour
     }
     public void MonsterDie()
     {
+        Managers.Player.LevelUp(3);
         Managers.Monster.monsters.Remove(this as MonsterController);
         monster = null;
         Managers.Pool.Destroy(this.gameObject);
