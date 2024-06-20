@@ -25,7 +25,10 @@ public class MonsterController : MonoBehaviour
     }
     private void Update()
     {
-        Move();
+        if(lockOn == false)
+        {
+            Move();
+        }
 
         if(isAttack == false)
         {
@@ -68,6 +71,11 @@ public class MonsterController : MonoBehaviour
         if (other.CompareTag("Bullet"))
         {
             BulletController bullet = other.GetComponent<BulletController>();
+
+            if (bullet.bulletType == BulletType.Enemy)
+            {
+                return;
+            }
 
             if(bullet.bulletType == BulletType.Freeze)
             {

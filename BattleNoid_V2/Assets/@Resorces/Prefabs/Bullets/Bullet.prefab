@@ -277,7 +277,7 @@ MonoBehaviour:
   bulletType: 0
   direction: {x: 0, y: 0, z: 0}
   moveSpeed: 0
-  timer: 0
+  timer: -1
   damage: 0
   range: 0
 --- !u!54 &8955636035561604920

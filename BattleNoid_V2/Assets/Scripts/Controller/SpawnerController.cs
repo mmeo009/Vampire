@@ -16,7 +16,7 @@ public class SpawnerController   : MonoBehaviour
     #endregion
     private void OnEnable()
     {
-        monsterIndex = Random.Range(0, Managers.Data.enemyDictionary.Count);
+        monsterIndex = Random.Range(1, Managers.Data.enemyDictionary.Count);
         spawnerHp = 100f;
         timer = 3f;
     }

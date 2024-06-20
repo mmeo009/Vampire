@@ -11,17 +11,22 @@ public class BulletController : MonoBehaviour
     public float timer;
     public float damage;
     public float range;
-    private void OnEnable()
-    {
-        timer = (range / moveSpeed);
-    }
+
     private void FixedUpdate()
     {
         Move();
-        timer -= Time.fixedDeltaTime;
-        if(timer <= 0)
+        if(timer == -1)
         {
-            DestroyBullet();
+            timer = (range / moveSpeed);
+        }
+        if(timer > 0)
+        {
+            timer -= Time.fixedDeltaTime;
+            if (timer <= 0)
+            {
+                DestroyBullet();
+                timer = -1;
+            }
         }
     }
     private void Move()
