@@ -211,7 +211,7 @@ public class MonsterController : MonoBehaviour
         }
         else if(monster.attackType == 4)
         {
-            Collider[] colls = Physics.OverlapSphere(transform.position, monster.attackRange);
+            Collider[] colls = Physics.OverlapSphere(transform.position, 2);
 
             foreach (Collider col in colls)
             {

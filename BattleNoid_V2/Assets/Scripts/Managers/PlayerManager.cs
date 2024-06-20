@@ -113,6 +113,7 @@ public class PlayerManager
                     if (player.currentXp <= 0)
                     {
                         player.currentXp = 0;
+                        Managers.UI.ButtonAction(ActionType.SceneMove, "StartScene");
                     }
                     break;
                 case StatType.MAXXP:
