@@ -275,7 +275,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 44, y: -7.32959}
+  m_AnchoredPosition: {x: 44, y: 87}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &174938085
@@ -328,8 +328,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 60
+  m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -364,7 +364,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -352.66425, y: -97.29663, z: -231.80487, w: -97.555664}
+  m_margin: {x: -669.921, y: -97.29663, z: -555.1933, w: -97.555664}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -425,10 +425,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TipText: {fileID: 174938085}
   tips:
-  - "\uD14C\uC2A4\uD2B8 1"
-  - "\uD14C\uC2A4\uD2B8 2"
-  - "\uD14C\uC2A4\uD2B8 3"
-  - "\uD14C\uC2A4\uD2B8 4"
+  - "\uBCF8 \uAC8C\uC784\uC758 \uAC1C\uBC1C\uC790\uC758 \uC778\uC6D0\uC740 \uCD1D
+    10\uBA85\uC785\uB2C8\uB2E4."
+  - "\uC2A4\uD0AC\uC758 \uCFE8\uD0C0\uC784\uC744 \uC790\uC8FC \uD655\uC778\uD558\uC138\uC694!"
+  - "\uC801\uB4E4\uC758 \uC6C0\uC9C1\uC784\uC744 \uC8FC\uC758\uD558\uC138\uC694!"
+  - "\uB3C8\uAE4C\uC2A4\uC640 \uC81C\uC721\uBCF6\uC74C\uC758 \uC870\uD569\uC740 \uCD5C\uACE0\uB78D\uB2C8\uB2E4."
+  - "HP\uC758 \uAD00\uB9AC\uB294 \uD544\uC218\uC785\uB2C8\uB2E4!!"
 --- !u!1 &869045324
 GameObject:
   m_ObjectHideFlags: 0
